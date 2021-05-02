@@ -2,26 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://example.org/posts/my-first-post/</loc>
+    <loc>sonemiyuki.cn/posts/my-first-post/</loc>
     <lastmod>2021-05-02T18:12:51+08:00</lastmod>
   </url><url>
-    <loc>http://example.org/posts/</loc>
+    <loc>sonemiyuki.cn/posts/</loc>
     <lastmod>2021-05-02T18:12:51+08:00</lastmod>
   </url><url>
-    <loc>http://example.org/</loc>
+    <loc>sonemiyuki.cn/</loc>
     <lastmod>2021-05-02T18:12:51+08:00</lastmod>
   </url><url>
-    <loc>http://example.org/post/</loc>
+    <loc>sonemiyuki.cn/post/</loc>
     <lastmod>2017-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/post/test/</loc>
+    <loc>sonemiyuki.cn/post/test/</loc>
     <lastmod>2017-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/post/test/</loc>
+    <loc>sonemiyuki.cn/post/test/</loc>
     <lastmod>2016-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://example.org/categories/</loc>
+    <loc>sonemiyuki.cn/categories/</loc>
   </url><url>
-    <loc>http://example.org/tags/</loc>
+    <loc>sonemiyuki.cn/tags/</loc>
   </url>
 </urlset>
