@@ -2,9 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 宇宙的中心</title>
-    <link>sonemiyuki.cn/tags/</link>
+    <link>sonemiyuki.github.io/tags/</link>
     <description>Recent content in Tags on 宇宙的中心</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="sonemiyuki.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-han</language>
+    <copyright>All rights reserved - 2016</copyright><atom:link href="sonemiyuki.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
