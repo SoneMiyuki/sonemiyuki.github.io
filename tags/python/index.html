@@ -1,223 +1,159 @@
 <!DOCTYPE html>
-<html lang="zh-han">
+<html lang="en" >
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  	<meta property="og:title" content=" Python &middot;  世界的中心" />
-  	<meta property="og:site_name" content="世界的中心" />
-  	<meta property="og:url" content="sonemiyuki.cn/tags/python/" />
-    
-    
-    <meta property="og:type" content="website" />
-    
 
-  <title>
-     Python &middot;  世界的中心
-  </title>
+<meta property="og:title" content="Python" />
+<meta property="og:description" content="你相信吗，这里是世界的中心." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://sonemiyuki.github.io/tags/python/" />
+<meta property="og:updated_time" content="2021-05-04T00:00:00+00:00" />
 
-    <meta name="description" content="你相信吗？这里是世界的中心" />
 
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="sonemiyuki.cn/images/favicon.ico">
-	  <link rel="apple-touch-icon" href="sonemiyuki.cn/images/apple-touch-icon.png" />
-    
-    <link rel="stylesheet" type="text/css" href="sonemiyuki.cn/css/screen.css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python"/>
+<meta name="twitter:description" content="你相信吗，这里是世界的中心."/>
+<meta name="generator" content="Hugo 0.83.0" />
 
 
     
       
-          <link href="sonemiyuki.cn/index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
-      
-      
-        <link href="sonemiyuki.cn/tags/python/index.xml" rel="alternate" type="application/rss+xml" title="Python &middot; 世界的中心" />
-      
     
-    <meta name="generator" content="Hugo 0.83.0" />
 
-    <link rel="canonical" href="sonemiyuki.cn/tags/python/" />
+    <link rel="canonical" href="https://sonemiyuki.github.io/tags/python/">
 
-     
-</head>
-<body class="nav-closed">
-<div id="particles-js"></div>
+    <title>世界的中心</title>
+
+    
+    <!-- combined, minified CSS -->
+    
+    <link href="https://sonemiyuki.github.io/css/style.876bbe11cfbbf3aedf883f4804dc283a275cd7f8b4ed0b540812126132c20313.css" rel="stylesheet" integrity="sha256-h2u&#43;Ec&#43;7867fiD9IBNwoOidc1/i07QtUCBISYTLCAxM=" crossorigin="anonymous">
+    
+
+    <!-- minified Font Awesome for SVG icons -->
+    
+    <script defer src="https://sonemiyuki.github.io/js/fontawesome.min.718cc80fdde25f04f77c67a98cc477007bdc5e9cf7969f4999943bf4de2f3ce5.js" integrity="sha256-cYzID93iXwT3fGepjMR3AHvcXpz3lp9JmZQ79N4vPOU=" crossorigin="anonymous"></script>
+
+    <!-- RSS 2.0 feed -->
+    <link rel="alternate" type="application/rss+xml" href="https://sonemiyuki.github.io/tags/python/index.xml" title="世界的中心" />
+    
+
+    
+
+  </head>
+
+  <body>
+
+    
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="nav blog-nav">
+          <a class="nav-link " href="https://sonemiyuki.github.io/">Home</a>
+          
+          <a class="nav-link" href="http://localhost:1313/categories/%E6%B5%8B%E8%AF%95/" title="">测试</a>
+          
+        </nav>
+      </div>
+    </div>
+    
+
+    
+    
+    <header class="blog-header">
+      <div class="container">
+        <h1 class="blog-title" dir="auto"><a href="https://sonemiyuki.github.io/" rel="home">世界的中心</a></h1>
+        <p class="lead blog-description" dir="auto">你相信吗，这里是世界的中心.</p>
+      </div>
+    </header>
+    
+    
+
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 blog-main">
+
+          
+
+
+
+
+
+
+<article class="blog-post">
+  <header>
+    <h2 class="blog-post-title" dir="auto"><a href="https://sonemiyuki.github.io/2021/05/python3%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E9%80%9F%E6%88%90/">Python3单元测试速成</a></h2>
+    <p class="blog-post-meta"><time datetime="2021-05-04T00:00:00Z">Tue May 04, 2021</time> by Miyuki in 
+<span class="fas fa-folder" aria-hidden="true"></span>&nbsp;<a href="/categories/%E6%B5%8B%E8%AF%95/" rel="category tag">测试</a>
+
+
+<span class="fas fa-tag" aria-hidden="true"></span>&nbsp;<a href="/tags/python/" rel="tag">Python</a>, <a href="/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" rel="tag">单元测试</a>
+
+</p>
+  </header>
+  Python3单元测试unittest及HTML报告生成速成 前置知识：
+ Python面向对象基本 单元测试基本知识 Junit等其他测试框架关于测试类、测试方法、测试套件等基本构件的知识  我们先定义一个待测试的类和对象 code.py
+class algor: def add(a, b): return a + b 然后开一个测试文件
+from code import algor import unittest # 下述文件是从py2拿过来的，需要改造。改造方法在后面 import HTMLTestRunner 编写测试类：
+class TestAlgor1(unittest.TestCase): @classmethod # 类前执行 def setUpClass(self): print(&#34;setUpClass&#34;) # 类后执行 @classmethod def tearDownClass(self): print(&#34;tearDownClass&#34;) # 方法前执行 def setUp(self): print(&#34;setUp&#34;) # 方法后执行 def tearDown(self): print(&#34;tearDown&#34;) # 测试方法，一般命名为测试某某某类 def testAdd1(self): self.
+  <a href='https://sonemiyuki.github.io/2021/05/python3%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E9%80%9F%E6%88%90/'>Read more →</a>
+</article> 
+
+
+
+
+
+
+
+
+        </div> <!-- /.blog-main -->
+
+        <aside class="col-sm-3 ml-auto blog-sidebar">
+  
+  <section class="sidebar-module sidebar-module-inset">
+    <h4>About</h4>
+    <p dir="auto">A simple Hugo theme based on the <a href="http://v4-alpha.getbootstrap.com/examples/blog/">Bootstrap v4 blog example</a>.</p>
+  </section>
   
 
+  
+        <section class="sidebar-module">
+    <h4>Recent Posts</h4>
+    <ol class="list-unstyled">
 
- <div class="site-wrapper">
+
+<li><a href="/2021/05/python3%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E9%80%9F%E6%88%90/">Python3单元测试速成</a></li>
+
+    </ol>
+  </section>
+
+  
+
+  
+</aside>
 
 
-
-
-	<header class="main-header" style="background-image: url(sonemiyuki.cn/images/user.jpg)">
-
-    <nav class="main-nav overlay clearfix">
-      
-        <a class="blog-logo" href="sonemiyuki.cn/"><img src="sonemiyuki.cn/images/user.png" alt="Home" /></a>
-      
-      
-        
-          <a class="menu-button icon-feed" href="sonemiyuki.cn/tags/python/index.xml">&nbsp;&nbsp;Subscribe</a>
-        
-      
-    </nav>
-    <div class="vertical">
-
-        <div class="main-header-content inner">
-            <h1 class="page-title">
-
-              <a class="btn-bootstrap-2" href="#content">世界的中心</a>
-          </h1>
-        </div>
-</div>
-    <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
-</header>
-
-<main id="content" class="content" role="main">
-    
-    
-    
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
     
 
-	<div class="extra-pagination inner">
-    <nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 of 1</span>
-	
-</nav>
-
-	</div>
-
-	
-	   
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="sonemiyuki.cn/post/py3unittest/">Python3单元测试unittest及HTML报告生成速成</a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <h1 id="python3单元测试unittest及html报告生成速成">Python3单元测试unittest及HTML报告生成速成</h1>
-<p>前置知识：</p>
-<ul>
-<li>Python面向对象基本</li>
-<li>单元测试基本知识</li>
-<li>Junit等其他测试框架关于测试类、测试方法、测试套件等基本构件的知识</li>
-</ul>
-<p>我们先定义一个待测试的类和对象
-code.py</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">algor</span>:
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(a, b):
-        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b
-</code></pre></div><p>然后开一个测试文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">from</span> code <span style="color:#66d9ef">import</span> algor
-<span style="color:#f92672">import</span> unittest
-
-<span style="color:#75715e"># 下述文件是从py2拿过来的，需要改造。改造方法在后面</span>
-<span style="color:#f92672">import</span> HTMLTestRunner
-</code></pre></div><p>编写测试类：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestAlgor1</span>(unittest<span style="color:#f92672">.</span>TestCase):
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#75715e"># 类前执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUpClass</span>(self):
-        print(<span style="color:#e6db74">&#34;setUpClass&#34;</span>)
-    <span style="color:#75715e"># 类后执行</span>
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDownClass</span>(self):
-        print(<span style="color:#e6db74">&#34;tearDownClass&#34;</span>)
-    <span style="color:#75715e"># 方法前执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
-        print(<span style="color:#e6db74">&#34;setUp&#34;</span>)
-    <span style="color:#75715e"># 方法后执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDown</span>(self):
-        print(<span style="color:#e6db74">&#34;tearDown&#34;</span>)
-    <span style="color:#75715e"># 测试方法，一般命名为测试某某某类</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">testAdd1</span>(self):
-        self<span style="color:#f92672">.</span>assertEquals(algor<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">4</span>)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">testAdd2</span>(self):
-        self<span style="color:#f92672">.</span>assertEquals(algor<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">114</span>, <span style="color:#ae81ff">514</span>), <span style="color:#ae81ff">628</span>)
-</code></pre></div><p>主函数：构建测试套件和生成报告：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3" data-lang="Python3"><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
-    suite <span style="color:#f92672">=</span> unittest<span style="color:#f92672">.</span>TestSuite()
-    suite<span style="color:#f92672">.</span>addTest(TestAlgor1(<span style="color:#e6db74">&#34;testAdd1&#34;</span>))
-    suite<span style="color:#f92672">.</span>addTest(TestAlgor1(<span style="color:#e6db74">&#34;testAdd2&#34;</span>))
-    filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./apptestresult.html&#39;</span>
-    fb <span style="color:#f92672">=</span> open(filename, <span style="color:#e6db74">&#39;wb&#39;</span>)
-    runner <span style="color:#f92672">=</span> HTMLTestRunner<span style="color:#f92672">.</span>HTMLTestRscaunner(stream<span style="color:#f92672">=</span>fb, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;测试HTMLTestRunner&#34;</span>, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;测试HTMLTestRunner&#34;</span>)
-    runner<span style="color:#f92672">.</span>run(suite)
-    fb<span style="color:#f92672">.</span>close() 
-</code></pre></div><p>上述方案是一个基于python2里面HTMLTestRunner模块的实现，需要先下载HTMLTestRunner.py文件然后进行改进以在py3环境中使用</p>
-<p>第94行，将import StringIO修改成import io</p>
-<p>第539行，将self.outputBuffer = StringIO.StringIO()修改成self.outputBuffer = io.StringIO()</p>
-<p>第642行，将if not rmap.has_key(cls):修改成if not cls in rmap:</p>
-<p>第766行，将uo = o.decode(&lsquo;latin-1&rsquo;)修改成uo = e</p>
-<p>第772行，将ue = e.decode(&lsquo;latin-1&rsquo;)修改成ue = e</p>
-<p>第631行，将print &raquo; sys.stderr, &lsquo;\nTime Elapsed: %s&rsquo; % (self.stopTime-self.startTime)修改成print(sys.stderr, &lsquo;\nTime Elapsed: %s&rsquo; % (self.stopTime-self.startTime))</p>
-<p>其中，Python3中，已经没有StringIO了。取而代之的是io.StringIO。
-<a href="https://www.cnblogs.com/huny/p/12078784.html">参见</a></p>
-<p>在python3有第三方库可以实现相关功能，这个库是html-testRunner
-注意import的大小写</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">import</span> HtmlTestRunner
-</code></pre></div><p>主函数只要写</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">unittest<span style="color:#f92672">.</span>main(testRunner<span style="color:#f92672">=</span>HtmlTestRunner<span style="color:#f92672">.</span>HTMLTestRunner(output<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;example_dir&#39;</span>))
-</code></pre></div><p><a href="https://pypi.org/project/html-testRunner/#description">参见</a></p>
-
-          </section>
+    
+    <footer class="blog-footer">
+      <p dir="auto">
+      
+      Blog template created by <a href="https://twitter.com/mdo">@mdo</a>, ported to Hugo by <a href='https://twitter.com/mralanorth'>@mralanorth</a>.
+      
       </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            syui
-        
-        on
-            
-                <a href="sonemiyuki.cn/tags/unit-test/">#Unit Test</a>,
-            
-                <a href="sonemiyuki.cn/tags/python/">#Python</a>,
-            
-                <a href="sonemiyuki.cn/tags/tester/">#Tester</a>,
-            
-        
-        <time class="post-date" datetime="2021-05-04T17:21:01&#43;08:00">
-            4 May 2021
-        </time>
+      <p>
+      <a href="#">Back to top</a>
+      </p>
     </footer>
-</article>
+    
 
-	
+  </body>
 
-	<nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 of 1</span>
-	
-</nav>
-
-</main>
-
-
-
-    <footer class="site-footer clearfix">
-        <section class="copyright"><a href="">世界的中心</a> All rights reserved - 2021-</section>
-        
-        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="https://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/syui/hugo-theme-air">hugo-theme-air</a> theme</section>
-        
-    </footer>
-    </div>
-    <script type="text/javascript" src="sonemiyuki.cn/js/jquery.js"></script>
-    <script type="text/javascript" src="sonemiyuki.cn/js/jquery.fitvids.js"></script>
-    <script type="text/javascript" src="sonemiyuki.cn/js/index.js"></script>
-    <script src="sonemiyuki.cn/js/particles.min.js"></script>
-    <script src="sonemiyuki.cn/js/particles.js"></script>  
-
-</body>
 </html>
-
