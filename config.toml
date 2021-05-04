@@ -1,6 +1,6 @@
 # Hugo variables
 #
-baseurl = "https://sonemiyuki.github.io/"
+baseurl = "https://sonemiyuki.cn/"
 languageCode = "zh-Hans"
 title = "世界的中心"
 theme = "hugo-theme-bootstrap4-blog"
@@ -27,7 +27,7 @@ summaryLength = 50
 
 [[menu.navbar]]
 name = "测试"
-url = "http://localhost:1313/categories/%E6%B5%8B%E8%AF%95/"
+url = "https://sonemiyuki.cn/categories/%E6%B5%8B%E8%AF%95/"
 
 
 # Theme variables
