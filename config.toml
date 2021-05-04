@@ -1,24 +1,24 @@
-baseURL = "sonemiyuki.github.io"
+BaseUrl= "sonemiyuki.cn/"
 LanguageCode= "zh-han"
-Title= "宇宙的中心"
+Title= "世界的中心"
 paginate = 5
 DisqusShortname = ""
-Copyright = "All rights reserved - 2016"
+Copyright = "All rights reserved - 2021-"
 canonifyurls = true
 
 [author]
-  name = "Miyuki"
+  name = "miyuki"
 
 [permalinks]
-    post = "/post/:year/:month/:day/:slug"
+    post = "/post/:slug"
 
 [params]
-  description = "this is my description"
+  description = "你相信吗？这里是世界的中心"
   cover = "images/user.jpg"
   author = "syui"
   authorlocation = ""
-  authorwebsite = "https://syui.cf/hugo-theme-air"
-  bio= "my bio"
+  authorwebsite = "sonemiyuki.cn"
+  bio= "跨越次元的爱恋"
   logo = "images/user.png"
   googleAnalyticsUserID = ""
   # Optional RSS-Link, if not provided it defaults to the standard index.xml
@@ -27,4 +27,4 @@ canonifyurls = true
   twitterName = ""
   # set true if you are not proud of using Hugo (true will hide the footer note "Proudly published with HUGO.....")
   hideHUGOSupport = false
-  mainSections = ["post"]
+  mainSections = ["post","get"]
