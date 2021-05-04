@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 世界的中心</title>
-    <link>sonemiyuki.cn/post/</link>
-    <description>Recent content in Posts on 世界的中心</description>
+    <title>Unit Test on 世界的中心</title>
+    <link>sonemiyuki.cn/tags/unit-test/</link>
+    <description>Recent content in Unit Test on 世界的中心</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-han</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Tue, 04 May 2021 17:21:01 +0800</lastBuildDate><atom:link href="sonemiyuki.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 04 May 2021 17:21:01 +0800</lastBuildDate><atom:link href="sonemiyuki.cn/tags/unit-test/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python3单元测试unittest及HTML报告生成速成</title>
       <link>sonemiyuki.cn/post/py3unittest/</link>
