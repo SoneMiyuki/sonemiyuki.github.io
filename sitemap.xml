@@ -2,27 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>sonemiyuki.cn/post/</loc>
+    <loc>/post/</loc>
     <lastmod>2021-05-06T10:54:24+08:00</lastmod>
   </url><url>
-    <loc>sonemiyuki.cn/tags/python/</loc>
+    <loc>/tags/python/</loc>
     <lastmod>2021-05-06T10:54:24+08:00</lastmod>
   </url><url>
-    <loc>sonemiyuki.cn/post/2021/05/06/py3unittest/</loc>
+    <loc>/post/2021/05/06/py3unittest/</loc>
     <lastmod>2021-05-06T10:54:24+08:00</lastmod>
   </url><url>
-    <loc>sonemiyuki.cn/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2021-05-06T10:54:24+08:00</lastmod>
   </url><url>
-    <loc>sonemiyuki.cn/tags/tester/</loc>
+    <loc>/tags/tester/</loc>
     <lastmod>2021-05-06T10:54:24+08:00</lastmod>
   </url><url>
-    <loc>sonemiyuki.cn/tags/unittest/</loc>
+    <loc>/tags/unittest/</loc>
     <lastmod>2021-05-06T10:54:24+08:00</lastmod>
   </url><url>
-    <loc>sonemiyuki.cn/</loc>
+    <loc>/</loc>
     <lastmod>2021-05-06T10:54:24+08:00</lastmod>
   </url><url>
-    <loc>sonemiyuki.cn/categories/</loc>
+    <loc>/categories/</loc>
   </url>
 </urlset>
