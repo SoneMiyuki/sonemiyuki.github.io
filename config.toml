@@ -1,4 +1,4 @@
-BaseUrl= "sonemiyuki.cn/"
+BaseUrl= ""
 LanguageCode= "en-US"
 Title= "世界的中心"
 paginate = 5
@@ -17,7 +17,7 @@ canonifyurls = true
   cover = "images/user.jpg"
   author = "miyuki"
   authorlocation = ""
-  authorwebsite = "sonemiyuki.cn"
+  authorwebsite = ""
   bio= "心存善念，尽力而为"
   logo = "images/user.png"
   googleAnalyticsUserID = ""
