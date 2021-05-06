@@ -2,19 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 世界的中心</title>
-    <link>https://sonemiyuki.cn/categories/</link>
+    <link>https://sonemiyuki.github.io/categories/</link>
     <description>Recent content in Categories on 世界的中心</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Tue, 04 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://sonemiyuki.cn/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>测试</title>
-      <link>https://sonemiyuki.cn/categories/%E6%B5%8B%E8%AF%95/</link>
-      <pubDate>Tue, 04 May 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://sonemiyuki.cn/categories/%E6%B5%8B%E8%AF%95/</guid>
-      <description></description>
-    </item>
-    
+    <language>en-US</language>
+    <copyright>All rights reserved - 2021-</copyright><atom:link href="https://sonemiyuki.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
