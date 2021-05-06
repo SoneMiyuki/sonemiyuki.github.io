@@ -2,36 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 世界的中心</title>
-    <link>https://sonemiyuki.github.io/tags/</link>
+    <link>sonemiyuki.cn/tags/</link>
     <description>Recent content in Tags on 世界的中心</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Thu, 06 May 2021 10:54:24 +0800</lastBuildDate><atom:link href="https://sonemiyuki.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language>
+    <lastBuildDate>Thu, 06 May 2021 10:54:24 +0800</lastBuildDate><atom:link href="sonemiyuki.cn/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python</title>
-      <link>https://sonemiyuki.github.io/tags/python/</link>
+      <link>sonemiyuki.cn/tags/python/</link>
       <pubDate>Thu, 06 May 2021 10:54:24 +0800</pubDate>
       
-      <guid>https://sonemiyuki.github.io/tags/python/</guid>
+      <guid>sonemiyuki.cn/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tester</title>
-      <link>https://sonemiyuki.github.io/tags/tester/</link>
+      <link>sonemiyuki.cn/tags/tester/</link>
       <pubDate>Thu, 06 May 2021 10:54:24 +0800</pubDate>
       
-      <guid>https://sonemiyuki.github.io/tags/tester/</guid>
+      <guid>sonemiyuki.cn/tags/tester/</guid>
       <description></description>
     </item>
     
     <item>
       <title>unittest</title>
-      <link>https://sonemiyuki.github.io/tags/unittest/</link>
+      <link>sonemiyuki.cn/tags/unittest/</link>
       <pubDate>Thu, 06 May 2021 10:54:24 +0800</pubDate>
       
-      <guid>https://sonemiyuki.github.io/tags/unittest/</guid>
+      <guid>sonemiyuki.cn/tags/unittest/</guid>
       <description></description>
     </item>
     
