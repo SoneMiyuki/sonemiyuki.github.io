@@ -7,7 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Thu, 06 May 2021 10:54:24 +0800</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 May 2021 22:29:30 +0800</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GET与POST探秘</title>
+      <link>/post/2021/05/09/get-post/</link>
+      <pubDate>Sun, 09 May 2021 22:29:30 +0800</pubDate>
+      
+      <guid>/post/2021/05/09/get-post/</guid>
+      <description>从HTTP GET和POST的整理生发出来的 幂等性(Idempotence)
+ Methods can also have the property of &amp;ldquo;idempotence&amp;rdquo; in that (aside from error or expiration issues) the side-effects of N &amp;gt; 0 identical requests is the same as for a single request.
+ 幂等性在HTTP1.1中的定义如上，可以大致理解为一次和多次请求某一个资源应该具有同样的副作用。 这是一个语义范畴的概念，换言之主要是由设计API、协议或者应用的人去保证的。幂等性是分布式系统设计中十分重要的概念，而HTTP的分布式本质也决定了它在HTTP中具有重要地位。
+毋庸置疑，HTTP在当前的分布式系统中有重要的地位，幂等性也融入了设计理念之中。让我们考虑一个例子来说明幂等性在实际业务中的作用。 我们假设有如下函数帮助模拟业务：从某个id为account_id的账户里面扣数量为amount的钱。
+bool withdraw(account_id, amount)在一个分布式系统里面，如果单纯用HTTP协议，我们不能很显然地假定系统的可靠性，那么，这时候我们假设A让B去扣钱，有可能产生几种情况：
+ A说：B，请去某账户扣钱。 B完成了指令。 B对A说：我扣完了，返回你一个True，A收到了。 A说：B，请去某账户扣钱。 B完成了指令。 B对A说：由于余额等原因无法扣款，返回你一个False，A收到了。 事情往往不尽如人意，因为消息传递出现了两次，如果丢包了，有可能出现以下情况：   A说：B，请去某账户扣钱。 B没听到。 A说：B，请去某账户扣钱。 B完成了指令。B对A说：我扣完了，返回你一个True，A没收到 A说：B，请去某账户扣钱。 B完成了指令。B对A说：由于余额等原因无法扣款，返回你一个False，A没收到  从A的角度来看，如果迟迟没有收到Reply，有可能出现这三种情况之一，但是在目前设计下A无法通过已有的信息进行判断是三种情况的哪一种，也就无法确定是要叫B重新付款，还是返回付款成功，或者返回付款失败。
+我们可以引进中间件完成这个业务，但是这在架构上会增加和中间件的耦合程度。从设计的角度说，有一种被称作幂等设计的设计思路被用来解决类似的问题。
+int create_ticket() bool idempotent_withdraw(ticket_id, account_id, amount)A对B说，我要找你有一件事。B说，好的，你找我的事情我编号为5。A说，好的，5号事情是如此如此。B办完了，对A说，办完了。A返回。 在这样一个过程中，取号的过程损失很小，如果取号过程丢包了，只要重新取一个号码就可以了。但是当A收到取回的号码，这时候B就知道有一件事情要办。在这个假设下，B最多只会把这件特定的事情办一次成为AB之间的Common Sense。如果丢包导致A没有返回，A可以在调用上加上原来的ID，并且持续发送，因为B只会把这件事情办一次，所以可以持续发送，等待返回。</description>
+    </item>
+    
     <item>
       <title>Python 3单元测试unittest及HTML报告生成速成</title>
       <link>/post/2021/05/06/py3unittest/</link>
@@ -20,22 +36,6 @@ class algor: def add(a, b): return a + b 然后开一个测试文件
 from code import algor import unittest # 下述文件是从py2拿过来的，需要改造。改造方法在后面 import HTMLTestRunner 编写测试类：
 class TestAlgor1(unittest.TestCase): @classmethod # 类前执行 def setUpClass(self): print(&amp;#34;setUpClass&amp;#34;) # 类后执行 @classmethod def tearDownClass(self): print(&amp;#34;tearDownClass&amp;#34;) # 方法前执行 def setUp(self): print(&amp;#34;setUp&amp;#34;) # 方法后执行 def tearDown(self): print(&amp;#34;tearDown&amp;#34;) # 测试方法，一般命名为测试某某某类 def testAdd1(self): self.assertEquals(algor.add(1, 3), 4) def testAdd2(self): self.assertEquals(algor.add(114, 514), 628) 主函数：构建测试套件和生成报告：
 if __name__ == &amp;#39;__main__&amp;#39;: suite = unittest.</description>
-    </item>
-    
-    <item>
-      <title>GET与POST探秘</title>
-      <link>/post/1/01/01/get-post/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/post/1/01/01/get-post/</guid>
-      <description>从HTTP GET和POST的整理生发出来的 幂等性(Idempotence)
- Methods can also have the property of &amp;ldquo;idempotence&amp;rdquo; in that (aside from error or expiration issues) the side-effects of N &amp;gt; 0 identical requests is the same as for a single request.
- 幂等性在HTTP1.1中的定义如上，可以大致理解为一次和多次请求某一个资源应该具有同样的副作用。 这是一个语义范畴的概念，换言之主要是由设计API、协议或者应用的人去保证的。幂等性是分布式系统设计中十分重要的概念，而HTTP的分布式本质也决定了它在HTTP中具有重要地位。
-毋庸置疑，HTTP在当前的分布式系统中有重要的地位，幂等性也融入了设计理念之中。让我们考虑一个例子来说明幂等性在实际业务中的作用。 我们假设有如下函数帮助模拟业务：从某个id为account_id的账户里面扣数量为amount的钱。
-bool withdraw(account_id, amount)在一个分布式系统里面，如果单纯用HTTP协议，我们不能很显然地假定系统的可靠性，那么，这时候我们假设A让B去扣钱，有可能产生几种情况：
- A说：B，请去某账户扣钱。 B完成了指令。 B对A说：我扣完了，返回你一个True，A收到了。 A说：B，请去某账户扣钱。 B完成了指令。 B对A说：由于余额等原因无法扣款，返回你一个False，A收到了。 事情往往不尽如人意，因为消息传递出现了两次，如果丢包了，有可能出现以下情况：   A说：B，请去某账户扣钱。 B没听到。 A说：B，请去某账户扣钱。 B完成了指令。B对A说：我扣完了，返回你一个True，A没收到 A说：B，请去某账户扣钱。 B完成了指令。B对A说：由于余额等原因无法扣款，返回你一个False，A没收到  从A的角度来看，如果迟迟没有收到Reply，有可能出现这三种情况之一，但是在目前设计下A无法通过已有的信息进行判断是三种情况的哪一种，也就无法确定是要叫B重新付款，还是返回付款成功，或者返回付款失败。
-我们可以引进中间件完成这个业务，但是这在架构上会增加和中间件的耦合程度。从设计的角度说，有一种被称作幂等设计的设计思路被用来解决类似的问题。
-int create_ticket() bool idempotent_withdraw(ticket_id, account_id, amount)A对B说，我要找你有一件事。B说，好的，你找我的事情我编号为5。A说，好的，5号事情是如此如此。B办完了，对A说，办完了。A返回。 在这样一个过程中，取号的过程损失很小，如果取号过程丢包了，只要重新取一个号码就可以了。但是当A收到取回的号码，这时候B就知道有一件事情要办。在这个假设下，B最多只会把这件特定的事情办一次成为AB之间的Common Sense。如果丢包导致A没有返回，A可以在调用上加上原来的ID，并且持续发送，因为B只会把这件事情办一次，所以可以持续发送，等待返回。</description>
     </item>
     
   </channel>

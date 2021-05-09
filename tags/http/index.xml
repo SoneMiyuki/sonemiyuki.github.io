@@ -6,13 +6,14 @@
     <description>Recent content in http on 世界的中心</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <copyright>All rights reserved - 2021-</copyright><atom:link href="/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>All rights reserved - 2021-</copyright>
+    <lastBuildDate>Sun, 09 May 2021 22:29:30 +0800</lastBuildDate><atom:link href="/tags/http/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GET与POST探秘</title>
-      <link>/post/1/01/01/get-post/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <link>/post/2021/05/09/get-post/</link>
+      <pubDate>Sun, 09 May 2021 22:29:30 +0800</pubDate>
       
-      <guid>/post/1/01/01/get-post/</guid>
+      <guid>/post/2021/05/09/get-post/</guid>
       <description>从HTTP GET和POST的整理生发出来的 幂等性(Idempotence)
  Methods can also have the property of &amp;ldquo;idempotence&amp;rdquo; in that (aside from error or expiration issues) the side-effects of N &amp;gt; 0 identical requests is the same as for a single request.
  幂等性在HTTP1.1中的定义如上，可以大致理解为一次和多次请求某一个资源应该具有同样的副作用。 这是一个语义范畴的概念，换言之主要是由设计API、协议或者应用的人去保证的。幂等性是分布式系统设计中十分重要的概念，而HTTP的分布式本质也决定了它在HTTP中具有重要地位。
