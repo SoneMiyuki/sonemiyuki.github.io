@@ -1,4 +1,4 @@
-BaseUrl= ""
+BaseUrl= "http://sonemiyuki.cn/"
 LanguageCode= "en-US"
 Title= "世界的中心"
 paginate = 5
@@ -11,13 +11,14 @@ canonifyurls = true
 
 [permalinks]
     post = "/post/:year/:month/:day/:slug"
+    # post = ""
 
 [params]
   description = "教学楼的天台，是世界的中心。"
   cover = "images/user.jpg"
   author = "miyuki"
   authorlocation = ""
-  authorwebsite = ""
+  authorwebsite = "http://sonemiyuki.cn"
   bio= "心存善念，尽力而为"
   logo = "images/user.png"
   googleAnalyticsUserID = ""

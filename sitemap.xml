@@ -2,33 +2,33 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/post/2021/05/09/get-post/</loc>
+    <loc>http://sonemiyuki.cn/post/2021/05/09/get-post/</loc>
     <lastmod>2021-05-09T22:29:30+08:00</lastmod>
   </url><url>
-    <loc>/tags/http/</loc>
+    <loc>http://sonemiyuki.cn/tags/http/</loc>
     <lastmod>2021-05-09T22:29:30+08:00</lastmod>
   </url><url>
-    <loc>/post/</loc>
+    <loc>http://sonemiyuki.cn/post/</loc>
     <lastmod>2021-05-09T22:29:30+08:00</lastmod>
   </url><url>
-    <loc>/tags/</loc>
+    <loc>http://sonemiyuki.cn/tags/</loc>
     <lastmod>2021-05-09T22:29:30+08:00</lastmod>
   </url><url>
-    <loc>/tags/tester/</loc>
+    <loc>http://sonemiyuki.cn/tags/tester/</loc>
     <lastmod>2021-05-09T22:29:30+08:00</lastmod>
   </url><url>
-    <loc>/</loc>
+    <loc>http://sonemiyuki.cn/</loc>
     <lastmod>2021-05-09T22:29:30+08:00</lastmod>
   </url><url>
-    <loc>/tags/python/</loc>
+    <loc>http://sonemiyuki.cn/tags/python/</loc>
     <lastmod>2021-05-06T10:54:24+08:00</lastmod>
   </url><url>
-    <loc>/post/2021/05/06/py3unittest/</loc>
+    <loc>http://sonemiyuki.cn/post/2021/05/06/py3unittest/</loc>
     <lastmod>2021-05-06T10:54:24+08:00</lastmod>
   </url><url>
-    <loc>/tags/unittest/</loc>
+    <loc>http://sonemiyuki.cn/tags/unittest/</loc>
     <lastmod>2021-05-06T10:54:24+08:00</lastmod>
   </url><url>
-    <loc>/categories/</loc>
+    <loc>http://sonemiyuki.cn/categories/</loc>
   </url>
 </urlset>
