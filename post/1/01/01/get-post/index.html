@@ -5,16 +5,24 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  	<meta property="og:title" content=" 世界的中心" />
+  	<meta property="og:title" content=" GET与POST探秘 &middot;  世界的中心" />
   	<meta property="og:site_name" content="世界的中心" />
-  	<meta property="og:url" content="/" />
+  	<meta property="og:url" content="/post/1/01/01/get-post/" />
     
     
-    <meta property="og:type" content="website" />
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="0001-01-01T00:00:00Z" />
+
+    
+    <meta property="og:article:tag" content="http" />
+    
+    <meta property="og:article:tag" content="tester" />
+    
     
 
   <title>
-     世界的中心
+     GET与POST探秘 &middot;  世界的中心
   </title>
 
     <meta name="description" content="教学楼的天台，是世界的中心。" />
@@ -31,13 +39,13 @@
 
     
       
+          <link href="index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
       
-        <link href="/index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
       
     
     <meta name="generator" content="Hugo 0.83.0" />
 
-    <link rel="canonical" href="/" />
+    <link rel="canonical" href="/post/1/01/01/get-post/" />
 
      
 </head>
@@ -50,21 +58,18 @@
 
 
 
-<header class="main-header " style="background-image: url(images/user.jpg)">
-
-
-    
+<header class="main-header " style="background-image: url(/images/user.jpg)">
 
     <nav class="main-nav overlay clearfix">
         
-            <a class="blog-logo" href="/"><img src="images/user.png" alt="Blog Logo" /></a>
+            <a class="blog-logo" href="/"><img src="/images/user.png" alt="Blog Logo" /></a>
         
         
     </nav>
 <div class="vertical">
         <div class="main-header-content inner">
             <h1 class="page-title">
-              <a class="btn-bootstrap-2 title-scroll" href="#content">世界的中心</a>
+              <a class="btn-bootstrap-2" href="#content">世界的中心</a>
           </h1>
           <h2 class="page-description">教学楼的天台，是世界的中心。</h2>
         </div>
@@ -72,134 +77,29 @@
     <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
 </header>
 
-<main id="content" class="content" role="main">
-    
-    
-    
-    
-    
-    
+  <main id="content" class="content" role="main">
 
-    <div class="extra-pagination inner">
-        <nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 of 1</span>
-	
-</nav>
 
-    </div>
+  <article class="post post">
 
-    
-        
-<article class="post post">
     <header class="post-header">
-        <h2 class="post-title"><a href="/post/2021/05/06/py3unittest/">Python 3单元测试unittest及HTML报告生成速成</a></h2>
+        <h1 class="post-title">GET与POST探秘</h1>
+        <section class="post-meta">
+        
+	<time class="post-date" datetime="0001-01-01">
+            0001-01-01
+          </time>
+        
+         
+          <span class="post-tag small"><a href="/tags/http/">#http</a></span>
+         
+          <span class="post-tag small"><a href="/tags/tester/">#tester</a></span>
+         
+        </section>
     </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <h4 id="python3单元测试unittest及html报告生成速成">Python3单元测试unittest及HTML报告生成速成</h4>
-<p>前置知识：</p>
-<ul>
-<li>Python面向对象基本</li>
-<li>单元测试基本知识</li>
-<li>Junit等其他测试框架关于测试类、测试方法、测试套件等基本构件的知识</li>
-</ul>
-<p>我们先定义一个待测试的类和对象
-code.py</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">algor</span>:
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(a, b):
-        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b
-</code></pre></div><p>然后开一个测试文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">from</span> code <span style="color:#66d9ef">import</span> algor
-<span style="color:#f92672">import</span> unittest
 
-<span style="color:#75715e"># 下述文件是从py2拿过来的，需要改造。改造方法在后面</span>
-<span style="color:#f92672">import</span> HTMLTestRunner
-</code></pre></div><p>编写测试类：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestAlgor1</span>(unittest<span style="color:#f92672">.</span>TestCase):
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#75715e"># 类前执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUpClass</span>(self):
-        print(<span style="color:#e6db74">&#34;setUpClass&#34;</span>)
-    <span style="color:#75715e"># 类后执行</span>
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDownClass</span>(self):
-        print(<span style="color:#e6db74">&#34;tearDownClass&#34;</span>)
-    <span style="color:#75715e"># 方法前执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
-        print(<span style="color:#e6db74">&#34;setUp&#34;</span>)
-    <span style="color:#75715e"># 方法后执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDown</span>(self):
-        print(<span style="color:#e6db74">&#34;tearDown&#34;</span>)
-    <span style="color:#75715e"># 测试方法，一般命名为测试某某某类</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">testAdd1</span>(self):
-        self<span style="color:#f92672">.</span>assertEquals(algor<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">4</span>)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">testAdd2</span>(self):
-        self<span style="color:#f92672">.</span>assertEquals(algor<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">114</span>, <span style="color:#ae81ff">514</span>), <span style="color:#ae81ff">628</span>)
-</code></pre></div><p>主函数：构建测试套件和生成报告：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3" data-lang="Python3"><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
-    suite <span style="color:#f92672">=</span> unittest<span style="color:#f92672">.</span>TestSuite()
-    suite<span style="color:#f92672">.</span>addTest(TestAlgor1(<span style="color:#e6db74">&#34;testAdd1&#34;</span>))
-    suite<span style="color:#f92672">.</span>addTest(TestAlgor1(<span style="color:#e6db74">&#34;testAdd2&#34;</span>))
-    filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./apptestresult.html&#39;</span>
-    fb <span style="color:#f92672">=</span> open(filename, <span style="color:#e6db74">&#39;wb&#39;</span>)
-    runner <span style="color:#f92672">=</span> HTMLTestRunner<span style="color:#f92672">.</span>HTMLTestRscaunner(stream<span style="color:#f92672">=</span>fb, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;测试HTMLTestRunner&#34;</span>, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;测试HTMLTestRunner&#34;</span>)
-    runner<span style="color:#f92672">.</span>run(suite)
-    fb<span style="color:#f92672">.</span>close() 
-</code></pre></div><p>上述方案是一个基于python2里面HTMLTestRunner模块的实现，需要先下载HTMLTestRunner.py文件然后进行改进以在py3环境中使用</p>
-<p>第94行，将import StringIO修改成import io</p>
-<p>第539行，将self.outputBuffer = StringIO.StringIO()修改成self.outputBuffer = io.StringIO()</p>
-<p>第642行，将if not rmap.has_key(cls):修改成if not cls in rmap:</p>
-<p>第766行，将uo = o.decode(&lsquo;latin-1&rsquo;)修改成uo = e</p>
-<p>第772行，将ue = e.decode(&lsquo;latin-1&rsquo;)修改成ue = e</p>
-<p>第631行，将print &raquo; sys.stderr, &lsquo;\nTime Elapsed: %s&rsquo; % (self.stopTime-self.startTime)修改成print(sys.stderr, &lsquo;\nTime Elapsed: %s&rsquo; % (self.stopTime-self.startTime))</p>
-<p>其中，Python3中，已经没有StringIO了。取而代之的是io.StringIO。
-<a href="https://www.cnblogs.com/huny/p/12078784.html">参见</a></p>
-<p>在python3有第三方库可以实现相关功能，这个库是html-testRunner
-注意import的大小写</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">import</span> HtmlTestRunner
-</code></pre></div><p>主函数只要写</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">unittest<span style="color:#f92672">.</span>main(testRunner<span style="color:#f92672">=</span>HtmlTestRunner<span style="color:#f92672">.</span>HTMLTestRunner(output<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;example_dir&#39;</span>))
-</code></pre></div><p><a href="https://pypi.org/project/html-testRunner/#description">参见</a></p>
-
-          </section>
-      </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            miyuki
-        
-        on
-            
-                <a href="tags/tester/">#tester</a>,
-            
-                <a href="tags/python/">#Python</a>,
-            
-                <a href="tags/unittest/">#unittest</a>,
-            
-        
-        <time class="post-date" datetime="2021-05-06T10:54:24&#43;08:00">
-            6 May 2021
-        </time>
-    </footer>
-</article>
-
-    
-        
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="/post/1/01/01/get-post/">GET与POST探秘</a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <h3 id="从http-get和post的整理生发出来的">从HTTP GET和POST的整理生发出来的</h3>
+    <section class="post-content">
+      <h3 id="从http-get和post的整理生发出来的">从HTTP GET和POST的整理生发出来的</h3>
 <p><strong>幂等性(Idempotence)</strong></p>
 <blockquote>
 <p>Methods can also have the property of &ldquo;idempotence&rdquo; in that (aside from error or expiration issues) the side-effects of N &gt; 0 identical requests is the same as for a single request.</p>
@@ -307,41 +207,53 @@ POST：
 </ol>
 </section>
 
-          </section>
-      </p>
-      
     </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            miyuki
-        
-        on
-            
-                <a href="tags/http/">#http</a>,
-            
-                <a href="tags/tester/">#tester</a>,
-            
-        
-        <time class="post-date" datetime="0001-01-01T00:00:00Z">
-            1 Jan 0001
-        </time>
-    </footer>
-</article>
+
+
+  <footer class="post-footer">
+
 
     
+    <figure class="author-image">
 
-    <nav class="pagination" role="navigation">
-	
-	<span class="page-number">Page 1 of 1</span>
-	
-</nav>
+        <a class="img" href="/" style="background-image: url(/images/user.png)"><span class="hidden">miyuki</span></a>
+    </figure>
+    
 
+    <section class="author">
+
+  <p>miyuki</p>
+  
+
+</section>
+
+
+    
+    <section class="share">
+      <h4>Share this post</h4>
+      <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=GET%e4%b8%8ePOST%e6%8e%a2%e7%a7%98&amp;url=%2fpost%2f1%2f01%2f01%2fget-post%2f"
+          onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <span class="hidden">Twitter</span>
+      </a>
+      <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=%2fpost%2f1%2f01%2f01%2fget-post%2f"
+          onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <span class="hidden">Facebook</span>
+      </a>
+      <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=%2fpost%2f1%2f01%2f01%2fget-post%2f"
+         onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <span class="hidden">Google+</span>
+      </a>
+    </section>
+    
+
+    
+    
+    
+
+  </footer>
+</article>
 
 </main>
-
     <footer class="site-footer clearfix">
         <section class="copyright"><a href="">世界的中心</a> All rights reserved - 2021-</section>
         

@@ -194,6 +194,147 @@ code.py</p>
 </article>
 
 	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="/post/1/01/01/get-post/">GET与POST探秘</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h3 id="从http-get和post的整理生发出来的">从HTTP GET和POST的整理生发出来的</h3>
+<p><strong>幂等性(Idempotence)</strong></p>
+<blockquote>
+<p>Methods can also have the property of &ldquo;idempotence&rdquo; in that (aside from error or expiration issues) the side-effects of N &gt; 0 identical requests is the same as for a single request.</p>
+</blockquote>
+<p>幂等性在HTTP1.1中的定义如上，可以大致理解为一次和多次请求某一个资源应该具有同样的副作用。
+这是一个语义范畴的概念，换言之主要是由设计API、协议或者应用的人去保证的。幂等性是分布式系统设计中十分重要的概念，而HTTP的分布式本质也决定了它在HTTP中具有重要地位。</p>
+<p>毋庸置疑，HTTP在当前的分布式系统中有重要的地位，幂等性也融入了设计理念之中。让我们考虑一个例子来说明幂等性在实际业务中的作用。
+我们假设有如下函数帮助模拟业务：从某个id为account_id的账户里面扣数量为amount的钱。</p>
+<pre><code>bool withdraw(account_id, amount)
+</code></pre><p>在一个分布式系统里面，如果单纯用HTTP协议，我们不能很显然地假定系统的可靠性，那么，这时候我们假设A让B去扣钱，有可能产生几种情况：</p>
+<ol>
+<li>A说：B，请去某账户扣钱。 B完成了指令。 B对A说：我扣完了，返回你一个True，A收到了。</li>
+<li>A说：B，请去某账户扣钱。 B完成了指令。 B对A说：由于余额等原因无法扣款，返回你一个False，A收到了。
+事情往往不尽如人意，因为消息传递出现了两次，如果丢包了，有可能出现以下情况：</li>
+</ol>
+<ul>
+<li>A说：B，请去某账户扣钱。 B没听到。</li>
+<li>A说：B，请去某账户扣钱。 B完成了指令。B对A说：我扣完了，返回你一个True，A没收到</li>
+<li>A说：B，请去某账户扣钱。 B完成了指令。B对A说：由于余额等原因无法扣款，返回你一个False，A没收到</li>
+</ul>
+<p>从A的角度来看，如果迟迟没有收到Reply，有可能出现这三种情况之一，但是在目前设计下A无法通过已有的信息进行判断是三种情况的哪一种，也就无法确定是要叫B重新付款，还是返回付款成功，或者返回付款失败。</p>
+<p>我们可以引进中间件完成这个业务，但是这在架构上会增加和中间件的耦合程度。从设计的角度说，有一种被称作幂等设计的设计思路被用来解决类似的问题。</p>
+<pre><code>int create_ticket() 
+bool idempotent_withdraw(ticket_id, account_id, amount)
+</code></pre><p>A对B说，我要找你有一件事。B说，好的，你找我的事情我编号为5。A说，好的，5号事情是如此如此。B办完了，对A说，办完了。A返回。
+在这样一个过程中，取号的过程损失很小，如果取号过程丢包了，只要重新取一个号码就可以了。但是当A收到取回的号码，这时候B就知道有一件事情要办。在这个假设下，B最多只会把这件特定的事情办一次成为AB之间的Common Sense。如果丢包导致A没有返回，A可以在调用上加上原来的ID，并且持续发送，因为B只会把这件事情办一次，所以可以持续发送，等待返回。</p>
+<p>和分布式事务相比，幂等设计的优势在于它的轻量级，容易适应异构环境，以及性能和可用性方面。在某些性能要求比较高的应用，幂等设计往往是唯一的选择。</p>
+<p><strong>HTTP的幂等性</strong></p>
+<p>HTTP协议本身是一种<strong>面向资源</strong>的应用层协议，但对HTTP协议的使用实际上存在着两种不同的方式：一种是RESTful的，它把HTTP当成<strong>应用层</strong>协议，比较忠实地遵守了HTTP协议的各种规定；另一种是SOA的，它并没有完全把HTTP当成应用层协议，而是把HTTP协议作为了<strong>传输层</strong>协议，然后在HTTP之上建立了自己的应用层协议。</p>
+<p>幂等性并不属于特定的协议，它是分布式系统的一种特性；所以，不论是SOA还是RESTful的Web API设计都应该考虑幂等性。下面将引入HTTP GET、DELETE、PUT、POST四种主要方法的语义和幂等性。</p>
+<p>幂等性在HTTP中的设计主要体现在<strong>没有副作用</strong>，而不完全是<strong>返回相同的结果</strong>，请注意两个概念的区别。因为在不同时间GET同一个网页的不同东西确实有可能产生不同的结果，但是本身没有副作用，不会改变资源的状态，所以是幂等的。</p>
+<p>HTTP <strong>GET</strong>方法用于获取资源，不应有副作用，所以是幂等的。</p>
+<p>HTTP <strong>DELETE</strong>方法用于删除资源，有副作用，但它应该满足幂等性。对于删除特定资源的请求，调用一次和N次对系统产生的副作用是相同的。；因此，调用者可以多次调用或刷新页面而不必担心引起错误。</p>
+<p>HTTP <strong>POST</strong>与HTTP <strong>PUT</strong>经常被混淆，请注意。
+HTTP 1.1中是这样规定的：</p>
+<blockquote>
+<p>The POST method is used to request that the origin server accept the entity enclosed in the request as a new subordinate of the resource identified by the Request-URI in the Request-Line &hellip;&hellip; If a resource has been created on the origin server, the response SHOULD be 201 (Created) and contain an entity which describes the status of the request and refers to the new resource, and a Location header.</p>
+</blockquote>
+<blockquote>
+<p>The PUT method requests that the enclosed entity be stored under the supplied Request-URI. If the Request-URI refers to an already existing resource, the enclosed entity SHOULD be considered as a modified version of the one residing on the origin server. If the Request-URI does not point to an existing resource, and that URI is capable of being defined as a new resource by the requesting user agent, the origin server can create the resource with that URI.</p>
+</blockquote>
+<p>POST所对应的URI并非创建的资源本身，而是资源的接收者。比如：POST <a href="http://www.forum.com/articles">http://www.forum.com/articles</a>的语义是在http://www.forum.com/articles下创建一篇帖子，HTTP响应中应包含帖子的创建状态以及帖子的URI。两次相同的POST请求会在服务器端创建两份资源，它们具有不同的URI.所以，POST方法不具备幂等性。而PUT所对应的URI是要创建或更新的资源本身。比如：PUT <a href="http://www.forum/articles/4231">http://www.forum/articles/4231</a>的语义是创建或更新ID为4231的帖子。对同一URI进行多次PUT的副作用和一次PUT是相同的；因此，PUT方法具有幂等性。</p>
+<p>如何通过Web API的形式实现前面所提到的取款功能。很简单，用POST /tickets来实现create_ticket；用PUT /accounts/account_id/ticket_id?amount=xxx来实现idempotent_withdraw。值得注意的是严格来讲amount参数不应该作为URI的一部分，真正的URI应该是/accounts/account_id/ticket_id，而amount应该放在请求的body中。这种模式可以应用于很多场合，比如：论坛网站中防止意外的重复发帖。</p>
+<p>那么，在GET和POST的机理之下，我们需要理解以下几点性质：</p>
+<ul>
+<li>GET在浏览器回退时是无害的，而POST会再次提交请求</li>
+</ul>
+<p>因为GET得到某份资源，是幂等的，post对目标再度提出创建，不是幂等的。</p>
+<p><strong>GET</strong>和<strong>POST</strong>的实现机理</p>
+<p>理论上，一个POST能完成所有请求，但我们往往不会这么设计。常见的4-5个HTTP请求里面，除了语义上的差别，在功能上也有所不同。</p>
+<p>GET的特点是什么呢：
+只能对URL进行编码。虽然URL理论上是无限长的<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，但是实现下来总是无法做到。这一点使得看似信息携带量少了，但是可以把所有的信息都体现在URL上。</p>
+<p>与之对应的
+POST：
+能够实现多种编码形式，在实现上实现了能够发无限长度的信息。</p>
+<p>所以，很多涉及信息保存的浏览器功能对GET和POST请求处理并不一致：</p>
+<ul>
+<li>get请求参数会被完整保留在浏览器历史记录中，post不会（信息都在URL）</li>
+<li>对参数的数据类型，get只接受ASCII字符，post没有限制（编码问题）</li>
+<li>get产生的url地址可以被bookmark（加入标签），post不可以（信息都在URL）</li>
+<li>对参数的数据类型，get只接受ASCII字符，post没有限制</li>
+<li>Get请求在url中传递的参数长度有限制，post没有</li>
+<li>Get比post更不安全，因为参数直接暴露在url中，不能用来传递敏感信息</li>
+<li>Get参数放在url中，post参数放在request body中</li>
+</ul>
+<p>POST和GET并没有本质区别。</p>
+<blockquote>
+<p>HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。</p>
+</blockquote>
+<p>在我大万维网世界中，TCP就像汽车，我们用TCP来运输数据，它很可靠，从来不会发生丢件少件的现象。但是如果路上跑的全是看起来一模一样的汽车，那这个世界看起来是一团混乱，送急件的汽车可能被前面满载货物的汽车拦堵在路上，整个交通系统一定会瘫痪。为了避免这种情况发生，交通规则HTTP诞生了。HTTP给汽车运输设定了好几个服务类别，有GET, POST, PUT, DELETE等等，HTTP规定，当执行GET请求的时候，要给汽车贴上GET的标签（设置method为GET），而且要求把传送的数据放在车顶上（url中）以方便记录。如果是POST请求，就要在车上贴上POST的标签，并把货物放在车厢里。当然，你也可以在GET的时候往车厢内偷偷藏点货物，但是这是很不光彩；也可以在POST的时候在车顶上也放一些数据，让人觉得傻乎乎的。HTTP只是个行为准则，而TCP才是GET和POST怎么实现的基本。</p>
+<p>但是，我们只看到HTTP对GET和POST参数的传送渠道（url还是requrest body）提出了要求。“标准答案”里关于参数大小的限制又是从哪来的呢？</p>
+<p>在我大万维网世界中，还有另一个重要的角色：运输公司。不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的部分，恕不处理。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。</p>
+<p>HTTP在某些实现上并没有强制性。</p>
+<p><img src="/images/HTTPstatus.png" alt=""></p>
+<p>在很多浏览器的实现中，POST是需要两次发包的。</p>
+<p>对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
+而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。
+也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。
+因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。</p>
+<ol>
+<li>GET与POST都有自己的语义，不能随便混用。</li>
+<li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li>
+<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</li>
+</ol>
+<p>或许可以这么理解：</p>
+<ul>
+<li>对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）</li>
+<li>而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）</li>
+</ul>
+<hr>
+<p>reference:</p>
+<ul>
+<li><a href="https://www.cnblogs.com/weidagang2046/archive/2011/06/04/idempotence.html">参考链接1-幂等性</a><!-- raw HTML omitted --></li>
+<li><a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">参考链接2-RFC 2616, Hypertext Transfer Protocol &ndash; HTTP/1.1, Method Definitions</a><!-- raw HTML omitted --></li>
+<li><a href="https://blog.csdn.net/thc151297/article/details/104317874">参考链接3-爬虫必备知识点——get请求和post请求的区别</a><!-- raw HTML omitted --></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;mid=100000054&amp;idx=1&amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd">参考链接4-WebTechGarden 99%的人都理解错了HTTP中GET与POST的区别</a><!-- raw HTML omitted --></li>
+</ul>
+<hr>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>在http协议中，其实并没有对url长度作出限制，但是显然地，这取决于Web 服务器和浏览器的具体实现而已。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="tags/http/">#http</a>,
+            
+                <a href="tags/tester/">#tester</a>,
+            
+        
+        <time class="post-date" datetime="0001-01-01T00:00:00Z">
+            1 Jan 0001
+        </time>
+    </footer>
+</article>
+
+	
 
 	<nav class="pagination" role="navigation">
 	
