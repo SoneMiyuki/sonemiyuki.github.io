@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on 世界的中心</title>
-    <link>http://sonemiyuki.cn/post/</link>
+    <link>https://sonemiyuki.cn/post/</link>
     <description>Recent content in Posts on 世界的中心</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Sun, 09 May 2021 22:29:30 +0800</lastBuildDate><atom:link href="http://sonemiyuki.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 May 2021 22:29:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GET与POST探秘</title>
-      <link>http://sonemiyuki.cn/post/2021/05/09/get-post/</link>
+      <link>https://sonemiyuki.cn/post/2021/05/09/get-post/</link>
       <pubDate>Sun, 09 May 2021 22:29:30 +0800</pubDate>
       
-      <guid>http://sonemiyuki.cn/post/2021/05/09/get-post/</guid>
+      <guid>https://sonemiyuki.cn/post/2021/05/09/get-post/</guid>
       <description>从HTTP GET和POST的整理生发出来的 幂等性(Idempotence)
  Methods can also have the property of &amp;ldquo;idempotence&amp;rdquo; in that (aside from error or expiration issues) the side-effects of N &amp;gt; 0 identical requests is the same as for a single request.
  幂等性在HTTP1.1中的定义如上，可以大致理解为一次和多次请求某一个资源应该具有同样的副作用。 这是一个语义范畴的概念，换言之主要是由设计API、协议或者应用的人去保证的。幂等性是分布式系统设计中十分重要的概念，而HTTP的分布式本质也决定了它在HTTP中具有重要地位。
@@ -26,10 +26,10 @@ int create_ticket() bool idempotent_withdraw(ticket_id, account_id, amount)A对
     
     <item>
       <title>Python 3单元测试unittest及HTML报告生成速成</title>
-      <link>http://sonemiyuki.cn/post/2021/05/06/py3unittest/</link>
+      <link>https://sonemiyuki.cn/post/2021/05/06/py3unittest/</link>
       <pubDate>Thu, 06 May 2021 10:54:24 +0800</pubDate>
       
-      <guid>http://sonemiyuki.cn/post/2021/05/06/py3unittest/</guid>
+      <guid>https://sonemiyuki.cn/post/2021/05/06/py3unittest/</guid>
       <description>Python3单元测试unittest及HTML报告生成速成 前置知识：
  Python面向对象基本 单元测试基本知识 Junit等其他测试框架关于测试类、测试方法、测试套件等基本构件的知识  我们先定义一个待测试的类和对象 code.py
 class algor: def add(a, b): return a + b 然后开一个测试文件

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>unittest on 世界的中心</title>
-    <link>http://sonemiyuki.cn/tags/unittest/</link>
+    <link>https://sonemiyuki.cn/tags/unittest/</link>
     <description>Recent content in unittest on 世界的中心</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Thu, 06 May 2021 10:54:24 +0800</lastBuildDate><atom:link href="http://sonemiyuki.cn/tags/unittest/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 06 May 2021 10:54:24 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/unittest/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Python 3单元测试unittest及HTML报告生成速成</title>
-      <link>http://sonemiyuki.cn/post/2021/05/06/py3unittest/</link>
+      <link>https://sonemiyuki.cn/post/2021/05/06/py3unittest/</link>
       <pubDate>Thu, 06 May 2021 10:54:24 +0800</pubDate>
       
-      <guid>http://sonemiyuki.cn/post/2021/05/06/py3unittest/</guid>
+      <guid>https://sonemiyuki.cn/post/2021/05/06/py3unittest/</guid>
       <description>Python3单元测试unittest及HTML报告生成速成 前置知识：
  Python面向对象基本 单元测试基本知识 Junit等其他测试框架关于测试类、测试方法、测试套件等基本构件的知识  我们先定义一个待测试的类和对象 code.py
 class algor: def add(a, b): return a + b 然后开一个测试文件

@@ -7,7 +7,7 @@
 
   	<meta property="og:title" content=" http &middot;  世界的中心" />
   	<meta property="og:site_name" content="世界的中心" />
-  	<meta property="og:url" content="http://sonemiyuki.cn/tags/http/" />
+  	<meta property="og:url" content="https://sonemiyuki.cn/tags/http/" />
     
     
     <meta property="og:type" content="website" />
@@ -22,24 +22,24 @@
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" href="http://sonemiyuki.cn/images/favicon.ico">
-	  <link rel="apple-touch-icon" href="http://sonemiyuki.cn/images/apple-touch-icon.png" />
+    <link rel="shortcut icon" href="https://sonemiyuki.cn/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="https://sonemiyuki.cn/images/apple-touch-icon.png" />
     
-    <link rel="stylesheet" type="text/css" href="http://sonemiyuki.cn/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="https://sonemiyuki.cn/css/screen.css" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
 
 
     
       
-          <link href="http://sonemiyuki.cn/index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
+          <link href="https://sonemiyuki.cn/index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
       
       
-        <link href="http://sonemiyuki.cn/tags/http/index.xml" rel="alternate" type="application/rss+xml" title="http &middot; 世界的中心" />
+        <link href="https://sonemiyuki.cn/tags/http/index.xml" rel="alternate" type="application/rss+xml" title="http &middot; 世界的中心" />
       
     
     <meta name="generator" content="Hugo 0.83.0" />
 
-    <link rel="canonical" href="http://sonemiyuki.cn/tags/http/" />
+    <link rel="canonical" href="https://sonemiyuki.cn/tags/http/" />
 
      
 </head>
@@ -53,15 +53,15 @@
 
 
 
-	<header class="main-header" style="background-image: url(http://sonemiyuki.cn/images/user.jpg)">
+	<header class="main-header" style="background-image: url(https://sonemiyuki.cn/images/user.jpg)">
 
     <nav class="main-nav overlay clearfix">
       
-        <a class="blog-logo" href="http://sonemiyuki.cn/"><img src="http://sonemiyuki.cn/images/user.png" alt="Home" /></a>
+        <a class="blog-logo" href="https://sonemiyuki.cn/"><img src="https://sonemiyuki.cn/images/user.png" alt="Home" /></a>
       
       
         
-          <a class="menu-button icon-feed" href="http://sonemiyuki.cn/tags/http/index.xml">&nbsp;&nbsp;Subscribe</a>
+          <a class="menu-button icon-feed" href="https://sonemiyuki.cn/tags/http/index.xml">&nbsp;&nbsp;Subscribe</a>
         
       
     </nav>
@@ -96,7 +96,7 @@
 	   
 <article class="post post">
     <header class="post-header">
-        <h2 class="post-title"><a href="http://sonemiyuki.cn/post/2021/05/09/get-post/">GET与POST探秘</a></h2>
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/05/09/get-post/">GET与POST探秘</a></h2>
     </header>
     <section class="post-excerpt">
       <p>
@@ -175,7 +175,7 @@ POST：
 <p>但是，我们只看到HTTP对GET和POST参数的传送渠道（url还是requrest body）提出了要求。“标准答案”里关于参数大小的限制又是从哪来的呢？</p>
 <p>在我大万维网世界中，还有另一个重要的角色：运输公司。不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的部分，恕不处理。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。</p>
 <p>HTTP在某些实现上并没有强制性。</p>
-<p><img src="http://sonemiyuki.cn/images/HTTPstatus.png" alt=""></p>
+<p><img src="https://sonemiyuki.cn/images/HTTPstatus.png" alt=""></p>
 <p>在很多浏览器的实现中，POST是需要两次发包的。</p>
 <p>对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
 而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。
@@ -215,16 +215,16 @@ POST：
     </section>
     <footer class="post-meta">
         
-            <img class="author-thumb" src="http://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
         
         
             miyuki
         
         on
             
-                <a href="http://sonemiyuki.cn/tags/http/">#http</a>,
+                <a href="https://sonemiyuki.cn/tags/http/">#http</a>,
             
-                <a href="http://sonemiyuki.cn/tags/tester/">#tester</a>,
+                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
             
         
         <time class="post-date" datetime="2021-05-09T22:29:30&#43;08:00">
@@ -252,11 +252,11 @@ POST：
         
     </footer>
     </div>
-    <script type="text/javascript" src="http://sonemiyuki.cn/js/jquery.js"></script>
-    <script type="text/javascript" src="http://sonemiyuki.cn/js/jquery.fitvids.js"></script>
-    <script type="text/javascript" src="http://sonemiyuki.cn/js/index.js"></script>
-    <script src="http://sonemiyuki.cn/js/particles.min.js"></script>
-    <script src="http://sonemiyuki.cn/js/particles.js"></script>  
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/index.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.min.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.js"></script>  
 
 </body>
 </html>
