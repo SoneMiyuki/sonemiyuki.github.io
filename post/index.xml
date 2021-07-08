@@ -7,7 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Sun, 09 May 2021 22:29:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Jul 2021 23:41:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算机网络面经与常见QA（1）</title>
+      <link>https://sonemiyuki.cn/post/2021/07/08/network/</link>
+      <pubDate>Thu, 08 Jul 2021 23:41:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/08/network/</guid>
+      <description>计算机网络面经与常见QA（1）  5层协议、7层协议、4层协议与主要协议   7层协议：  应用层：FTP、DNS、SMTP、HTTP、WWW、NFS 表示层：JPEG、MPEG、ASII 会话层：RPC、SQL、NFS 传输层：TCP、UDP 网络层：IP、ACMP、ARP、RARP、OSPF、IPX、RIP 链路层：PPP、MAC、VLAN 物理层：RJ45、CLOCK、IEEE802.3   5层协议：  将7层协议的顶部三层合并为应用层   4层协议:  将底下两层合并为数据接口层    IP地址的分类   A类:以0开头,第一个字节为0-127 B类:以10开头,第一个字节为128-191 C类:以110开头,第一个字节为192-223 D类:以1110开头,用于多播 E类:以1111开头,暂时保留 特殊IP地址:  0.0.0.0 缺省路由,表示不清楚的主机和目的网络 255.255.255.255 路由器不转发的内网广播 127.0.0.1 localhost,本机 224.0.0.1 组播地址 192.168.X.X 私有地址     IP地址,子网掩码,主机号码的关系
+  ARP(Address Resolution Protrol)地址解析协议
+  概述：根据IP协议获取物理地址的TCP/IP协议
+ 在主机中维护ARP cache，里面有本局域网的主机和路由器的（ip地址，硬件地址）映射表。 当主机A向局域网上的另外一台主机B发送IP数据报的时候，在其ARP高速缓存里面查询有无主机B的IP地址  若有，查出硬件地址并且写入mac帧，通过局域网将帧发往该硬件地址。 若无，则主机A运行ARP，根据以下步骤找出主机B的硬件地址：  ARP进程向局域网内广播发送ARP请求分组，局域网内所有主机运行的ARP进程均收到此分组。在这里是广播 主机B的IP地址和ARP请求分组待查的IP一直，收下这个ARP请求分组，并且向A发送ARP响应分组，在这个响应分组中写进自己的硬件地址。在这里是单播。 主机A在收到ARP响应分组之后在其ARP cache中写入主机B的（IP地址，物理地址映射）     ARP的特点：  每个数据项都有生存时间 解决的主要是局域网上的问题 广域网上联系需要交给路由器转发    各种需要了解的小协议   ICMP（Internet Control Message Protrol）  主要用于IP主机和路由器之间传递控制信息 类型-代码-校验和  3-终点不可达：不能交付数据包 11-时间超过：路由器接收到生存时间为0的数据报，丢弃并向原点发送报文 12-参数问题：路由器或者主机收到的数据包首部有的字段的值不正确 5-改变路由：提示主机进行重定向 8、0-回送或回答：ICMP回送请求报文由主机或者路由器向特定的主机发布询问 13、14-时间戳请求或回答：用于校正时间戳     FTP（File Transfer Protrol）文件传输协议  文件传输协议 主动模式：  控制连接：会话期间一直打开，用于控制和会话，端口号21 数据连接：用来传输数据，服务机端口号20，客户机端口号自行开放，发送PORT命令从服务器获取数据   被动模式：  控制连接：会话期间一直打开，用于控制和会话，端口号21 数据连接：用来传输数据，服务器随机开放端口，客户端再连接到服务器开放的端口进行数据传输   主动模式和被动模式的不同简单概述为： 主动模式传送数据时是“服务器”连接到“客户端”的端口；被动模式传送数据是“客户端”连接到“服务器”的端口。主动模式需要客户端必须开放端口给服务器，很多客户端都是在防火墙内，开放端口给FTP服务器访问比较困难。被动模式只需要服务器端开放端口给客户端连接就行了。   HTTP（Hyper Text Transfer Protocol）超文本传输协议  Port: 80 运用TCP保证了数据的可靠运输，但是HTTP本身没有连接，没有状态。 文件传输时间+2RTT HTTP1.</description>
+    </item>
+    
     <item>
       <title>GET与POST探秘</title>
       <link>https://sonemiyuki.cn/post/2021/05/09/get-post/</link>

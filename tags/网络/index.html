@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  	<meta property="og:title" content=" 网络 &middot;  世界的中心" />
+  	<meta property="og:site_name" content="世界的中心" />
+  	<meta property="og:url" content="https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/" />
+    
+    
+    <meta property="og:type" content="website" />
+    
+
+  <title>
+     网络 &middot;  世界的中心
+  </title>
+
+    <meta name="description" content="教学楼的天台，是世界的中心。" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://sonemiyuki.cn/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="https://sonemiyuki.cn/images/apple-touch-icon.png" />
+    
+    <link rel="stylesheet" type="text/css" href="https://sonemiyuki.cn/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="https://sonemiyuki.cn/index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
+      
+      
+        <link href="https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="alternate" type="application/rss+xml" title="网络 &middot; 世界的中心" />
+      
+    
+    <meta name="generator" content="Hugo 0.83.0" />
+
+    <link rel="canonical" href="https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/" />
+
+     
+</head>
+<body class="nav-closed">
+<div id="particles-js"></div>
+  
+
+
+ <div class="site-wrapper">
+
+
+
+
+	<header class="main-header" style="background-image: url(https://sonemiyuki.cn/images/user.jpg)">
+
+    <nav class="main-nav overlay clearfix">
+      
+        <a class="blog-logo" href="https://sonemiyuki.cn/"><img src="https://sonemiyuki.cn/images/user.png" alt="Home" /></a>
+      
+      
+        
+          <a class="menu-button icon-feed" href="https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/index.xml">&nbsp;&nbsp;Subscribe</a>
+        
+      
+    </nav>
+    <div class="vertical">
+
+        <div class="main-header-content inner">
+            <h1 class="page-title">
+
+              <a class="btn-bootstrap-2" href="#content">世界的中心</a>
+          </h1>
+        </div>
+</div>
+    <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
+</header>
+
+<main id="content" class="content" role="main">
+    
+    
+    
+    
+
+	<div class="extra-pagination inner">
+    <nav class="pagination" role="navigation">
+	
+	<span class="page-number">Page 1 of 1</span>
+	
+</nav>
+
+	</div>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/08/network/">计算机网络面经与常见QA（1）</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h3 id="计算机网络面经与常见qa1">计算机网络面经与常见QA（1）</h3>
+<ol>
+<li><strong>5层协议、7层协议、4层协议与主要协议</strong></li>
+</ol>
+<ul>
+<li>7层协议：
+<ul>
+<li>应用层：FTP、DNS、SMTP、HTTP、WWW、NFS</li>
+<li>表示层：JPEG、MPEG、ASII</li>
+<li>会话层：RPC、SQL、NFS</li>
+<li>传输层：TCP、UDP</li>
+<li>网络层：IP、ACMP、ARP、RARP、OSPF、IPX、RIP</li>
+<li>链路层：PPP、MAC、VLAN</li>
+<li>物理层：RJ45、CLOCK、IEEE802.3</li>
+</ul>
+</li>
+<li>5层协议：
+<ul>
+<li>将7层协议的顶部三层合并为应用层</li>
+</ul>
+</li>
+<li>4层协议:
+<ul>
+<li>将底下两层合并为数据接口层</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><strong>IP地址的分类</strong></li>
+</ol>
+<ul>
+<li>A类:以0开头,第一个字节为0-127</li>
+<li>B类:以10开头,第一个字节为128-191</li>
+<li>C类:以110开头,第一个字节为192-223</li>
+<li>D类:以1110开头,用于多播</li>
+<li>E类:以1111开头,暂时保留</li>
+<li>特殊IP地址:
+<ul>
+<li>0.0.0.0 缺省路由,表示不清楚的主机和目的网络</li>
+<li>255.255.255.255 路由器不转发的内网广播</li>
+<li>127.0.0.1 localhost,本机</li>
+<li>224.0.0.1 组播地址</li>
+<li>192.168.X.X 私有地址</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>
+<p><strong>IP地址,子网掩码,主机号码的关系</strong></p>
+</li>
+<li>
+<p><strong>ARP(Address Resolution Protrol)地址解析协议</strong></p>
+</li>
+</ol>
+<p>概述：根据IP协议获取物理地址的TCP/IP协议</p>
+<ul>
+<li>在主机中维护ARP cache，里面有本局域网的主机和路由器的（ip地址，硬件地址）映射表。</li>
+<li>当主机A向局域网上的另外一台主机B发送IP数据报的时候，在其ARP高速缓存里面查询有无主机B的IP地址
+<ul>
+<li>若有，查出硬件地址并且写入mac帧，通过局域网将帧发往该硬件地址。</li>
+<li>若无，则主机A运行ARP，根据以下步骤找出主机B的硬件地址：
+<ul>
+<li>ARP进程向局域网内广播发送ARP请求分组，局域网内所有主机运行的ARP进程均收到此分组。在这里是广播</li>
+<li>主机B的IP地址和ARP请求分组待查的IP一直，收下这个ARP请求分组，并且向A发送ARP响应分组，在这个响应分组中写进自己的硬件地址。在这里是单播。</li>
+<li>主机A在收到ARP响应分组之后在其ARP cache中写入主机B的（IP地址，物理地址映射）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ARP的特点：
+<ul>
+<li>每个数据项都有生存时间</li>
+<li>解决的主要是局域网上的问题</li>
+<li>广域网上联系需要交给路由器转发</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li><strong>各种需要了解的小协议</strong></li>
+</ol>
+<ul>
+<li><strong>ICMP（Internet Control Message Protrol）</strong>
+<ul>
+<li>主要用于IP主机和路由器之间传递控制信息</li>
+<li>类型-代码-校验和
+<ul>
+<li>3-终点不可达：不能交付数据包</li>
+<li>11-时间超过：路由器接收到生存时间为0的数据报，丢弃并向原点发送报文</li>
+<li>12-参数问题：路由器或者主机收到的数据包首部有的字段的值不正确</li>
+<li>5-改变路由：提示主机进行重定向</li>
+<li>8、0-回送或回答：ICMP回送请求报文由主机或者路由器向特定的主机发布询问</li>
+<li>13、14-时间戳请求或回答：用于校正时间戳</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>FTP（File Transfer Protrol）文件传输协议</strong>
+<ul>
+<li>文件传输协议</li>
+<li>主动模式：
+<ul>
+<li>控制连接：会话期间一直打开，用于控制和会话，端口号21</li>
+<li>数据连接：用来传输数据，服务机端口号20，客户机端口号自行开放，发送PORT命令从服务器获取数据</li>
+</ul>
+</li>
+<li>被动模式：
+<ul>
+<li>控制连接：会话期间一直打开，用于控制和会话，端口号21</li>
+<li>数据连接：用来传输数据，服务器随机开放端口，客户端再连接到服务器开放的端口进行数据传输</li>
+</ul>
+</li>
+<li>主动模式和被动模式的不同简单概述为： 主动模式传送数据时是“服务器”连接到“客户端”的端口；被动模式传送数据是“客户端”连接到“服务器”的端口。主动模式需要客户端必须开放端口给服务器，很多客户端都是在防火墙内，开放端口给FTP服务器访问比较困难。被动模式只需要服务器端开放端口给客户端连接就行了。</li>
+</ul>
+</li>
+<li><strong>HTTP（Hyper Text Transfer Protocol）超文本传输协议</strong>
+<ul>
+<li>Port: 80</li>
+<li>运用TCP保证了数据的可靠运输，但是HTTP本身没有连接，没有状态。</li>
+<li>文件传输时间+2RTT</li>
+<li>HTTP1.1：持续连接，节约建立连接的一个RTT</li>
+<li>请求报文和响应报文
+<ul>
+<li>请求报文：
+<ul>
+<li>请求行：包括方法、URL、版本</li>
+<li>header：一个map</li>
+<li>实体主体</li>
+</ul>
+</li>
+<li>响应报文：
+<ul>
+<li>状态行：版本、状态码、短语</li>
+<li>header: 一个map</li>
+<li>实体主体</li>
+</ul>
+</li>
+<li>常见状态码</li>
+<li>Header与Cookie
+<ul>
+<li>唯一识别性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>DHCP(Dynamic Host Configuration Protrol)动态主机配置协议</strong>
+<ul>
+<li>让系统得以连接到网络上，并且获取所需的必要参数</li>
+<li>即插即用联网，给内部网络分配IP地址</li>
+<li>过程：
+<ul>
+<li>发送广播报文，寻找DHCP服务器</li>
+<li>DHCP服务器发送提供报文</li>
+<li>DHCP中继代理：作为中介以UDP方式连接主机和DCHP服务器</li>
+<li>客户UDP68，服务器UDP67</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>NAT（Network Address Translation）网络地址转换</strong>
+<ul>
+<li>NAPT 加上端口号的转换</li>
+<li>内网转公网，公网转内网</li>
+</ul>
+</li>
+<li><strong>RARP（Reverse Address Resolution Protocol）反向地址转换协议</strong>
+<ul>
+<li>物理地址转IP地址</li>
+<li>无盘机需要向网关服务器的ARP表或者ARP cache请求其IP地址</li>
+<li>过程：
+<ul>
+<li>RARP广播，声明MAC地址并请求一个IP地址
+<ul>
+<li>在：查出来</li>
+<li>不在：查不出来</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>IP地址是返回的唯一可能结果，并且这个链路层请求不会被路由器转发，故每个网络需要一个RARP服务器</li>
+</ul>
+</li>
+</ul>
+<ol start="6">
+<li><strong>三次握手，传输数据，四次挥手</strong></li>
+</ol>
+<ul>
+<li>三次握手
+<ul>
+<li>第一次握手：客户端发送SYN，seq=x到服务端，进入SYN_SEND状态</li>
+<li>第二次握手：服务端收到SYN包，确认客户SYN（sql=y，ACK确认位=x+1），自己也发一个SYN包供对方确认，自己进入SYN_RECV状态</li>
+<li>第三次握手：客户端向服务器发送确认包ACK（ack=y+1），双方进入ESTABLISHED状态，完成三次握手</li>
+</ul>
+</li>
+<li>传输数据：客户端发送seq=x+1，ACK=y+1，等待对方确认返回ACK=x+2</li>
+<li>四次挥手
+<ul>
+<li>第一次挥手：客户端发送FIN包，并且继续seq和ACK</li>
+<li>第二次挥手：被动关闭方收到FIN包之后发个ACK给对方确认收到之前的东西</li>
+<li>第三次挥手：被动关闭方发送一个FIN</li>
+<li>第四次挥手：主动关闭方收到FIN包之后发个ACK给对方确认收到之前的东西</li>
+</ul>
+</li>
+</ul>
+<ol start="7">
+<li><strong>浏览器输入baidu.com之后地执行过程</strong></li>
+</ol>
+<ul>
+<li>DNS解析，浏览器查询自身缓存，若无，向DNS服务器询问到baidu.com的IP地址</li>
+<li>发起GET /index.html HTTP/1.1的GET请求</li>
+<li>传输层将HTTP请求用TCP报文头包装好，添加端口和服务器进行通讯</li>
+<li>网络层通过查找路由表进行不断转发确保通讯</li>
+<li>链路层通过ARP查询MAC地址进行传输</li>
+<li>得到index.html</li>
+</ul>
+<ol start="8">
+<li><strong>TCP和UPD的区别</strong></li>
+</ol>
+<ul>
+<li>TCP面向连接，安全，速度慢，数据流</li>
+<li>UDP非面向连接，不安全，速度快一点，数据报</li>
+</ul>
+<ol start="9">
+<li><strong>DNS原理</strong></li>
+</ol>
+<ul>
+<li>DNS客户通过查询DNS服务器解析名称，查询包括三条信息，包括DNS域名，查询类型，域名类别。基于UDP。</li>
+</ul>
+<ol start="10">
+<li><strong>交换机、路由器、网关</strong></li>
+</ol>
+<ul>
+<li>交换机：位于数据链路层，维护ARP表，隔绝冲突域，不隔绝广播域</li>
+<li>路由器：路由和转送
+<ul>
+<li>路由：决定host到host之间的传输路径</li>
+<li>转送：将路由器输入端的数据移动到路由器输出端</li>
+<li>隔离广播域</li>
+</ul>
+</li>
+<li>网关：连接两个网络的设备，能在不同协议之间移动数据，是连接两个网络的设备
+参考链接：</li>
+<li><a href="https://www.cnblogs.com/mawanglin2008/articles/3607767.html">参考链接1-FTP的主动模式和被动模式</a></li>
+<li><a href="https://www.nowcoder.com/discuss/1937">参考链接2-面经</a></li>
+<li><a href="https://blog.csdn.net/chpdirector84/article/details/6033511">参考链接3-RARP</a></li>
+</ul>
+<p>参考书目：
+《计算机网络（第7版）》谢希仁</p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/http/">#http</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/">#网络</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-08T23:41:30&#43;08:00">
+            8 Jul 2021
+        </time>
+    </footer>
+</article>
+
+	
+
+	<nav class="pagination" role="navigation">
+	
+	<span class="page-number">Page 1 of 1</span>
+	
+</nav>
+
+</main>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">世界的中心</a> All rights reserved - 2021-</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="https://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/syui/hugo-theme-air">hugo-theme-air</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/index.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.min.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.js"></script>  
+
+</body>
+</html>
+

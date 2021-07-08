@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>http on 世界的中心</title>
-    <link>https://sonemiyuki.cn/tags/http/</link>
-    <description>Recent content in http on 世界的中心</description>
+    <title>网络 on 世界的中心</title>
+    <link>https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/</link>
+    <description>Recent content in 网络 on 世界的中心</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Thu, 08 Jul 2021 23:41:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/http/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Jul 2021 23:41:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>计算机网络面经与常见QA（1）</title>
       <link>https://sonemiyuki.cn/post/2021/07/08/network/</link>
@@ -18,22 +18,6 @@
   ARP(Address Resolution Protrol)地址解析协议
   概述：根据IP协议获取物理地址的TCP/IP协议
  在主机中维护ARP cache，里面有本局域网的主机和路由器的（ip地址，硬件地址）映射表。 当主机A向局域网上的另外一台主机B发送IP数据报的时候，在其ARP高速缓存里面查询有无主机B的IP地址  若有，查出硬件地址并且写入mac帧，通过局域网将帧发往该硬件地址。 若无，则主机A运行ARP，根据以下步骤找出主机B的硬件地址：  ARP进程向局域网内广播发送ARP请求分组，局域网内所有主机运行的ARP进程均收到此分组。在这里是广播 主机B的IP地址和ARP请求分组待查的IP一直，收下这个ARP请求分组，并且向A发送ARP响应分组，在这个响应分组中写进自己的硬件地址。在这里是单播。 主机A在收到ARP响应分组之后在其ARP cache中写入主机B的（IP地址，物理地址映射）     ARP的特点：  每个数据项都有生存时间 解决的主要是局域网上的问题 广域网上联系需要交给路由器转发    各种需要了解的小协议   ICMP（Internet Control Message Protrol）  主要用于IP主机和路由器之间传递控制信息 类型-代码-校验和  3-终点不可达：不能交付数据包 11-时间超过：路由器接收到生存时间为0的数据报，丢弃并向原点发送报文 12-参数问题：路由器或者主机收到的数据包首部有的字段的值不正确 5-改变路由：提示主机进行重定向 8、0-回送或回答：ICMP回送请求报文由主机或者路由器向特定的主机发布询问 13、14-时间戳请求或回答：用于校正时间戳     FTP（File Transfer Protrol）文件传输协议  文件传输协议 主动模式：  控制连接：会话期间一直打开，用于控制和会话，端口号21 数据连接：用来传输数据，服务机端口号20，客户机端口号自行开放，发送PORT命令从服务器获取数据   被动模式：  控制连接：会话期间一直打开，用于控制和会话，端口号21 数据连接：用来传输数据，服务器随机开放端口，客户端再连接到服务器开放的端口进行数据传输   主动模式和被动模式的不同简单概述为： 主动模式传送数据时是“服务器”连接到“客户端”的端口；被动模式传送数据是“客户端”连接到“服务器”的端口。主动模式需要客户端必须开放端口给服务器，很多客户端都是在防火墙内，开放端口给FTP服务器访问比较困难。被动模式只需要服务器端开放端口给客户端连接就行了。   HTTP（Hyper Text Transfer Protocol）超文本传输协议  Port: 80 运用TCP保证了数据的可靠运输，但是HTTP本身没有连接，没有状态。 文件传输时间+2RTT HTTP1.</description>
-    </item>
-    
-    <item>
-      <title>GET与POST探秘</title>
-      <link>https://sonemiyuki.cn/post/2021/05/09/get-post/</link>
-      <pubDate>Sun, 09 May 2021 22:29:30 +0800</pubDate>
-      
-      <guid>https://sonemiyuki.cn/post/2021/05/09/get-post/</guid>
-      <description>从HTTP GET和POST的整理生发出来的 幂等性(Idempotence)
- Methods can also have the property of &amp;ldquo;idempotence&amp;rdquo; in that (aside from error or expiration issues) the side-effects of N &amp;gt; 0 identical requests is the same as for a single request.
- 幂等性在HTTP1.1中的定义如上，可以大致理解为一次和多次请求某一个资源应该具有同样的副作用。 这是一个语义范畴的概念，换言之主要是由设计API、协议或者应用的人去保证的。幂等性是分布式系统设计中十分重要的概念，而HTTP的分布式本质也决定了它在HTTP中具有重要地位。
-毋庸置疑，HTTP在当前的分布式系统中有重要的地位，幂等性也融入了设计理念之中。让我们考虑一个例子来说明幂等性在实际业务中的作用。 我们假设有如下函数帮助模拟业务：从某个id为account_id的账户里面扣数量为amount的钱。
-bool withdraw(account_id, amount)在一个分布式系统里面，如果单纯用HTTP协议，我们不能很显然地假定系统的可靠性，那么，这时候我们假设A让B去扣钱，有可能产生几种情况：
- A说：B，请去某账户扣钱。 B完成了指令。 B对A说：我扣完了，返回你一个True，A收到了。 A说：B，请去某账户扣钱。 B完成了指令。 B对A说：由于余额等原因无法扣款，返回你一个False，A收到了。 事情往往不尽如人意，因为消息传递出现了两次，如果丢包了，有可能出现以下情况：   A说：B，请去某账户扣钱。 B没听到。 A说：B，请去某账户扣钱。 B完成了指令。B对A说：我扣完了，返回你一个True，A没收到 A说：B，请去某账户扣钱。 B完成了指令。B对A说：由于余额等原因无法扣款，返回你一个False，A没收到  从A的角度来看，如果迟迟没有收到Reply，有可能出现这三种情况之一，但是在目前设计下A无法通过已有的信息进行判断是三种情况的哪一种，也就无法确定是要叫B重新付款，还是返回付款成功，或者返回付款失败。
-我们可以引进中间件完成这个业务，但是这在架构上会增加和中间件的耦合程度。从设计的角度说，有一种被称作幂等设计的设计思路被用来解决类似的问题。
-int create_ticket() bool idempotent_withdraw(ticket_id, account_id, amount)A对B说，我要找你有一件事。B说，好的，你找我的事情我编号为5。A说，好的，5号事情是如此如此。B办完了，对A说，办完了。A返回。 在这样一个过程中，取号的过程损失很小，如果取号过程丢包了，只要重新取一个号码就可以了。但是当A收到取回的号码，这时候B就知道有一件事情要办。在这个假设下，B最多只会把这件特定的事情办一次成为AB之间的Common Sense。如果丢包导致A没有返回，A可以在调用上加上原来的ID，并且持续发送，因为B只会把这件事情办一次，所以可以持续发送，等待返回。</description>
     </item>
     
   </channel>
