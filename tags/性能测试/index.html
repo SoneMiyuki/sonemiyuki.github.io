@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  	<meta property="og:title" content=" 性能测试 &middot;  世界的中心" />
+  	<meta property="og:site_name" content="世界的中心" />
+  	<meta property="og:url" content="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" />
+    
+    
+    <meta property="og:type" content="website" />
+    
+
+  <title>
+     性能测试 &middot;  世界的中心
+  </title>
+
+    <meta name="description" content="教学楼的天台，是世界的中心。" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://sonemiyuki.cn/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="https://sonemiyuki.cn/images/apple-touch-icon.png" />
+    
+    <link rel="stylesheet" type="text/css" href="https://sonemiyuki.cn/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="https://sonemiyuki.cn/index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
+      
+      
+        <link href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/index.xml" rel="alternate" type="application/rss+xml" title="性能测试 &middot; 世界的中心" />
+      
+    
+    <meta name="generator" content="Hugo 0.83.0" />
+
+    <link rel="canonical" href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/" />
+
+     
+</head>
+<body class="nav-closed">
+<div id="particles-js"></div>
+  
+
+
+ <div class="site-wrapper">
+
+
+
+
+	<header class="main-header" style="background-image: url(https://sonemiyuki.cn/images/user.jpg)">
+
+    <nav class="main-nav overlay clearfix">
+      
+        <a class="blog-logo" href="https://sonemiyuki.cn/"><img src="https://sonemiyuki.cn/images/user.png" alt="Home" /></a>
+      
+      
+        
+          <a class="menu-button icon-feed" href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/index.xml">&nbsp;&nbsp;Subscribe</a>
+        
+      
+    </nav>
+    <div class="vertical">
+
+        <div class="main-header-content inner">
+            <h1 class="page-title">
+
+              <a class="btn-bootstrap-2" href="#content">世界的中心</a>
+          </h1>
+        </div>
+</div>
+    <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
+</header>
+
+<main id="content" class="content" role="main">
+    
+    
+    
+    
+
+	<div class="extra-pagination inner">
+    <nav class="pagination" role="navigation">
+	
+	<span class="page-number">Page 1 of 1</span>
+	
+</nav>
+
+	</div>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/09/network/">性能测试Note（2）</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h1 id="性能测试note2">性能测试Note（2）</h1>
+<p>LR脚本开发
+性能测试可以并发，效率高一点</p>
+<p>构造200个账号</p>
+<ol>
+<li>数据库写（存储过程）</li>
+<li>自动化工具构造</li>
+<li>LR参数化构造</li>
+</ol>
+<p>50 account:
+var: username
+const: password</p>
+<p>方法1：
+VuserGenerator
+业务过程分解
+open_index
+into_register
+submit_register</p>
+<p>分析可能存在的关键因素
+username需要变量化处理
+username，少的用excel拖一下，多的用脚本构造</p>
+<p>自动化：
+选择协议（create script支持协议探测）一般B/S用HTTP，C/S用Socket</p>
+<p>参数化：
+ctrl+L
+Paramlist里面new一个username
+参数类型file，将excel里的数据做成username.dat;第一行username，下面各行为数据
+select column byname=username</p>
+<p>然后开始录制，录制之后选择脚本中自己输入的username右键参数取代，选择username</p>
+<p>C与LR：</p>
+<p>编程需要编写脚本</p>
+<p>action：本质是函数包，
+vuser_init.c
+Action.c
+vuser_end.c
+每个action是一组功能的集合</p>
+<p>记得return 0;</p>
+<p>lr_output_massage()输出到LR控制台</p>
+<p>F4：运行时设置</p>
+<p>Controller加载脚本</p>
+<p>Start Scenario</p>
+<p>另一种参数化思路：
+用Unique Number -&gt; %3d转化出数字，用t{username}这样的参数化强行拼接</p>
+<p>不同参数同一个数据源：
+按name选，注意same line as&hellip;</p>
+<p>Data Wizard:基于ODBC的驱动</p>
+<p>LR参数化：
+Select next row</p>
+<ul>
+<li>sequencial: 默认的，顺序化</li>
+<li>random: 随机化</li>
+<li>unique：唯一向下</li>
+<li>same line as &hellip;：取决于其他列</li>
+</ul>
+<p>对于单用户来说，顺序和唯一取值序列是相同的</p>
+<p>Update value on: 更新方式</p>
+<ul>
+<li>Each iteration 默认 每次迭代时取值 （常用）</li>
+<li>Each occurrence 每次遇到该参数时取值</li>
+<li>Once 取值仅一次，脚本运行过程中只取值一次值的是：一次选择，终身不变</li>
+</ul>
+<p>When out of values: 选择Unique才需要考虑这个选项，数据不足时处理情况，表示取值越界后的处理方式</p>
+<ul>
+<li>Abort Vuser   放弃虚拟用户，不再取值</li>
+<li>Continue in a cyclic manner  以循环的方式继续，当参数化文件中的值取完最后一个值后，又从参数化文件的第一行开始取值。</li>
+<li>Continue with last value    当参数化文件中的值取完最后一个值后，持续一直最后一个值 。</li>
+</ul>
+<p><img src="https://sonemiyuki.cn/images/LR-Param.png" alt="LR参数化"></p>
+<p>checkpoint：</p>
+<p>先打开页面Snapshot，然后查看页面某个元素</p>
+<p>其中的Body和Header指的是服务器到客户端的响应，不是说HTML界面信息</p>
+<p>页面会增加代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">web_reg_find(<span style="color:#e6db74">&#34;Search=Body&#34;</span>,
+<span style="color:#e6db74">&#34;SaveCount=registflag&#34;</span>,
+<span style="color:#e6db74">&#34;Text=Thank you&#34;</span>,
+LAST);
+</code></pre></div><p>注意到参数验证是以原始plain文本为准，换言之HTML标签也要纳入考虑，而不是仅仅看网页上的东西</p>
+<p>参考链接：
+<a href="https://www.cnblogs.com/whitewasher/p/7614689.html">参考链接1-LR参数详解</a></p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">#性能测试</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-09T22:54:30&#43;08:00">
+            9 Jul 2021
+        </time>
+    </footer>
+</article>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/09/network/">性能测试Note（1）</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h1 id="性能测试note1">性能测试Note（1）</h1>
+<p>重视场景</p>
+<p>效率：
+资源使用情况，消耗的时间达到均衡</p>
+<p>基准测试，不追求极限
+单元和集成也可以渗透性能测试</p>
+<p>接口测试重要性上升，组件化</p>
+<p>性能测试没办法人工模拟</p>
+<p>并发数：单位时间内对服务端发送请求的数量</p>
+<p>业务数量：单位时间内的业务数量</p>
+<p>并发数：柜员 业务数：顾客数</p>
+<p>单交易基准，单交易负载，单交易压力，综合交易，综合负载，稳定性。</p>
+<p>响应时间：服务端，用户端。网络传输时间不可控，性能测试一般在局域网中进行，多点千兆/百兆</p>
+<p>在线用户、有效用户</p>
+<p>业务分析和理解</p>
+<ul>
+<li>业务对象规模
+<ul>
+<li>注册用户</li>
+<li>在线用户</li>
+<li>日交易量</li>
+<li>峰值交易量</li>
+<li>峰值交易时间</li>
+<li>峰值并发数</li>
+</ul>
+</li>
+<li>测试点
+<ul>
+<li>注册</li>
+<li>登录</li>
+<li>订票</li>
+<li>查询</li>
+</ul>
+</li>
+</ul>
+<p>LR：WebTour</p>
+<p>VUGenerator：
+登录业务，三个功能点，
+打开首页
+输入用户名密码提交登陆
+退出</p>
+<p>对业务分解-创建三个动作
+open_index
+submit_login
+sign_off</p>
+<p>先切换动作再进行录制</p>
+<p>录制完修改thinktime并且进行回放
+显示script-pass的页面选择view之后expand-all查看所有报告
+脚本顺利执行不代表业务是对的</p>
+<p>注意重复登录有可能使用了不正确的session值或者jwt之类的验证token</p>
+<p>业务全对的时间才有意义</p>
+<p>日均200wPV
+200w<em>80%=160w 高峰用户数量
+24h</em>20%=4.8h 高峰用户时间
+单次访问页面2秒  2-5-8
+4.8*3600/2</p>
+<p>弄清楚考察并发数还是业务量。</p>
+<p>新需求：
+5min内200次用户注册，响应时间不超过3s成功率100%，CPU内存使用率均不超过70%</p>
+<p>单次注册消耗时间,基于行为测试：
+一次10.86s
+5<em>60/10.86=27
+200/27=8个VUser
+27</em>8=216testcase
+经验定律：*1.2 260个testcase</p>
+<p>open_index
+into_register
+submit_register</p>
+<p>业务成功率
+敏感、金融、人身权利 100%
+一般： 95%
+特定用户：98%</p>
+<p>CPU高</p>
+<ul>
+<li>算法复杂</li>
+<li>调用太多资源</li>
+<li>调用太多底层api</li>
+</ul>
+<p>内存</p>
+<ul>
+<li>内存泄漏,临时变量太多</li>
+<li>不够用</li>
+<li>设置不合理</li>
+</ul>
+<p>网络带宽：一般不超过总贷款的一半</p>
+<p>CPU队列长度一般不超过CPU数量+1</p>
+<p>吞吐量</p>
+<p>需求分析-&gt;指标提取-&gt;约束条件-&gt;业务流程</p>
+<p>手动测试
+自动化功能测试
+性能测试</p>
+<p>基于UI界面的 按钮，图片</p>
+<p>性能测试不关注行为，只关注服务器的响应过程</p>
+<p>先选择协议和字符集</p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">#性能测试</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-09T20:54:30&#43;08:00">
+            9 Jul 2021
+        </time>
+    </footer>
+</article>
+
+	
+
+	<nav class="pagination" role="navigation">
+	
+	<span class="page-number">Page 1 of 1</span>
+	
+</nav>
+
+</main>
+
+
+
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">世界的中心</a> All rights reserved - 2021-</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="https://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/syui/hugo-theme-air">hugo-theme-air</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/index.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.min.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.js"></script>  
+
+</body>
+</html>
+

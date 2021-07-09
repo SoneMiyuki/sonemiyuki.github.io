@@ -7,11 +7,29 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Thu, 08 Jul 2021 23:41:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Jul 2021 22:54:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tester</title>
+      <link>https://sonemiyuki.cn/tags/tester/</link>
+      <pubDate>Fri, 09 Jul 2021 22:54:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/tags/tester/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>性能测试</title>
+      <link>https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</link>
+      <pubDate>Fri, 09 Jul 2021 22:54:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>http</title>
       <link>https://sonemiyuki.cn/tags/http/</link>
-      <pubDate>Thu, 08 Jul 2021 23:41:30 +0800</pubDate>
+      <pubDate>Fri, 09 Jul 2021 08:54:30 +0800</pubDate>
       
       <guid>https://sonemiyuki.cn/tags/http/</guid>
       <description></description>
@@ -20,18 +38,9 @@
     <item>
       <title>网络</title>
       <link>https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/</link>
-      <pubDate>Thu, 08 Jul 2021 23:41:30 +0800</pubDate>
+      <pubDate>Fri, 09 Jul 2021 08:54:30 +0800</pubDate>
       
       <guid>https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tester</title>
-      <link>https://sonemiyuki.cn/tags/tester/</link>
-      <pubDate>Sun, 09 May 2021 22:29:30 +0800</pubDate>
-      
-      <guid>https://sonemiyuki.cn/tags/tester/</guid>
       <description></description>
     </item>
     

@@ -7,7 +7,67 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Sun, 09 May 2021 22:29:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/tester/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Jul 2021 22:54:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/tester/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>性能测试Note（2）</title>
+      <link>https://sonemiyuki.cn/post/2021/07/09/network/</link>
+      <pubDate>Fri, 09 Jul 2021 22:54:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/09/network/</guid>
+      <description>性能测试Note（2） LR脚本开发 性能测试可以并发，效率高一点
+构造200个账号
+ 数据库写（存储过程） 自动化工具构造 LR参数化构造  50 account: var: username const: password
+方法1： VuserGenerator 业务过程分解 open_index into_register submit_register
+分析可能存在的关键因素 username需要变量化处理 username，少的用excel拖一下，多的用脚本构造
+自动化： 选择协议（create script支持协议探测）一般B/S用HTTP，C/S用Socket
+参数化： ctrl+L Paramlist里面new一个username 参数类型file，将excel里的数据做成username.dat;第一行username，下面各行为数据 select column byname=username
+然后开始录制，录制之后选择脚本中自己输入的username右键参数取代，选择username
+C与LR：
+编程需要编写脚本
+action：本质是函数包， vuser_init.c Action.c vuser_end.c 每个action是一组功能的集合
+记得return 0;
+lr_output_massage()输出到LR控制台
+F4：运行时设置
+Controller加载脚本
+Start Scenario
+另一种参数化思路： 用Unique Number -&amp;gt; %3d转化出数字，用t{username}这样的参数化强行拼接
+不同参数同一个数据源： 按name选，注意same line as&amp;hellip;
+Data Wizard:基于ODBC的驱动
+LR参数化： Select next row
+ sequencial: 默认的，顺序化 random: 随机化 unique：唯一向下 same line as &amp;hellip;：取决于其他列  对于单用户来说，顺序和唯一取值序列是相同的</description>
+    </item>
+    
+    <item>
+      <title>性能测试Note（1）</title>
+      <link>https://sonemiyuki.cn/post/2021/07/09/network/</link>
+      <pubDate>Fri, 09 Jul 2021 20:54:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/09/network/</guid>
+      <description>性能测试Note（1） 重视场景
+效率： 资源使用情况，消耗的时间达到均衡
+基准测试，不追求极限 单元和集成也可以渗透性能测试
+接口测试重要性上升，组件化
+性能测试没办法人工模拟
+并发数：单位时间内对服务端发送请求的数量
+业务数量：单位时间内的业务数量
+并发数：柜员 业务数：顾客数
+单交易基准，单交易负载，单交易压力，综合交易，综合负载，稳定性。
+响应时间：服务端，用户端。网络传输时间不可控，性能测试一般在局域网中进行，多点千兆/百兆
+在线用户、有效用户
+业务分析和理解
+ 业务对象规模  注册用户 在线用户 日交易量 峰值交易量 峰值交易时间 峰值并发数   测试点  注册 登录 订票 查询    LR：WebTour
+VUGenerator： 登录业务，三个功能点， 打开首页 输入用户名密码提交登陆 退出
+对业务分解-创建三个动作 open_index submit_login sign_off
+先切换动作再进行录制
+录制完修改thinktime并且进行回放 显示script-pass的页面选择view之后expand-all查看所有报告 脚本顺利执行不代表业务是对的
+注意重复登录有可能使用了不正确的session值或者jwt之类的验证token
+业务全对的时间才有意义
+日均200wPV 200w80%=160w 高峰用户数量 24h20%=4.8h 高峰用户时间 单次访问页面2秒 2-5-8 4.8*3600/2
+弄清楚考察并发数还是业务量。
+新需求： 5min内200次用户注册，响应时间不超过3s成功率100%，CPU内存使用率均不超过70%
+单次注册消耗时间,基于行为测试： 一次10.86s 560/10.86=27 200/27=8个VUser 278=216testcase 经验定律：*1.2 260个testcase</description>
+    </item>
+    
     <item>
       <title>GET与POST探秘</title>
       <link>https://sonemiyuki.cn/post/2021/05/09/get-post/</link>

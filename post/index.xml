@@ -7,7 +7,77 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Thu, 08 Jul 2021 23:41:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Jul 2021 22:54:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>性能测试Note（2）</title>
+      <link>https://sonemiyuki.cn/post/2021/07/09/network/</link>
+      <pubDate>Fri, 09 Jul 2021 22:54:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/09/network/</guid>
+      <description>性能测试Note（2） LR脚本开发 性能测试可以并发，效率高一点
+构造200个账号
+ 数据库写（存储过程） 自动化工具构造 LR参数化构造  50 account: var: username const: password
+方法1： VuserGenerator 业务过程分解 open_index into_register submit_register
+分析可能存在的关键因素 username需要变量化处理 username，少的用excel拖一下，多的用脚本构造
+自动化： 选择协议（create script支持协议探测）一般B/S用HTTP，C/S用Socket
+参数化： ctrl+L Paramlist里面new一个username 参数类型file，将excel里的数据做成username.dat;第一行username，下面各行为数据 select column byname=username
+然后开始录制，录制之后选择脚本中自己输入的username右键参数取代，选择username
+C与LR：
+编程需要编写脚本
+action：本质是函数包， vuser_init.c Action.c vuser_end.c 每个action是一组功能的集合
+记得return 0;
+lr_output_massage()输出到LR控制台
+F4：运行时设置
+Controller加载脚本
+Start Scenario
+另一种参数化思路： 用Unique Number -&amp;gt; %3d转化出数字，用t{username}这样的参数化强行拼接
+不同参数同一个数据源： 按name选，注意same line as&amp;hellip;
+Data Wizard:基于ODBC的驱动
+LR参数化： Select next row
+ sequencial: 默认的，顺序化 random: 随机化 unique：唯一向下 same line as &amp;hellip;：取决于其他列  对于单用户来说，顺序和唯一取值序列是相同的</description>
+    </item>
+    
+    <item>
+      <title>性能测试Note（1）</title>
+      <link>https://sonemiyuki.cn/post/2021/07/09/network/</link>
+      <pubDate>Fri, 09 Jul 2021 20:54:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/09/network/</guid>
+      <description>性能测试Note（1） 重视场景
+效率： 资源使用情况，消耗的时间达到均衡
+基准测试，不追求极限 单元和集成也可以渗透性能测试
+接口测试重要性上升，组件化
+性能测试没办法人工模拟
+并发数：单位时间内对服务端发送请求的数量
+业务数量：单位时间内的业务数量
+并发数：柜员 业务数：顾客数
+单交易基准，单交易负载，单交易压力，综合交易，综合负载，稳定性。
+响应时间：服务端，用户端。网络传输时间不可控，性能测试一般在局域网中进行，多点千兆/百兆
+在线用户、有效用户
+业务分析和理解
+ 业务对象规模  注册用户 在线用户 日交易量 峰值交易量 峰值交易时间 峰值并发数   测试点  注册 登录 订票 查询    LR：WebTour
+VUGenerator： 登录业务，三个功能点， 打开首页 输入用户名密码提交登陆 退出
+对业务分解-创建三个动作 open_index submit_login sign_off
+先切换动作再进行录制
+录制完修改thinktime并且进行回放 显示script-pass的页面选择view之后expand-all查看所有报告 脚本顺利执行不代表业务是对的
+注意重复登录有可能使用了不正确的session值或者jwt之类的验证token
+业务全对的时间才有意义
+日均200wPV 200w80%=160w 高峰用户数量 24h20%=4.8h 高峰用户时间 单次访问页面2秒 2-5-8 4.8*3600/2
+弄清楚考察并发数还是业务量。
+新需求： 5min内200次用户注册，响应时间不超过3s成功率100%，CPU内存使用率均不超过70%
+单次注册消耗时间,基于行为测试： 一次10.86s 560/10.86=27 200/27=8个VUser 278=216testcase 经验定律：*1.2 260个testcase</description>
+    </item>
+    
+    <item>
+      <title>计算机网络面经与常见QA（2）</title>
+      <link>https://sonemiyuki.cn/post/2021/07/09/network/</link>
+      <pubDate>Fri, 09 Jul 2021 08:54:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/09/network/</guid>
+      <description>各层的报文格式   以太网帧  目标MAC地址（6B） 源MAC地址（6B） 类型（2B） 数据（46-1500B） FCS（4B）   IP数据报  版本（4bit） header长度（4bit），以32bit为单位 服务类型（8bit） 总长度（16bit） 上层协议标识（16bit）标记上层协议 标志：（3bit）用来表示是否有分片，是否允许分片等 片偏移量（13bit）以8bit为单位的片偏移量 生存时间（8bit）跳数限制，若TTL为0，则丢弃这个数据包 协议（8bit） 校验和（16bit）检验首部的校验和 源地址（32bit） 目的地址（32bit）   UDP数据报  源端口（16bit） 目的端口（16bit） UDP长度（16bit） UDP校验和（16bit） 伪首部：前缀源IP（4B），目的IP（4B），0（1B），17（1B），UPD长度（2B），以16个bit为单位，按位加法，然后取反。   TCP数据报  源端口（16bit） 目的端口（16bit） 数据序号seq（16bit） 确认序号ack（16bit） 偏移量（4bit） 保留（6bit） 六个标志位（6bit）  URG：紧急指针字段有效，尽快传输 ACK：设定ack字段有效 PSH：尽快将保温传给应用层 RST：要求重建TCP SYN：设定syn字段有效 fin：表示传输结束，请求释放连接   窗口字段（16bit） 校验和（16bit） 紧急指针（16bit）     建立TCP/UDP连接的调用   路由协议
+   RIP(Routing Information Protocol)路由信息协议  距离向量型的一种路由协议 30s一次,对全网广播,等待5次,将已知路由进行广播,然后下一跳继续广播,进行逐步传播   OSPF(Open Shortest Path First)开放最短路径优先  基于IP 适用泛洪法发送请求 发送信息是路由器临近的所有路由器的链路状态 链路状态变化才发送信息 Dijkstra 收敛快 划分自治系统 问候、数据库描述、链路状态请求、链路状态更新、链路状态确认   BGP(Border Gateway Protrol)边界网关协议  寻求一条能到达目的地并且比较好的路由 BGP发言人    等待2MSL的原因   保证客户端发送的最后一个ACK报文能够到达服务器。 新的连接中不会出现旧连接的请求报文。  TCP的可靠性   校验和 序列号 确认应答 超时重传  超时重传基于两个可能的原因  发送过去的包全体丢包,接到这个包之后接收方没有收到 接受的ACK报文丢包,接收方发现数据存在,仍然发送ACK应答   动态计算最大超时时间   连接管理  三次握手,四次挥手确保可靠的连接   流量管理  滑动窗口大小的内容实际上是接收端数据缓冲区的剩余大小。接收端会在确认应答发送ACK报文时，将自己的即时窗口大小填入，并跟随ACK报文一起发送过去。而发送方根据ACK报文里的窗口大小的值的改变进而改变自己的发送速度。如果接收到窗口大小的值为0，那么发送方将停止发送数据。并定期的向接收端发送窗口探测数据段，让接收端把窗口大小告诉发送端。   拥塞控制  慢启动:少量数据探路,拥塞窗口指数增长 增长过阈值之后线性增长 拥塞之后慢启动的阈值变为原来的一半,拥塞窗口重置为 1    糊涂窗口综合征    当TCP中发送端发送数据很慢或者接收端接收缓冲数据很慢,就会使得应用进程的有效载荷很小。</description>
+    </item>
+    
     <item>
       <title>计算机网络面经与常见QA（1）</title>
       <link>https://sonemiyuki.cn/post/2021/07/08/network/</link>

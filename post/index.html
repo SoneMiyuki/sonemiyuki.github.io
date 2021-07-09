@@ -86,11 +86,469 @@
 	<div class="extra-pagination inner">
     <nav class="pagination" role="navigation">
 	
-	<span class="page-number">Page 1 of 1</span>
+	<span class="page-number">Page 1 of 2</span>
+	
+	    <a class="older-posts" href="https://sonemiyuki.cn/post/page/2/">Older Posts &rarr;</a>
 	
 </nav>
 
 	</div>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/09/network/">性能测试Note（2）</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h1 id="性能测试note2">性能测试Note（2）</h1>
+<p>LR脚本开发
+性能测试可以并发，效率高一点</p>
+<p>构造200个账号</p>
+<ol>
+<li>数据库写（存储过程）</li>
+<li>自动化工具构造</li>
+<li>LR参数化构造</li>
+</ol>
+<p>50 account:
+var: username
+const: password</p>
+<p>方法1：
+VuserGenerator
+业务过程分解
+open_index
+into_register
+submit_register</p>
+<p>分析可能存在的关键因素
+username需要变量化处理
+username，少的用excel拖一下，多的用脚本构造</p>
+<p>自动化：
+选择协议（create script支持协议探测）一般B/S用HTTP，C/S用Socket</p>
+<p>参数化：
+ctrl+L
+Paramlist里面new一个username
+参数类型file，将excel里的数据做成username.dat;第一行username，下面各行为数据
+select column byname=username</p>
+<p>然后开始录制，录制之后选择脚本中自己输入的username右键参数取代，选择username</p>
+<p>C与LR：</p>
+<p>编程需要编写脚本</p>
+<p>action：本质是函数包，
+vuser_init.c
+Action.c
+vuser_end.c
+每个action是一组功能的集合</p>
+<p>记得return 0;</p>
+<p>lr_output_massage()输出到LR控制台</p>
+<p>F4：运行时设置</p>
+<p>Controller加载脚本</p>
+<p>Start Scenario</p>
+<p>另一种参数化思路：
+用Unique Number -&gt; %3d转化出数字，用t{username}这样的参数化强行拼接</p>
+<p>不同参数同一个数据源：
+按name选，注意same line as&hellip;</p>
+<p>Data Wizard:基于ODBC的驱动</p>
+<p>LR参数化：
+Select next row</p>
+<ul>
+<li>sequencial: 默认的，顺序化</li>
+<li>random: 随机化</li>
+<li>unique：唯一向下</li>
+<li>same line as &hellip;：取决于其他列</li>
+</ul>
+<p>对于单用户来说，顺序和唯一取值序列是相同的</p>
+<p>Update value on: 更新方式</p>
+<ul>
+<li>Each iteration 默认 每次迭代时取值 （常用）</li>
+<li>Each occurrence 每次遇到该参数时取值</li>
+<li>Once 取值仅一次，脚本运行过程中只取值一次值的是：一次选择，终身不变</li>
+</ul>
+<p>When out of values: 选择Unique才需要考虑这个选项，数据不足时处理情况，表示取值越界后的处理方式</p>
+<ul>
+<li>Abort Vuser   放弃虚拟用户，不再取值</li>
+<li>Continue in a cyclic manner  以循环的方式继续，当参数化文件中的值取完最后一个值后，又从参数化文件的第一行开始取值。</li>
+<li>Continue with last value    当参数化文件中的值取完最后一个值后，持续一直最后一个值 。</li>
+</ul>
+<p><img src="https://sonemiyuki.cn/images/LR-Param.png" alt="LR参数化"></p>
+<p>checkpoint：</p>
+<p>先打开页面Snapshot，然后查看页面某个元素</p>
+<p>其中的Body和Header指的是服务器到客户端的响应，不是说HTML界面信息</p>
+<p>页面会增加代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">web_reg_find(<span style="color:#e6db74">&#34;Search=Body&#34;</span>,
+<span style="color:#e6db74">&#34;SaveCount=registflag&#34;</span>,
+<span style="color:#e6db74">&#34;Text=Thank you&#34;</span>,
+LAST);
+</code></pre></div><p>注意到参数验证是以原始plain文本为准，换言之HTML标签也要纳入考虑，而不是仅仅看网页上的东西</p>
+<p>参考链接：
+<a href="https://www.cnblogs.com/whitewasher/p/7614689.html">参考链接1-LR参数详解</a></p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">#性能测试</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-09T22:54:30&#43;08:00">
+            9 Jul 2021
+        </time>
+    </footer>
+</article>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/09/network/">性能测试Note（1）</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h1 id="性能测试note1">性能测试Note（1）</h1>
+<p>重视场景</p>
+<p>效率：
+资源使用情况，消耗的时间达到均衡</p>
+<p>基准测试，不追求极限
+单元和集成也可以渗透性能测试</p>
+<p>接口测试重要性上升，组件化</p>
+<p>性能测试没办法人工模拟</p>
+<p>并发数：单位时间内对服务端发送请求的数量</p>
+<p>业务数量：单位时间内的业务数量</p>
+<p>并发数：柜员 业务数：顾客数</p>
+<p>单交易基准，单交易负载，单交易压力，综合交易，综合负载，稳定性。</p>
+<p>响应时间：服务端，用户端。网络传输时间不可控，性能测试一般在局域网中进行，多点千兆/百兆</p>
+<p>在线用户、有效用户</p>
+<p>业务分析和理解</p>
+<ul>
+<li>业务对象规模
+<ul>
+<li>注册用户</li>
+<li>在线用户</li>
+<li>日交易量</li>
+<li>峰值交易量</li>
+<li>峰值交易时间</li>
+<li>峰值并发数</li>
+</ul>
+</li>
+<li>测试点
+<ul>
+<li>注册</li>
+<li>登录</li>
+<li>订票</li>
+<li>查询</li>
+</ul>
+</li>
+</ul>
+<p>LR：WebTour</p>
+<p>VUGenerator：
+登录业务，三个功能点，
+打开首页
+输入用户名密码提交登陆
+退出</p>
+<p>对业务分解-创建三个动作
+open_index
+submit_login
+sign_off</p>
+<p>先切换动作再进行录制</p>
+<p>录制完修改thinktime并且进行回放
+显示script-pass的页面选择view之后expand-all查看所有报告
+脚本顺利执行不代表业务是对的</p>
+<p>注意重复登录有可能使用了不正确的session值或者jwt之类的验证token</p>
+<p>业务全对的时间才有意义</p>
+<p>日均200wPV
+200w<em>80%=160w 高峰用户数量
+24h</em>20%=4.8h 高峰用户时间
+单次访问页面2秒  2-5-8
+4.8*3600/2</p>
+<p>弄清楚考察并发数还是业务量。</p>
+<p>新需求：
+5min内200次用户注册，响应时间不超过3s成功率100%，CPU内存使用率均不超过70%</p>
+<p>单次注册消耗时间,基于行为测试：
+一次10.86s
+5<em>60/10.86=27
+200/27=8个VUser
+27</em>8=216testcase
+经验定律：*1.2 260个testcase</p>
+<p>open_index
+into_register
+submit_register</p>
+<p>业务成功率
+敏感、金融、人身权利 100%
+一般： 95%
+特定用户：98%</p>
+<p>CPU高</p>
+<ul>
+<li>算法复杂</li>
+<li>调用太多资源</li>
+<li>调用太多底层api</li>
+</ul>
+<p>内存</p>
+<ul>
+<li>内存泄漏,临时变量太多</li>
+<li>不够用</li>
+<li>设置不合理</li>
+</ul>
+<p>网络带宽：一般不超过总贷款的一半</p>
+<p>CPU队列长度一般不超过CPU数量+1</p>
+<p>吞吐量</p>
+<p>需求分析-&gt;指标提取-&gt;约束条件-&gt;业务流程</p>
+<p>手动测试
+自动化功能测试
+性能测试</p>
+<p>基于UI界面的 按钮，图片</p>
+<p>性能测试不关注行为，只关注服务器的响应过程</p>
+<p>先选择协议和字符集</p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">#性能测试</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-09T20:54:30&#43;08:00">
+            9 Jul 2021
+        </time>
+    </footer>
+</article>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/09/network/">计算机网络面经与常见QA（2）</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <ol start="11">
+<li><strong>各层的报文格式</strong></li>
+</ol>
+<ul>
+<li>以太网帧
+<ul>
+<li>目标MAC地址（6B）</li>
+<li>源MAC地址（6B）</li>
+<li>类型（2B）</li>
+<li>数据（46-1500B）</li>
+<li>FCS（4B）</li>
+</ul>
+</li>
+<li>IP数据报
+<ul>
+<li>版本（4bit）</li>
+<li>header长度（4bit），以32bit为单位</li>
+<li>服务类型（8bit）</li>
+<li>总长度（16bit）</li>
+<li>上层协议标识（16bit）标记上层协议</li>
+<li>标志：（3bit）用来表示是否有分片，是否允许分片等</li>
+<li>片偏移量（13bit）以8bit为单位的片偏移量</li>
+<li>生存时间（8bit）跳数限制，若TTL为0，则丢弃这个数据包</li>
+<li>协议（8bit）</li>
+<li>校验和（16bit）检验首部的校验和</li>
+<li>源地址（32bit）</li>
+<li>目的地址（32bit）</li>
+</ul>
+</li>
+<li>UDP数据报
+<ul>
+<li>源端口（16bit）</li>
+<li>目的端口（16bit）</li>
+<li>UDP长度（16bit）</li>
+<li>UDP校验和（16bit）</li>
+<li>伪首部：前缀源IP（4B），目的IP（4B），0（1B），17（1B），UPD长度（2B），以16个bit为单位，按位加法，然后取反。</li>
+</ul>
+</li>
+<li>TCP数据报
+<ul>
+<li>源端口（16bit）</li>
+<li>目的端口（16bit）</li>
+<li>数据序号seq（16bit）</li>
+<li>确认序号ack（16bit）</li>
+<li>偏移量（4bit）</li>
+<li>保留（6bit）</li>
+<li>六个标志位（6bit）
+<ul>
+<li>URG：紧急指针字段有效，尽快传输</li>
+<li>ACK：设定ack字段有效</li>
+<li>PSH：尽快将保温传给应用层</li>
+<li>RST：要求重建TCP</li>
+<li>SYN：设定syn字段有效</li>
+<li>fin：表示传输结束，请求释放连接</li>
+</ul>
+</li>
+<li>窗口字段（16bit）</li>
+<li>校验和（16bit）</li>
+<li>紧急指针（16bit）</li>
+</ul>
+</li>
+</ul>
+<ol start="12">
+<li>
+<p><strong>建立TCP/UDP连接的调用</strong>
+<img src="https://sonemiyuki.cn/images/socketprocess.png" alt="TCP/UDP过程"></p>
+</li>
+<li>
+<p><strong>路由协议</strong></p>
+</li>
+</ol>
+<ul>
+<li><strong>RIP(Routing Information Protocol)路由信息协议</strong>
+<ul>
+<li>距离向量型的一种路由协议</li>
+<li>30s一次,对全网广播,等待5次,将已知路由进行广播,然后下一跳继续广播,进行逐步传播</li>
+</ul>
+</li>
+<li><strong>OSPF(Open Shortest Path First)开放最短路径优先</strong>
+<ul>
+<li>基于IP</li>
+<li>适用泛洪法发送请求</li>
+<li>发送信息是路由器临近的所有路由器的链路状态</li>
+<li>链路状态变化才发送信息</li>
+<li>Dijkstra</li>
+<li>收敛快</li>
+<li>划分自治系统</li>
+<li>问候、数据库描述、链路状态请求、链路状态更新、链路状态确认</li>
+</ul>
+</li>
+<li><strong>BGP(Border Gateway Protrol)边界网关协议</strong>
+<ul>
+<li>寻求一条能到达目的地并且比较好的路由</li>
+<li>BGP发言人</li>
+</ul>
+</li>
+</ul>
+<ol start="14">
+<li><strong>等待2MSL的原因</strong></li>
+</ol>
+<ul>
+<li>保证客户端发送的最后一个ACK报文能够到达服务器。</li>
+<li>新的连接中不会出现旧连接的请求报文。</li>
+</ul>
+<ol start="15">
+<li><strong>TCP的可靠性</strong></li>
+</ol>
+<ul>
+<li>校验和</li>
+<li>序列号</li>
+<li>确认应答</li>
+<li>超时重传
+<ul>
+<li>超时重传基于两个可能的原因
+<ul>
+<li>发送过去的包全体丢包,接到这个包之后接收方没有收到</li>
+<li>接受的ACK报文丢包,接收方发现数据存在,仍然发送ACK应答</li>
+</ul>
+</li>
+<li>动态计算最大超时时间</li>
+</ul>
+</li>
+<li>连接管理
+<ul>
+<li>三次握手,四次挥手确保可靠的连接</li>
+</ul>
+</li>
+<li>流量管理
+<ul>
+<li>滑动窗口大小的内容实际上是接收端数据缓冲区的剩余大小。接收端会在确认应答发送ACK报文时，将自己的即时窗口大小填入，并跟随ACK报文一起发送过去。而发送方根据ACK报文里的窗口大小的值的改变进而改变自己的发送速度。如果接收到窗口大小的值为0，那么发送方将停止发送数据。并定期的向接收端发送<strong>窗口探测</strong>数据段，让接收端把窗口大小告诉发送端。</li>
+</ul>
+</li>
+<li>拥塞控制
+<ul>
+<li>慢启动:少量数据探路,拥塞窗口指数增长</li>
+<li>增长过阈值之后线性增长</li>
+<li>拥塞之后慢启动的阈值变为原来的一半,拥塞窗口重置为 1</li>
+</ul>
+</li>
+</ul>
+<ol start="16">
+<li><strong>糊涂窗口综合征</strong></li>
+</ol>
+<ul>
+<li>
+<p>当TCP中发送端发送数据很慢或者接收端接收缓冲数据很慢,就会使得应用进程的有效载荷很小。</p>
+</li>
+<li>
+<p>发送端：利用算法强迫TCP收集一定数据为更大的数据块再发送，Nagle算法决定TCP的等待时延</p>
+</li>
+<li>
+<p>接收端：</p>
+<ul>
+<li>Clark解决方法 Clark解决方法是只要有数据到达就发送确认，但宣布的窗口大小为零，直到或者缓存空间已能放入具有最大长度的报文段，或者缓存空间的一半已经空了。</li>
+<li>延迟确认 第二个解决方法是延迟一段时间后再发送确认。这表示当一个报文段到达时并不立即发送确认。接收端在确认收到的报文段之前一直等待，直到入缓存有足够的空间为止。延迟的确认防止了发送端的TCP滑动其窗口。当发送端的TCP发送完其数据后，它就停下来了。这样就防止了这种症状。</li>
+</ul>
+</li>
+<li>
+<p><a href="https://www.cnblogs.com/mawanglin2008/articles/3607767.html">参考链接1-FTP的主动模式和被动模式</a></p>
+</li>
+<li>
+<p><a href="https://www.nowcoder.com/discuss/1937">参考链接2-面经</a></p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/chpdirector84/article/details/6033511">参考链接3-RARP</a></p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/qq_30852577/article/details/79009060">参考链接4-路由协议</a></p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/qzcsu/article/details/72861891">参考链接5-TCP面经</a></p>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/liuchenxia8/article/details/80428157">参考链接6-TCP/IP</a></p>
+</li>
+<li>
+<p><a href="https://www.cnblogs.com/ggjucheng/archive/2012/02/03/2337046.html">参考链接7-糊涂窗口综合征</a></p>
+</li>
+</ul>
+<p>参考书目：
+《计算机网络（第7版）》谢希仁</p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/http/">#http</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/">#网络</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-09T08:54:30&#43;08:00">
+            9 Jul 2021
+        </time>
+    </footer>
+</article>
 
 	
 	   
@@ -458,7 +916,7 @@ POST：
 <p>但是，我们只看到HTTP对GET和POST参数的传送渠道（url还是requrest body）提出了要求。“标准答案”里关于参数大小的限制又是从哪来的呢？</p>
 <p>在我大万维网世界中，还有另一个重要的角色：运输公司。不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的部分，恕不处理。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。</p>
 <p>HTTP在某些实现上并没有强制性。</p>
-<p><img src="https://sonemiyuki.cn/images/HTTPstatus.png" alt=""></p>
+<p><img src="https://sonemiyuki.cn/images/HTTPstatus.png" alt="HTTP状态"></p>
 <p>在很多浏览器的实现中，POST是需要两次发包的。</p>
 <p>对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
 而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。
@@ -517,111 +975,12 @@ POST：
 </article>
 
 	
-	   
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/05/06/py3unittest/">Python 3单元测试unittest及HTML报告生成速成</a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <h4 id="python3单元测试unittest及html报告生成速成">Python3单元测试unittest及HTML报告生成速成</h4>
-<p>前置知识：</p>
-<ul>
-<li>Python面向对象基本</li>
-<li>单元测试基本知识</li>
-<li>Junit等其他测试框架关于测试类、测试方法、测试套件等基本构件的知识</li>
-</ul>
-<p>我们先定义一个待测试的类和对象
-code.py</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">algor</span>:
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(a, b):
-        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b
-</code></pre></div><p>然后开一个测试文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">from</span> code <span style="color:#66d9ef">import</span> algor
-<span style="color:#f92672">import</span> unittest
-
-<span style="color:#75715e"># 下述文件是从py2拿过来的，需要改造。改造方法在后面</span>
-<span style="color:#f92672">import</span> HTMLTestRunner
-</code></pre></div><p>编写测试类：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestAlgor1</span>(unittest<span style="color:#f92672">.</span>TestCase):
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#75715e"># 类前执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUpClass</span>(self):
-        print(<span style="color:#e6db74">&#34;setUpClass&#34;</span>)
-    <span style="color:#75715e"># 类后执行</span>
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDownClass</span>(self):
-        print(<span style="color:#e6db74">&#34;tearDownClass&#34;</span>)
-    <span style="color:#75715e"># 方法前执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
-        print(<span style="color:#e6db74">&#34;setUp&#34;</span>)
-    <span style="color:#75715e"># 方法后执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDown</span>(self):
-        print(<span style="color:#e6db74">&#34;tearDown&#34;</span>)
-    <span style="color:#75715e"># 测试方法，一般命名为测试某某某类</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">testAdd1</span>(self):
-        self<span style="color:#f92672">.</span>assertEquals(algor<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">4</span>)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">testAdd2</span>(self):
-        self<span style="color:#f92672">.</span>assertEquals(algor<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">114</span>, <span style="color:#ae81ff">514</span>), <span style="color:#ae81ff">628</span>)
-</code></pre></div><p>主函数：构建测试套件和生成报告：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3" data-lang="Python3"><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
-    suite <span style="color:#f92672">=</span> unittest<span style="color:#f92672">.</span>TestSuite()
-    suite<span style="color:#f92672">.</span>addTest(TestAlgor1(<span style="color:#e6db74">&#34;testAdd1&#34;</span>))
-    suite<span style="color:#f92672">.</span>addTest(TestAlgor1(<span style="color:#e6db74">&#34;testAdd2&#34;</span>))
-    filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./apptestresult.html&#39;</span>
-    fb <span style="color:#f92672">=</span> open(filename, <span style="color:#e6db74">&#39;wb&#39;</span>)
-    runner <span style="color:#f92672">=</span> HTMLTestRunner<span style="color:#f92672">.</span>HTMLTestRscaunner(stream<span style="color:#f92672">=</span>fb, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;测试HTMLTestRunner&#34;</span>, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;测试HTMLTestRunner&#34;</span>)
-    runner<span style="color:#f92672">.</span>run(suite)
-    fb<span style="color:#f92672">.</span>close() 
-</code></pre></div><p>上述方案是一个基于python2里面HTMLTestRunner模块的实现，需要先下载HTMLTestRunner.py文件然后进行改进以在py3环境中使用</p>
-<p>第94行，将import StringIO修改成import io</p>
-<p>第539行，将self.outputBuffer = StringIO.StringIO()修改成self.outputBuffer = io.StringIO()</p>
-<p>第642行，将if not rmap.has_key(cls):修改成if not cls in rmap:</p>
-<p>第766行，将uo = o.decode(&lsquo;latin-1&rsquo;)修改成uo = e</p>
-<p>第772行，将ue = e.decode(&lsquo;latin-1&rsquo;)修改成ue = e</p>
-<p>第631行，将print &raquo; sys.stderr, &lsquo;\nTime Elapsed: %s&rsquo; % (self.stopTime-self.startTime)修改成print(sys.stderr, &lsquo;\nTime Elapsed: %s&rsquo; % (self.stopTime-self.startTime))</p>
-<p>其中，Python3中，已经没有StringIO了。取而代之的是io.StringIO。
-<a href="https://www.cnblogs.com/huny/p/12078784.html">参见</a></p>
-<p>在python3有第三方库可以实现相关功能，这个库是html-testRunner
-注意import的大小写</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">import</span> HtmlTestRunner
-</code></pre></div><p>主函数只要写</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">unittest<span style="color:#f92672">.</span>main(testRunner<span style="color:#f92672">=</span>HtmlTestRunner<span style="color:#f92672">.</span>HTMLTestRunner(output<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;example_dir&#39;</span>))
-</code></pre></div><p><a href="https://pypi.org/project/html-testRunner/#description">参见</a></p>
-
-          </section>
-      </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            miyuki
-        
-        on
-            
-                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
-            
-                <a href="https://sonemiyuki.cn/tags/python/">#Python</a>,
-            
-                <a href="https://sonemiyuki.cn/tags/unittest/">#unittest</a>,
-            
-        
-        <time class="post-date" datetime="2021-05-06T10:54:24&#43;08:00">
-            6 May 2021
-        </time>
-    </footer>
-</article>
-
-	
 
 	<nav class="pagination" role="navigation">
 	
-	<span class="page-number">Page 1 of 1</span>
+	<span class="page-number">Page 1 of 2</span>
+	
+	    <a class="older-posts" href="https://sonemiyuki.cn/post/page/2/">Older Posts &rarr;</a>
 	
 </nav>
 
