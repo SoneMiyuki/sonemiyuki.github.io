@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Java on 世界的中心</title>
+    <link>https://sonemiyuki.cn/tags/java/</link>
+    <description>Recent content in Java on 世界的中心</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>All rights reserved - 2021-</copyright>
+    <lastBuildDate>Sun, 11 Jul 2021 22:29:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java面经后端</title>
+      <link>https://sonemiyuki.cn/post/2021/07/11/java/</link>
+      <pubDate>Sun, 11 Jul 2021 22:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/11/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java面经基础（含OO）</title>
+      <link>https://sonemiyuki.cn/post/2021/07/11/java/</link>
+      <pubDate>Sun, 11 Jul 2021 22:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/11/java/</guid>
+      <description>OO的优点和三个特性 优点：基于面向过程，易于复用，易于理解，可扩展，可维护
+ 封装  外部不关心也无法修改内部实现   继承  继承基类的方法并做出改变   多态  同一个方法，不同的实现    Java编译过程  编译：创建完源文件之后，程序先要被JVM中的java编译器进行编译为.class文件。java编译一个类时，如果这个类所依赖的类还没有被编译，编译器会自动的先编译这个所依赖的类，然后引用。 编译后的字节码文件格式主要分为两部分：常量池和方法字节码。常量池记录的是代码出现过的字面量（文本字符串、八种基本类型的值、被声明为final的常量等）以及符号引用（类和方法的全限定名、字段的名称和描述符、方法的名称和描述符）方法字节码中放的是各个方法的字节码（依赖操作数栈和局部变量表，由JVM解释执行） 经过JVM的解释运行 加载 &amp;ndash;&amp;gt; 验证 &amp;ndash;&amp;gt; 准备 &amp;ndash;&amp;gt; 解析 &amp;ndash;&amp;gt; 初始化（其中验证、准备、解析统称为类的连接）  JDK JVM JRE 注意JRE包含bin和lib，bin是JVM虚拟机，lib是映射到不同操作系统所需要的库。
+== 和 equals == 比较的是栈里面的值，基础数据类型比较基础数据类型，对象比较地址
+equals默认用==进行比较 String的equals重写将另一个对象强转String
+final final的作用
+ 修饰类：类不能被继承 修饰方法：可以重载不能重写 修饰变量：常变量，不能更改值 修饰类变量：声明，非静态初始化块，构造器 类变量：静态初始化块，声明 作用在栈上，基础变量不能改，引用的值可变  为什么局部内部类和匿名内部类只能访问局部final类型的变量 编译生成class文件，内部类的class文件会独立出来。外部类方法结束局部变量销毁，但是内部类如果还在执行就会出问题。将局部变量复制作为内部类的成员变量，延长其生命周期。
+final是某种保持一致性的妥协
+重载和重写 重载： 同一个类、方法名相同，参数名（类型、个数、顺序）不同，返回值修饰符可以不同；
+重写：父子类中，方法名参数名必须相同，返回值范围和抛出异常值范围小于等于父类，修饰符范围大于等于父类，无法重写父类private方法。
+接口和抽象类  抽象类可以有普通成员函数，接口的方法必须全部抽象 抽象类成员变量类型比较宽，看接口的成员变量必须是public static final 抽象类单继承，可以通过接口实现多继承  接口：对类的行为进行约束，约定了一定要有某个方法。like-a。</description>
+    </item>
+    
+    <item>
+      <title>Java面经集合</title>
+      <link>https://sonemiyuki.cn/post/2021/07/11/java/</link>
+      <pubDate>Sun, 11 Jul 2021 22:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/11/java/</guid>
+      <description>String、StringBuilder、StringBuffer String：final修饰，不可变，每次操作产生新对象，浪费时间空间
+StringBuffer和StringBuilder在原对象进行操作。StringBuffer的所有方法都是synchronize方法修饰的。
+性能 Builder &amp;gt; Buffer &amp;gt; String
+场景：改变字符串内容 优先StringBuilder，多线程使用StringBuffer。
+List 和 Set List： 有序，可重复，允许多个null，可以用迭代器也可以用get方法访问元素
+Set：无序，不可重复，最多允许一个null，只能用迭代器遍历。
+HashSet底层是使用HashMap实现的。当使用add方法将对象添加到Set当中时，实际上是将该对象作为底层所维护的Map对象的key，而value则都是同一个Object对象（该对象我们用不上）；其他的都是通过定义的HashMap对象实现的。
+ArrayList 和 LinkedList ArrayList：本质上基于数组，适合下标访问，具有1.5倍扩容机制，尾插法移动少，性能提高好。
+LinkedList：本质上基于链表时适合插入删除，不适合查询，必须用iterator遍历，否则时间复杂度过大。indexOf会遍历整个链表。
+HashMap 和 HashTable HashTable线程安全，所有方法synchronized修饰。HashMap允许null的key和value。
+底层实现：数组+链表 数组：二次hash之后映射到一个数组上面那如果未冲突则直接存Node进去，如果冲突，equals判断，相同则取代钙元素，否则判断链表高度，链表高度达到8转为红黑树，低于6则转回链表。
+HashMap扩容 capacity 即容量，默认16。loadFactor 加载因子，默认是0.75threshold 阈值。阈值=容量*加载因子。默认12。当元素数量超过阈值时便会触发扩容。
+当元素数量超过阈值时便会触发扩容。每次扩容的容量都是之前容量的2倍。
+HashMap的容量变化通常存在以下几种情况： 空参数的构造函数：实例化的HashMap默认内部数组是null，即没有实例化。第一次调用put方法时，则会开始第一次初始化扩容，长度为16。有参构造函数：用于指定容量。会根据指定的正整数找到不小于指定容量的2的幂数，将这个数设置赋值给阈值（threshold）。第一次调用put方法时，会将阈值赋值给容量，然后让 阈值 = 容量 * 负载因子 。（因此并不是我们手动指定了容量就一定不会触发扩容，超过阈值后一样会扩容！！）如果不是第一次扩容，则容量变为原来的2倍，阈值也变为原来的2倍。（容量和阈值都变为原来的2倍时，负载因子还是不变）
+由于数组的容量是以2的幂次方扩容的，那么一个Entity在扩容时，新的位置要么在原位置，要么在原长度+原位置的位置。数组长度变为原来的2倍，表现在二进制上就是多了一个高位参与数组下标确定。此时，一个元素通过hash转换坐标的方法计算后，恰好出现一个现象：最高位是0则坐标不变，最高位是1则坐标变为“原长度+原坐标”。在扩容时，不需要重新计算元素的hash了，只需要判断最高位是1还是0就好了。
+参考链接： java中Map和Set的底层分析 HashMap扩容机制</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -85,7 +85,9 @@
 	
 	    <a class="newer-posts" href="https://sonemiyuki.cn/">&larr; Newer Posts</a>
 	
-	<span class="page-number">Page 2 of 2</span>
+	<span class="page-number">Page 2 of 3</span>
+	
+	    <a class="older-posts" href="https://sonemiyuki.cn/page/3/">Older Posts &rarr;</a>
 	
 </nav>
 
@@ -95,76 +97,39 @@
         
 <article class="post post">
     <header class="post-header">
-        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/05/06/py3unittest/">Python 3单元测试unittest及HTML报告生成速成</a></h2>
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/10/network/">性能测试Note（3）</a></h2>
     </header>
     <section class="post-excerpt">
       <p>
           <section class="post-content">
-            <h4 id="python3单元测试unittest及html报告生成速成">Python3单元测试unittest及HTML报告生成速成</h4>
-<p>前置知识：</p>
-<ul>
-<li>Python面向对象基本</li>
-<li>单元测试基本知识</li>
-<li>Junit等其他测试框架关于测试类、测试方法、测试套件等基本构件的知识</li>
-</ul>
-<p>我们先定义一个待测试的类和对象
-code.py</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">algor</span>:
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(a, b):
-        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b
-</code></pre></div><p>然后开一个测试文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">from</span> code <span style="color:#66d9ef">import</span> algor
-<span style="color:#f92672">import</span> unittest
-
-<span style="color:#75715e"># 下述文件是从py2拿过来的，需要改造。改造方法在后面</span>
-<span style="color:#f92672">import</span> HTMLTestRunner
-</code></pre></div><p>编写测试类：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestAlgor1</span>(unittest<span style="color:#f92672">.</span>TestCase):
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#75715e"># 类前执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUpClass</span>(self):
-        print(<span style="color:#e6db74">&#34;setUpClass&#34;</span>)
-    <span style="color:#75715e"># 类后执行</span>
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDownClass</span>(self):
-        print(<span style="color:#e6db74">&#34;tearDownClass&#34;</span>)
-    <span style="color:#75715e"># 方法前执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
-        print(<span style="color:#e6db74">&#34;setUp&#34;</span>)
-    <span style="color:#75715e"># 方法后执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDown</span>(self):
-        print(<span style="color:#e6db74">&#34;tearDown&#34;</span>)
-    <span style="color:#75715e"># 测试方法，一般命名为测试某某某类</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">testAdd1</span>(self):
-        self<span style="color:#f92672">.</span>assertEquals(algor<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">4</span>)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">testAdd2</span>(self):
-        self<span style="color:#f92672">.</span>assertEquals(algor<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">114</span>, <span style="color:#ae81ff">514</span>), <span style="color:#ae81ff">628</span>)
-</code></pre></div><p>主函数：构建测试套件和生成报告：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3" data-lang="Python3"><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
-    suite <span style="color:#f92672">=</span> unittest<span style="color:#f92672">.</span>TestSuite()
-    suite<span style="color:#f92672">.</span>addTest(TestAlgor1(<span style="color:#e6db74">&#34;testAdd1&#34;</span>))
-    suite<span style="color:#f92672">.</span>addTest(TestAlgor1(<span style="color:#e6db74">&#34;testAdd2&#34;</span>))
-    filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./apptestresult.html&#39;</span>
-    fb <span style="color:#f92672">=</span> open(filename, <span style="color:#e6db74">&#39;wb&#39;</span>)
-    runner <span style="color:#f92672">=</span> HTMLTestRunner<span style="color:#f92672">.</span>HTMLTestRscaunner(stream<span style="color:#f92672">=</span>fb, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;测试HTMLTestRunner&#34;</span>, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;测试HTMLTestRunner&#34;</span>)
-    runner<span style="color:#f92672">.</span>run(suite)
-    fb<span style="color:#f92672">.</span>close() 
-</code></pre></div><p>上述方案是一个基于python2里面HTMLTestRunner模块的实现，需要先下载HTMLTestRunner.py文件然后进行改进以在py3环境中使用</p>
-<p>第94行，将import StringIO修改成import io</p>
-<p>第539行，将self.outputBuffer = StringIO.StringIO()修改成self.outputBuffer = io.StringIO()</p>
-<p>第642行，将if not rmap.has_key(cls):修改成if not cls in rmap:</p>
-<p>第766行，将uo = o.decode(&lsquo;latin-1&rsquo;)修改成uo = e</p>
-<p>第772行，将ue = e.decode(&lsquo;latin-1&rsquo;)修改成ue = e</p>
-<p>第631行，将print &raquo; sys.stderr, &lsquo;\nTime Elapsed: %s&rsquo; % (self.stopTime-self.startTime)修改成print(sys.stderr, &lsquo;\nTime Elapsed: %s&rsquo; % (self.stopTime-self.startTime))</p>
-<p>其中，Python3中，已经没有StringIO了。取而代之的是io.StringIO。
-<a href="https://www.cnblogs.com/huny/p/12078784.html">参见</a></p>
-<p>在python3有第三方库可以实现相关功能，这个库是html-testRunner
-注意import的大小写</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">import</span> HtmlTestRunner
-</code></pre></div><p>主函数只要写</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">unittest<span style="color:#f92672">.</span>main(testRunner<span style="color:#f92672">=</span>HtmlTestRunner<span style="color:#f92672">.</span>HTMLTestRunner(output<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;example_dir&#39;</span>))
-</code></pre></div><p><a href="https://pypi.org/project/html-testRunner/#description">参见</a></p>
+            <h1 id="基于loadrunner的性能测试note3">基于LoadRunner的性能测试Note（3）</h1>
+<p>一小时内6000个用户开户</p>
+<p>用lr事务手测单个用户时间，假设单次15s
+一个小时一个vuser可以完成240个用户开户
+6000/240=25，可用25个vuser模拟一小时内的6000个开户操作</p>
+<p>unique number
+start 1
+block 240*1.2=288
+7200个testcase
+确定需求，分析约束，准备数据。</p>
+<p>关联-参数化-检查点</p>
+<p>参数化：客户端提交给服务端的参数
+关联：服务端返回给客户端的参数</p>
+<p>订购机票
+open_index
+submit_login
+info_flight
+find_flight
+select_flight
+pay_flight
+sign_off</p>
+<p>账户参数化：username, usersession做关联</p>
+<p>出发和到达的城市需要随机化，随机某个具体航班</p>
+<p>web_reg_save_param(&ldquo;fligts&rdquo;, &ldquo;LB=&quot;&gt;&rdquo;, &ldquo;RB=<!-- raw HTML omitted -->&rdquo;,&ldquo;ORD=All&rdquo;,LAST);
+根据业务适当去重
+strcmp</p>
+<p>吞吐量，响应时间，系统资源&hellip;&hellip;</p>
+<p>结果分析：根据Analysis进行结果分析</p>
 
           </section>
       </p>
@@ -179,15 +144,684 @@ code.py</p>
         
         on
             
+                <a href="https://sonemiyuki.cn/tags/loadrunner/">#LoadRunner</a>,
+            
                 <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
             
-                <a href="https://sonemiyuki.cn/tags/python/">#Python</a>,
-            
-                <a href="https://sonemiyuki.cn/tags/unittest/">#unittest</a>,
+                <a href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">#性能测试</a>,
             
         
-        <time class="post-date" datetime="2021-05-06T10:54:24&#43;08:00">
-            6 May 2021
+        <time class="post-date" datetime="2021-07-10T16:54:30&#43;08:00">
+            10 Jul 2021
+        </time>
+    </footer>
+</article>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/09/network/">性能测试Note（2）</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h1 id="基于loadrunner的性能测试note2">基于LoadRunner的性能测试Note（2）</h1>
+<p>LR脚本开发
+性能测试可以并发，效率高一点</p>
+<p>构造200个账号</p>
+<ol>
+<li>数据库写（存储过程）</li>
+<li>自动化工具构造</li>
+<li>LR参数化构造</li>
+</ol>
+<p>50 account:
+var: username
+const: password</p>
+<p>方法1：
+VuserGenerator
+业务过程分解
+open_index
+into_register
+submit_register</p>
+<p>分析可能存在的关键因素
+username需要变量化处理
+username，少的用excel拖一下，多的用脚本构造</p>
+<p>自动化：
+选择协议（create script支持协议探测）一般B/S用HTTP，C/S用Socket</p>
+<p>参数化：
+ctrl+L
+Paramlist里面new一个username
+参数类型file，将excel里的数据做成username.dat;第一行username，下面各行为数据
+select column byname=username</p>
+<p>然后开始录制，录制之后选择脚本中自己输入的username右键参数取代，选择username</p>
+<p>C与LR：</p>
+<p>编程需要编写脚本</p>
+<p>action：本质是函数包，
+vuser_init.c
+Action.c
+vuser_end.c
+每个action是一组功能的集合</p>
+<p>记得return 0;</p>
+<p>lr_output_massage()输出到LR控制台</p>
+<p>F4：运行时设置</p>
+<p>Controller加载脚本</p>
+<p>Start Scenario</p>
+<p>另一种参数化思路：
+用Unique Number -&gt; %3d转化出数字，用t{username}这样的参数化强行拼接</p>
+<p>不同参数同一个数据源：
+按name选，注意same line as&hellip;</p>
+<p>Data Wizard:基于ODBC的驱动</p>
+<p>LR参数化：
+Select next row</p>
+<ul>
+<li>sequencial: 默认的，顺序化</li>
+<li>random: 随机化</li>
+<li>unique：唯一向下</li>
+<li>same line as &hellip;：取决于其他列</li>
+</ul>
+<p>对于单用户来说，顺序和唯一取值序列是相同的</p>
+<p>Update value on: 更新方式</p>
+<ul>
+<li>Each iteration 默认 每次迭代时取值 （常用）</li>
+<li>Each occurrence 每次遇到该参数时取值</li>
+<li>Once 取值仅一次，脚本运行过程中只取值一次值的是：一次选择，终身不变</li>
+</ul>
+<p>When out of values: 选择Unique才需要考虑这个选项，数据不足时处理情况，表示取值越界后的处理方式</p>
+<ul>
+<li>Abort Vuser   放弃虚拟用户，不再取值</li>
+<li>Continue in a cyclic manner  以循环的方式继续，当参数化文件中的值取完最后一个值后，又从参数化文件的第一行开始取值。</li>
+<li>Continue with last value    当参数化文件中的值取完最后一个值后，持续一直最后一个值 。</li>
+</ul>
+<p><img src="https://sonemiyuki.cn/images/LR-Param.png" alt="LR参数化"></p>
+<p>checkpoint：</p>
+<p>先打开页面Snapshot，然后查看页面某个元素</p>
+<p>其中的Body和Header指的是服务器到客户端的响应，不是说HTML界面信息</p>
+<p>页面会增加代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C">web_reg_find(<span style="color:#e6db74">&#34;Search=Body&#34;</span>,
+<span style="color:#e6db74">&#34;SaveCount=registflag&#34;</span>,
+<span style="color:#e6db74">&#34;Text=Thank you&#34;</span>,
+LAST);
+</code></pre></div><p>注意到参数验证是以原始plain文本为准，换言之HTML标签也要纳入考虑，而不是仅仅看网页上的东西</p>
+<p>参考链接：
+<a href="https://www.cnblogs.com/whitewasher/p/7614689.html">参考链接1-LR参数详解</a></p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/loadrunner/">#LoadRunner</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">#性能测试</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-09T22:54:30&#43;08:00">
+            9 Jul 2021
+        </time>
+    </footer>
+</article>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/09/network/">性能测试Note（1）</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h1 id="基于loadrunner的性能测试note1">基于LoadRunner的性能测试Note（1）</h1>
+<p>重视场景</p>
+<p>效率：
+资源使用情况，消耗的时间达到均衡</p>
+<p>基准测试，不追求极限
+单元和集成也可以渗透性能测试</p>
+<p>接口测试重要性上升，组件化</p>
+<p>性能测试没办法人工模拟</p>
+<p>并发数：单位时间内对服务端发送请求的数量</p>
+<p>业务数量：单位时间内的业务数量</p>
+<p>并发数：柜员 业务数：顾客数</p>
+<p>单交易基准，单交易负载，单交易压力，综合交易，综合负载，稳定性。</p>
+<p>响应时间：服务端，用户端。网络传输时间不可控，性能测试一般在局域网中进行，多点千兆/百兆</p>
+<p>在线用户、有效用户</p>
+<p>业务分析和理解</p>
+<ul>
+<li>业务对象规模
+<ul>
+<li>注册用户</li>
+<li>在线用户</li>
+<li>日交易量</li>
+<li>峰值交易量</li>
+<li>峰值交易时间</li>
+<li>峰值并发数</li>
+</ul>
+</li>
+<li>测试点
+<ul>
+<li>注册</li>
+<li>登录</li>
+<li>订票</li>
+<li>查询</li>
+</ul>
+</li>
+</ul>
+<p>LR：WebTour</p>
+<p>VUGenerator：
+登录业务，三个功能点，
+打开首页
+输入用户名密码提交登陆
+退出</p>
+<p>对业务分解-创建三个动作
+open_index
+submit_login
+sign_off</p>
+<p>先切换动作再进行录制</p>
+<p>录制完修改thinktime并且进行回放
+显示script-pass的页面选择view之后expand-all查看所有报告
+脚本顺利执行不代表业务是对的</p>
+<p>注意重复登录有可能使用了不正确的session值或者jwt之类的验证token</p>
+<p>业务全对的时间才有意义</p>
+<p>日均200wPV
+200w<em>80%=160w 高峰用户数量
+24h</em>20%=4.8h 高峰用户时间
+单次访问页面2秒  2-5-8
+4.8*3600/2</p>
+<p>弄清楚考察并发数还是业务量。</p>
+<p>新需求：
+5min内200次用户注册，响应时间不超过3s成功率100%，CPU内存使用率均不超过70%</p>
+<p>单次注册消耗时间,基于行为测试：
+一次10.86s
+5<em>60/10.86=27
+200/27=8个VUser
+27</em>8=216testcase
+经验定律：*1.2 260个testcase</p>
+<p>open_index
+into_register
+submit_register</p>
+<p>业务成功率
+敏感、金融、人身权利 100%
+一般： 95%
+特定用户：98%</p>
+<p>CPU高</p>
+<ul>
+<li>算法复杂</li>
+<li>调用太多资源</li>
+<li>调用太多底层api</li>
+</ul>
+<p>内存</p>
+<ul>
+<li>内存泄漏,临时变量太多</li>
+<li>不够用</li>
+<li>设置不合理</li>
+</ul>
+<p>网络带宽：一般不超过总贷款的一半</p>
+<p>CPU队列长度一般不超过CPU数量+1</p>
+<p>吞吐量</p>
+<p>需求分析-&gt;指标提取-&gt;约束条件-&gt;业务流程</p>
+<p>手动测试
+自动化功能测试
+性能测试</p>
+<p>基于UI界面的 按钮，图片</p>
+<p>性能测试不关注行为，只关注服务器的响应过程</p>
+<p>先选择协议和字符集</p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/loadrunner/">#LoadRunner</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">#性能测试</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-09T20:54:30&#43;08:00">
+            9 Jul 2021
+        </time>
+    </footer>
+</article>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/08/network/">计算机网络面经与常见QA（1）</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h3 id="计算机网络面经与常见qa1">计算机网络面经与常见QA（1）</h3>
+<ol>
+<li><strong>5层协议、7层协议、4层协议与主要协议</strong></li>
+</ol>
+<ul>
+<li>7层协议：
+<ul>
+<li>应用层：FTP、DNS、SMTP、HTTP、WWW、NFS</li>
+<li>表示层：JPEG、MPEG、ASII</li>
+<li>会话层：RPC、SQL、NFS</li>
+<li>传输层：TCP、UDP</li>
+<li>网络层：IP、ACMP、ARP、RARP、OSPF、IPX、RIP</li>
+<li>链路层：PPP、MAC、VLAN</li>
+<li>物理层：RJ45、CLOCK、IEEE802.3</li>
+</ul>
+</li>
+<li>5层协议：
+<ul>
+<li>将7层协议的顶部三层合并为应用层</li>
+</ul>
+</li>
+<li>4层协议:
+<ul>
+<li>将底下两层合并为数据接口层</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><strong>IP地址的分类</strong></li>
+</ol>
+<ul>
+<li>A类:以0开头,第一个字节为0-127</li>
+<li>B类:以10开头,第一个字节为128-191</li>
+<li>C类:以110开头,第一个字节为192-223</li>
+<li>D类:以1110开头,用于多播</li>
+<li>E类:以1111开头,暂时保留</li>
+<li>特殊IP地址:
+<ul>
+<li>0.0.0.0 缺省路由,表示不清楚的主机和目的网络</li>
+<li>255.255.255.255 路由器不转发的内网广播</li>
+<li>127.0.0.1 localhost,本机</li>
+<li>224.0.0.1 组播地址</li>
+<li>192.168.X.X 私有地址</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>
+<p><strong>IP地址,子网掩码,主机号码的关系</strong></p>
+</li>
+<li>
+<p><strong>ARP(Address Resolution Protrol)地址解析协议</strong></p>
+</li>
+</ol>
+<p>概述：根据IP协议获取物理地址的TCP/IP协议</p>
+<ul>
+<li>在主机中维护ARP cache，里面有本局域网的主机和路由器的（ip地址，硬件地址）映射表。</li>
+<li>当主机A向局域网上的另外一台主机B发送IP数据报的时候，在其ARP高速缓存里面查询有无主机B的IP地址
+<ul>
+<li>若有，查出硬件地址并且写入mac帧，通过局域网将帧发往该硬件地址。</li>
+<li>若无，则主机A运行ARP，根据以下步骤找出主机B的硬件地址：
+<ul>
+<li>ARP进程向局域网内广播发送ARP请求分组，局域网内所有主机运行的ARP进程均收到此分组。在这里是广播</li>
+<li>主机B的IP地址和ARP请求分组待查的IP一直，收下这个ARP请求分组，并且向A发送ARP响应分组，在这个响应分组中写进自己的硬件地址。在这里是单播。</li>
+<li>主机A在收到ARP响应分组之后在其ARP cache中写入主机B的（IP地址，物理地址映射）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ARP的特点：
+<ul>
+<li>每个数据项都有生存时间</li>
+<li>解决的主要是局域网上的问题</li>
+<li>广域网上联系需要交给路由器转发</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li><strong>各种需要了解的小协议</strong></li>
+</ol>
+<ul>
+<li><strong>ICMP（Internet Control Message Protrol）</strong>
+<ul>
+<li>主要用于IP主机和路由器之间传递控制信息</li>
+<li>类型-代码-校验和
+<ul>
+<li>3-终点不可达：不能交付数据包</li>
+<li>11-时间超过：路由器接收到生存时间为0的数据报，丢弃并向原点发送报文</li>
+<li>12-参数问题：路由器或者主机收到的数据包首部有的字段的值不正确</li>
+<li>5-改变路由：提示主机进行重定向</li>
+<li>8、0-回送或回答：ICMP回送请求报文由主机或者路由器向特定的主机发布询问</li>
+<li>13、14-时间戳请求或回答：用于校正时间戳</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>FTP（File Transfer Protrol）文件传输协议</strong>
+<ul>
+<li>文件传输协议</li>
+<li>主动模式：
+<ul>
+<li>控制连接：会话期间一直打开，用于控制和会话，端口号21</li>
+<li>数据连接：用来传输数据，服务机端口号20，客户机端口号自行开放，发送PORT命令从服务器获取数据</li>
+</ul>
+</li>
+<li>被动模式：
+<ul>
+<li>控制连接：会话期间一直打开，用于控制和会话，端口号21</li>
+<li>数据连接：用来传输数据，服务器随机开放端口，客户端再连接到服务器开放的端口进行数据传输</li>
+</ul>
+</li>
+<li>主动模式和被动模式的不同简单概述为： 主动模式传送数据时是“服务器”连接到“客户端”的端口；被动模式传送数据是“客户端”连接到“服务器”的端口。主动模式需要客户端必须开放端口给服务器，很多客户端都是在防火墙内，开放端口给FTP服务器访问比较困难。被动模式只需要服务器端开放端口给客户端连接就行了。</li>
+</ul>
+</li>
+<li><strong>HTTP（Hyper Text Transfer Protocol）超文本传输协议</strong>
+<ul>
+<li>Port: 80</li>
+<li>运用TCP保证了数据的可靠运输，但是HTTP本身没有连接，没有状态。</li>
+<li>文件传输时间+2RTT</li>
+<li>HTTP1.1：持续连接，节约建立连接的一个RTT</li>
+<li>请求报文和响应报文
+<ul>
+<li>请求报文：
+<ul>
+<li>请求行：包括方法、URL、版本</li>
+<li>header：一个map</li>
+<li>实体主体</li>
+</ul>
+</li>
+<li>响应报文：
+<ul>
+<li>状态行：版本、状态码、短语</li>
+<li>header: 一个map</li>
+<li>实体主体</li>
+</ul>
+</li>
+<li>常见状态码</li>
+<li>Header与Cookie
+<ul>
+<li>唯一识别性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>DHCP(Dynamic Host Configuration Protrol)动态主机配置协议</strong>
+<ul>
+<li>让系统得以连接到网络上，并且获取所需的必要参数</li>
+<li>即插即用联网，给内部网络分配IP地址</li>
+<li>过程：
+<ul>
+<li>发送广播报文，寻找DHCP服务器</li>
+<li>DHCP服务器发送提供报文</li>
+<li>DHCP中继代理：作为中介以UDP方式连接主机和DCHP服务器</li>
+<li>客户UDP68，服务器UDP67</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>NAT（Network Address Translation）网络地址转换</strong>
+<ul>
+<li>NAPT 加上端口号的转换</li>
+<li>内网转公网，公网转内网</li>
+</ul>
+</li>
+<li><strong>RARP（Reverse Address Resolution Protocol）反向地址转换协议</strong>
+<ul>
+<li>物理地址转IP地址</li>
+<li>无盘机需要向网关服务器的ARP表或者ARP cache请求其IP地址</li>
+<li>过程：
+<ul>
+<li>RARP广播，声明MAC地址并请求一个IP地址
+<ul>
+<li>在：查出来</li>
+<li>不在：查不出来</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>IP地址是返回的唯一可能结果，并且这个链路层请求不会被路由器转发，故每个网络需要一个RARP服务器</li>
+</ul>
+</li>
+</ul>
+<ol start="6">
+<li><strong>三次握手，传输数据，四次挥手</strong></li>
+</ol>
+<ul>
+<li>三次握手
+<ul>
+<li>第一次握手：客户端发送SYN，seq=x到服务端，进入SYN_SEND状态</li>
+<li>第二次握手：服务端收到SYN包，确认客户SYN（sql=y，ACK确认位=x+1），自己也发一个SYN包供对方确认，自己进入SYN_RECV状态</li>
+<li>第三次握手：客户端向服务器发送确认包ACK（ack=y+1），双方进入ESTABLISHED状态，完成三次握手</li>
+</ul>
+</li>
+<li>传输数据：客户端发送seq=x+1，ACK=y+1，等待对方确认返回ACK=x+2</li>
+<li>四次挥手
+<ul>
+<li>第一次挥手：客户端发送FIN包，并且继续seq和ACK</li>
+<li>第二次挥手：被动关闭方收到FIN包之后发个ACK给对方确认收到之前的东西</li>
+<li>第三次挥手：被动关闭方发送一个FIN</li>
+<li>第四次挥手：主动关闭方收到FIN包之后发个ACK给对方确认收到之前的东西</li>
+</ul>
+</li>
+</ul>
+<ol start="7">
+<li><strong>浏览器输入baidu.com之后地执行过程</strong></li>
+</ol>
+<ul>
+<li>DNS解析，浏览器查询自身缓存，若无，向DNS服务器询问到baidu.com的IP地址</li>
+<li>发起GET /index.html HTTP/1.1的GET请求</li>
+<li>传输层将HTTP请求用TCP报文头包装好，添加端口和服务器进行通讯</li>
+<li>网络层通过查找路由表进行不断转发确保通讯</li>
+<li>链路层通过ARP查询MAC地址进行传输</li>
+<li>得到index.html</li>
+</ul>
+<ol start="8">
+<li><strong>TCP和UPD的区别</strong></li>
+</ol>
+<ul>
+<li>TCP面向连接，安全，速度慢，数据流</li>
+<li>UDP非面向连接，不安全，速度快一点，数据报</li>
+</ul>
+<ol start="9">
+<li><strong>DNS原理</strong></li>
+</ol>
+<ul>
+<li>DNS客户通过查询DNS服务器解析名称，查询包括三条信息，包括DNS域名，查询类型，域名类别。基于UDP。</li>
+</ul>
+<ol start="10">
+<li><strong>交换机、路由器、网关</strong></li>
+</ol>
+<ul>
+<li>交换机：位于数据链路层，维护ARP表，隔绝冲突域，不隔绝广播域</li>
+<li>路由器：路由和转送
+<ul>
+<li>路由：决定host到host之间的传输路径</li>
+<li>转送：将路由器输入端的数据移动到路由器输出端</li>
+<li>隔离广播域</li>
+</ul>
+</li>
+<li>网关：连接两个网络的设备，能在不同协议之间移动数据，是连接两个网络的设备
+参考链接：</li>
+<li><a href="https://www.cnblogs.com/mawanglin2008/articles/3607767.html">参考链接1-FTP的主动模式和被动模式</a></li>
+<li><a href="https://www.nowcoder.com/discuss/1937">参考链接2-面经</a></li>
+<li><a href="https://blog.csdn.net/chpdirector84/article/details/6033511">参考链接3-RARP</a></li>
+</ul>
+<p>参考书目：
+《计算机网络（第7版）》谢希仁</p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/http/">#http</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/">#网络</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-08T23:41:30&#43;08:00">
+            8 Jul 2021
+        </time>
+    </footer>
+</article>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/05/09/get-post/">GET与POST探秘</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h3 id="从http-get和post的整理生发出来的">从HTTP GET和POST的整理生发出来的</h3>
+<p><strong>幂等性(Idempotence)</strong></p>
+<blockquote>
+<p>Methods can also have the property of &ldquo;idempotence&rdquo; in that (aside from error or expiration issues) the side-effects of N &gt; 0 identical requests is the same as for a single request.</p>
+</blockquote>
+<p>幂等性在HTTP1.1中的定义如上，可以大致理解为一次和多次请求某一个资源应该具有同样的副作用。
+这是一个语义范畴的概念，换言之主要是由设计API、协议或者应用的人去保证的。幂等性是分布式系统设计中十分重要的概念，而HTTP的分布式本质也决定了它在HTTP中具有重要地位。</p>
+<p>毋庸置疑，HTTP在当前的分布式系统中有重要的地位，幂等性也融入了设计理念之中。让我们考虑一个例子来说明幂等性在实际业务中的作用。
+我们假设有如下函数帮助模拟业务：从某个id为account_id的账户里面扣数量为amount的钱。</p>
+<pre><code>bool withdraw(account_id, amount)
+</code></pre><p>在一个分布式系统里面，如果单纯用HTTP协议，我们不能很显然地假定系统的可靠性，那么，这时候我们假设A让B去扣钱，有可能产生几种情况：</p>
+<ol>
+<li>A说：B，请去某账户扣钱。 B完成了指令。 B对A说：我扣完了，返回你一个True，A收到了。</li>
+<li>A说：B，请去某账户扣钱。 B完成了指令。 B对A说：由于余额等原因无法扣款，返回你一个False，A收到了。
+事情往往不尽如人意，因为消息传递出现了两次，如果丢包了，有可能出现以下情况：</li>
+</ol>
+<ul>
+<li>A说：B，请去某账户扣钱。 B没听到。</li>
+<li>A说：B，请去某账户扣钱。 B完成了指令。B对A说：我扣完了，返回你一个True，A没收到</li>
+<li>A说：B，请去某账户扣钱。 B完成了指令。B对A说：由于余额等原因无法扣款，返回你一个False，A没收到</li>
+</ul>
+<p>从A的角度来看，如果迟迟没有收到Reply，有可能出现这三种情况之一，但是在目前设计下A无法通过已有的信息进行判断是三种情况的哪一种，也就无法确定是要叫B重新付款，还是返回付款成功，或者返回付款失败。</p>
+<p>我们可以引进中间件完成这个业务，但是这在架构上会增加和中间件的耦合程度。从设计的角度说，有一种被称作幂等设计的设计思路被用来解决类似的问题。</p>
+<pre><code>int create_ticket() 
+bool idempotent_withdraw(ticket_id, account_id, amount)
+</code></pre><p>A对B说，我要找你有一件事。B说，好的，你找我的事情我编号为5。A说，好的，5号事情是如此如此。B办完了，对A说，办完了。A返回。
+在这样一个过程中，取号的过程损失很小，如果取号过程丢包了，只要重新取一个号码就可以了。但是当A收到取回的号码，这时候B就知道有一件事情要办。在这个假设下，B最多只会把这件特定的事情办一次成为AB之间的Common Sense。如果丢包导致A没有返回，A可以在调用上加上原来的ID，并且持续发送，因为B只会把这件事情办一次，所以可以持续发送，等待返回。</p>
+<p>和分布式事务相比，幂等设计的优势在于它的轻量级，容易适应异构环境，以及性能和可用性方面。在某些性能要求比较高的应用，幂等设计往往是唯一的选择。</p>
+<p><strong>HTTP的幂等性</strong></p>
+<p>HTTP协议本身是一种<strong>面向资源</strong>的应用层协议，但对HTTP协议的使用实际上存在着两种不同的方式：一种是RESTful的，它把HTTP当成<strong>应用层</strong>协议，比较忠实地遵守了HTTP协议的各种规定；另一种是SOA的，它并没有完全把HTTP当成应用层协议，而是把HTTP协议作为了<strong>传输层</strong>协议，然后在HTTP之上建立了自己的应用层协议。</p>
+<p>幂等性并不属于特定的协议，它是分布式系统的一种特性；所以，不论是SOA还是RESTful的Web API设计都应该考虑幂等性。下面将引入HTTP GET、DELETE、PUT、POST四种主要方法的语义和幂等性。</p>
+<p>幂等性在HTTP中的设计主要体现在<strong>没有副作用</strong>，而不完全是<strong>返回相同的结果</strong>，请注意两个概念的区别。因为在不同时间GET同一个网页的不同东西确实有可能产生不同的结果，但是本身没有副作用，不会改变资源的状态，所以是幂等的。</p>
+<p>HTTP <strong>GET</strong>方法用于获取资源，不应有副作用，所以是幂等的。</p>
+<p>HTTP <strong>DELETE</strong>方法用于删除资源，有副作用，但它应该满足幂等性。对于删除特定资源的请求，调用一次和N次对系统产生的副作用是相同的。；因此，调用者可以多次调用或刷新页面而不必担心引起错误。</p>
+<p>HTTP <strong>POST</strong>与HTTP <strong>PUT</strong>经常被混淆，请注意。
+HTTP 1.1中是这样规定的：</p>
+<blockquote>
+<p>The POST method is used to request that the origin server accept the entity enclosed in the request as a new subordinate of the resource identified by the Request-URI in the Request-Line &hellip;&hellip; If a resource has been created on the origin server, the response SHOULD be 201 (Created) and contain an entity which describes the status of the request and refers to the new resource, and a Location header.</p>
+</blockquote>
+<blockquote>
+<p>The PUT method requests that the enclosed entity be stored under the supplied Request-URI. If the Request-URI refers to an already existing resource, the enclosed entity SHOULD be considered as a modified version of the one residing on the origin server. If the Request-URI does not point to an existing resource, and that URI is capable of being defined as a new resource by the requesting user agent, the origin server can create the resource with that URI.</p>
+</blockquote>
+<p>POST所对应的URI并非创建的资源本身，而是资源的接收者。比如：POST <a href="http://www.forum.com/articles">http://www.forum.com/articles</a>的语义是在http://www.forum.com/articles下创建一篇帖子，HTTP响应中应包含帖子的创建状态以及帖子的URI。两次相同的POST请求会在服务器端创建两份资源，它们具有不同的URI.所以，POST方法不具备幂等性。而PUT所对应的URI是要创建或更新的资源本身。比如：PUT <a href="http://www.forum/articles/4231">http://www.forum/articles/4231</a>的语义是创建或更新ID为4231的帖子。对同一URI进行多次PUT的副作用和一次PUT是相同的；因此，PUT方法具有幂等性。</p>
+<p>如何通过Web API的形式实现前面所提到的取款功能。很简单，用POST /tickets来实现create_ticket；用PUT /accounts/account_id/ticket_id?amount=xxx来实现idempotent_withdraw。值得注意的是严格来讲amount参数不应该作为URI的一部分，真正的URI应该是/accounts/account_id/ticket_id，而amount应该放在请求的body中。这种模式可以应用于很多场合，比如：论坛网站中防止意外的重复发帖。</p>
+<p>那么，在GET和POST的机理之下，我们需要理解以下几点性质：</p>
+<ul>
+<li>GET在浏览器回退时是无害的，而POST会再次提交请求</li>
+</ul>
+<p>因为GET得到某份资源，是幂等的，post对目标再度提出创建，不是幂等的。</p>
+<p><strong>GET</strong>和<strong>POST</strong>的实现机理</p>
+<p>理论上，一个POST能完成所有请求，但我们往往不会这么设计。常见的4-5个HTTP请求里面，除了语义上的差别，在功能上也有所不同。</p>
+<p>GET的特点是什么呢：
+只能对URL进行编码。虽然URL理论上是无限长的<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>，但是实现下来总是无法做到。这一点使得看似信息携带量少了，但是可以把所有的信息都体现在URL上。</p>
+<p>与之对应的
+POST：
+能够实现多种编码形式，在实现上实现了能够发无限长度的信息。</p>
+<p>所以，很多涉及信息保存的浏览器功能对GET和POST请求处理并不一致：</p>
+<ul>
+<li>get请求参数会被完整保留在浏览器历史记录中，post不会（信息都在URL）</li>
+<li>对参数的数据类型，get只接受ASCII字符，post没有限制（编码问题）</li>
+<li>get产生的url地址可以被bookmark（加入标签），post不可以（信息都在URL）</li>
+<li>对参数的数据类型，get只接受ASCII字符，post没有限制</li>
+<li>Get请求在url中传递的参数长度有限制，post没有</li>
+<li>Get比post更不安全，因为参数直接暴露在url中，不能用来传递敏感信息</li>
+<li>Get参数放在url中，post参数放在request body中</li>
+</ul>
+<p>POST和GET并没有本质区别。</p>
+<blockquote>
+<p>HTTP的底层是TCP/IP。所以GET和POST的底层也是TCP/IP，也就是说，GET/POST都是TCP链接。GET和POST能做的事情是一样一样的。你要给GET加上request body，给POST带上url参数，技术上是完全行的通的。</p>
+</blockquote>
+<p>在我大万维网世界中，TCP就像汽车，我们用TCP来运输数据，它很可靠，从来不会发生丢件少件的现象。但是如果路上跑的全是看起来一模一样的汽车，那这个世界看起来是一团混乱，送急件的汽车可能被前面满载货物的汽车拦堵在路上，整个交通系统一定会瘫痪。为了避免这种情况发生，交通规则HTTP诞生了。HTTP给汽车运输设定了好几个服务类别，有GET, POST, PUT, DELETE等等，HTTP规定，当执行GET请求的时候，要给汽车贴上GET的标签（设置method为GET），而且要求把传送的数据放在车顶上（url中）以方便记录。如果是POST请求，就要在车上贴上POST的标签，并把货物放在车厢里。当然，你也可以在GET的时候往车厢内偷偷藏点货物，但是这是很不光彩；也可以在POST的时候在车顶上也放一些数据，让人觉得傻乎乎的。HTTP只是个行为准则，而TCP才是GET和POST怎么实现的基本。</p>
+<p>但是，我们只看到HTTP对GET和POST参数的传送渠道（url还是requrest body）提出了要求。“标准答案”里关于参数大小的限制又是从哪来的呢？</p>
+<p>在我大万维网世界中，还有另一个重要的角色：运输公司。不同的浏览器（发起http请求）和服务器（接受http请求）就是不同的运输公司。 虽然理论上，你可以在车顶上无限的堆货物（url中无限加参数）。但是运输公司可不傻，装货和卸货也是有很大成本的，他们会限制单次运输量来控制风险，数据量太大对浏览器和服务器都是很大负担。业界不成文的规定是，（大多数）浏览器通常都会限制url长度在2K个字节，而（大多数）服务器最多处理64K大小的url。超过的部分，恕不处理。如果你用GET服务，在request body偷偷藏了数据，不同服务器的处理方式也是不同的，有些服务器会帮你卸货，读出数据，有些服务器直接忽略，所以，虽然GET可以带request body，也不能保证一定能被接收到哦。</p>
+<p>HTTP在某些实现上并没有强制性。</p>
+<p><img src="https://sonemiyuki.cn/images/HTTPstatus.png" alt="HTTP状态"></p>
+<p>在很多浏览器的实现中，POST是需要两次发包的。</p>
+<p>对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）；
+而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）。
+也就是说，GET只需要汽车跑一趟就把货送到了，而POST得跑两趟，第一趟，先去和服务器打个招呼“嗨，我等下要送一批货来，你们打开门迎接我”，然后再回头把货送过去。
+因为POST需要两步，时间上消耗的要多一点，看起来GET比POST更有效。因此Yahoo团队有推荐用GET替换POST来优化网站性能。</p>
+<ol>
+<li>GET与POST都有自己的语义，不能随便混用。</li>
+<li>据研究，在网络环境好的情况下，发一次包的时间和发两次包的时间差别基本可以无视。而在网络环境差的情况下，两次包的TCP在验证数据包完整性上，有非常大的优点。</li>
+<li>并不是所有浏览器都会在POST中发送两次包，Firefox就只发送一次。</li>
+</ol>
+<p>或许可以这么理解：</p>
+<ul>
+<li>对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200（返回数据）</li>
+<li>而对于POST，浏览器先发送header，服务器响应100 continue，浏览器再发送data，服务器响应200 ok（返回数据）</li>
+</ul>
+<hr>
+<p>reference:</p>
+<ul>
+<li><a href="https://www.cnblogs.com/weidagang2046/archive/2011/06/04/idempotence.html">参考链接1-幂等性</a><!-- raw HTML omitted --></li>
+<li><a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html">参考链接2-RFC 2616, Hypertext Transfer Protocol &ndash; HTTP/1.1, Method Definitions</a><!-- raw HTML omitted --></li>
+<li><a href="https://blog.csdn.net/thc151297/article/details/104317874">参考链接3-爬虫必备知识点——get请求和post请求的区别</a><!-- raw HTML omitted --></li>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI3NzIzMzg3Mw==&amp;mid=100000054&amp;idx=1&amp;sn=71f6c214f3833d9ca20b9f7dcd9d33e4#rd">参考链接4-WebTechGarden 99%的人都理解错了HTTP中GET与POST的区别</a><!-- raw HTML omitted --></li>
+</ul>
+<hr>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>在http协议中，其实并没有对url长度作出限制，但是显然地，这取决于Web 服务器和浏览器的具体实现而已。&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/http/">#http</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
+            
+        
+        <time class="post-date" datetime="2021-05-09T22:29:30&#43;08:00">
+            9 May 2021
         </time>
     </footer>
 </article>
@@ -198,7 +832,9 @@ code.py</p>
 	
 	    <a class="newer-posts" href="https://sonemiyuki.cn/">&larr; Newer Posts</a>
 	
-	<span class="page-number">Page 2 of 2</span>
+	<span class="page-number">Page 2 of 3</span>
+	
+	    <a class="older-posts" href="https://sonemiyuki.cn/page/3/">Older Posts &rarr;</a>
 	
 </nav>
 

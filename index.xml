@@ -7,14 +7,105 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Fri, 09 Jul 2021 22:54:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Jul 2021 23:41:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算机网络面经与常见QA（2）</title>
+      <link>https://sonemiyuki.cn/post/2021/07/11/network/</link>
+      <pubDate>Sun, 11 Jul 2021 23:41:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/11/network/</guid>
+      <description>各层的报文格式   以太网帧  目标MAC地址（6B） 源MAC地址（6B） 类型（2B） 数据（46-1500B） FCS（4B）   IP数据报  版本（4bit） header长度（4bit），以32bit为单位 服务类型（8bit） 总长度（16bit） 上层协议标识（16bit）标记上层协议 标志：（3bit）用来表示是否有分片，是否允许分片等 片偏移量（13bit）以8bit为单位的片偏移量 生存时间（8bit）跳数限制，若TTL为0，则丢弃这个数据包 协议（8bit） 校验和（16bit）检验首部的校验和 源地址（32bit） 目的地址（32bit）   UDP数据报  源端口（16bit） 目的端口（16bit） UDP长度（16bit） UDP校验和（16bit） 伪首部：前缀源IP（4B），目的IP（4B），0（1B），17（1B），UPD长度（2B），以16个bit为单位，按位加法，然后取反。   TCP数据报  源端口（16bit） 目的端口（16bit） 数据序号seq（16bit） 确认序号ack（16bit） 偏移量（4bit） 保留（6bit） 六个标志位（6bit）  URG：紧急指针字段有效，尽快传输 ACK：设定ack字段有效 PSH：尽快将保温传给应用层 RST：要求重建TCP SYN：设定syn字段有效 fin：表示传输结束，请求释放连接   窗口字段（16bit） 校验和（16bit） 紧急指针（16bit）     建立TCP/UDP连接的调用   路由协议
+   RIP(Routing Information Protocol)路由信息协议  距离向量型的一种路由协议 30s一次,对全网广播,等待5次,将已知路由进行广播,然后下一跳继续广播,进行逐步传播   OSPF(Open Shortest Path First)开放最短路径优先  基于IP 适用泛洪法发送请求 发送信息是路由器临近的所有路由器的链路状态 链路状态变化才发送信息 Dijkstra 收敛快 划分自治系统 问候、数据库描述、链路状态请求、链路状态更新、链路状态确认   BGP(Border Gateway Protrol)边界网关协议  寻求一条能到达目的地并且比较好的路由 BGP发言人    等待2MSL的原因   保证客户端发送的最后一个ACK报文能够到达服务器。 新的连接中不会出现旧连接的请求报文。  TCP的可靠性   校验和 序列号 确认应答 超时重传  超时重传基于两个可能的原因  发送过去的包全体丢包,接到这个包之后接收方没有收到 接受的ACK报文丢包,接收方发现数据存在,仍然发送ACK应答   动态计算最大超时时间   连接管理  三次握手,四次挥手确保可靠的连接   流量管理  滑动窗口大小的内容实际上是接收端数据缓冲区的剩余大小。接收端会在确认应答发送ACK报文时，将自己的即时窗口大小填入，并跟随ACK报文一起发送过去。而发送方根据ACK报文里的窗口大小的值的改变进而改变自己的发送速度。如果接收到窗口大小的值为0，那么发送方将停止发送数据。并定期的向接收端发送窗口探测数据段，让接收端把窗口大小告诉发送端。   拥塞控制  慢启动:少量数据探路,拥塞窗口指数增长 增长过阈值之后线性增长 拥塞之后慢启动的阈值变为原来的一半,拥塞窗口重置为 1    糊涂窗口综合征    当TCP中发送端发送数据很慢或者接收端接收缓冲数据很慢,就会使得应用进程的有效载荷很小。</description>
+    </item>
+    
+    <item>
+      <title>Java面经后端</title>
+      <link>https://sonemiyuki.cn/post/2021/07/11/java/</link>
+      <pubDate>Sun, 11 Jul 2021 22:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/11/java/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Java面经基础（含OO）</title>
+      <link>https://sonemiyuki.cn/post/2021/07/11/java/</link>
+      <pubDate>Sun, 11 Jul 2021 22:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/11/java/</guid>
+      <description>OO的优点和三个特性 优点：基于面向过程，易于复用，易于理解，可扩展，可维护
+ 封装  外部不关心也无法修改内部实现   继承  继承基类的方法并做出改变   多态  同一个方法，不同的实现    Java编译过程  编译：创建完源文件之后，程序先要被JVM中的java编译器进行编译为.class文件。java编译一个类时，如果这个类所依赖的类还没有被编译，编译器会自动的先编译这个所依赖的类，然后引用。 编译后的字节码文件格式主要分为两部分：常量池和方法字节码。常量池记录的是代码出现过的字面量（文本字符串、八种基本类型的值、被声明为final的常量等）以及符号引用（类和方法的全限定名、字段的名称和描述符、方法的名称和描述符）方法字节码中放的是各个方法的字节码（依赖操作数栈和局部变量表，由JVM解释执行） 经过JVM的解释运行 加载 &amp;ndash;&amp;gt; 验证 &amp;ndash;&amp;gt; 准备 &amp;ndash;&amp;gt; 解析 &amp;ndash;&amp;gt; 初始化（其中验证、准备、解析统称为类的连接）  JDK JVM JRE 注意JRE包含bin和lib，bin是JVM虚拟机，lib是映射到不同操作系统所需要的库。
+== 和 equals == 比较的是栈里面的值，基础数据类型比较基础数据类型，对象比较地址
+equals默认用==进行比较 String的equals重写将另一个对象强转String
+final final的作用
+ 修饰类：类不能被继承 修饰方法：可以重载不能重写 修饰变量：常变量，不能更改值 修饰类变量：声明，非静态初始化块，构造器 类变量：静态初始化块，声明 作用在栈上，基础变量不能改，引用的值可变  为什么局部内部类和匿名内部类只能访问局部final类型的变量 编译生成class文件，内部类的class文件会独立出来。外部类方法结束局部变量销毁，但是内部类如果还在执行就会出问题。将局部变量复制作为内部类的成员变量，延长其生命周期。
+final是某种保持一致性的妥协
+重载和重写 重载： 同一个类、方法名相同，参数名（类型、个数、顺序）不同，返回值修饰符可以不同；
+重写：父子类中，方法名参数名必须相同，返回值范围和抛出异常值范围小于等于父类，修饰符范围大于等于父类，无法重写父类private方法。
+接口和抽象类  抽象类可以有普通成员函数，接口的方法必须全部抽象 抽象类成员变量类型比较宽，看接口的成员变量必须是public static final 抽象类单继承，可以通过接口实现多继承  接口：对类的行为进行约束，约定了一定要有某个方法。like-a。</description>
+    </item>
+    
+    <item>
+      <title>Java面经集合</title>
+      <link>https://sonemiyuki.cn/post/2021/07/11/java/</link>
+      <pubDate>Sun, 11 Jul 2021 22:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/11/java/</guid>
+      <description>String、StringBuilder、StringBuffer String：final修饰，不可变，每次操作产生新对象，浪费时间空间
+StringBuffer和StringBuilder在原对象进行操作。StringBuffer的所有方法都是synchronize方法修饰的。
+性能 Builder &amp;gt; Buffer &amp;gt; String
+场景：改变字符串内容 优先StringBuilder，多线程使用StringBuffer。
+List 和 Set List： 有序，可重复，允许多个null，可以用迭代器也可以用get方法访问元素
+Set：无序，不可重复，最多允许一个null，只能用迭代器遍历。
+HashSet底层是使用HashMap实现的。当使用add方法将对象添加到Set当中时，实际上是将该对象作为底层所维护的Map对象的key，而value则都是同一个Object对象（该对象我们用不上）；其他的都是通过定义的HashMap对象实现的。
+ArrayList 和 LinkedList ArrayList：本质上基于数组，适合下标访问，具有1.5倍扩容机制，尾插法移动少，性能提高好。
+LinkedList：本质上基于链表时适合插入删除，不适合查询，必须用iterator遍历，否则时间复杂度过大。indexOf会遍历整个链表。
+HashMap 和 HashTable HashTable线程安全，所有方法synchronized修饰。HashMap允许null的key和value。
+底层实现：数组+链表 数组：二次hash之后映射到一个数组上面那如果未冲突则直接存Node进去，如果冲突，equals判断，相同则取代钙元素，否则判断链表高度，链表高度达到8转为红黑树，低于6则转回链表。
+HashMap扩容 capacity 即容量，默认16。loadFactor 加载因子，默认是0.75threshold 阈值。阈值=容量*加载因子。默认12。当元素数量超过阈值时便会触发扩容。
+当元素数量超过阈值时便会触发扩容。每次扩容的容量都是之前容量的2倍。
+HashMap的容量变化通常存在以下几种情况： 空参数的构造函数：实例化的HashMap默认内部数组是null，即没有实例化。第一次调用put方法时，则会开始第一次初始化扩容，长度为16。有参构造函数：用于指定容量。会根据指定的正整数找到不小于指定容量的2的幂数，将这个数设置赋值给阈值（threshold）。第一次调用put方法时，会将阈值赋值给容量，然后让 阈值 = 容量 * 负载因子 。（因此并不是我们手动指定了容量就一定不会触发扩容，超过阈值后一样会扩容！！）如果不是第一次扩容，则容量变为原来的2倍，阈值也变为原来的2倍。（容量和阈值都变为原来的2倍时，负载因子还是不变）
+由于数组的容量是以2的幂次方扩容的，那么一个Entity在扩容时，新的位置要么在原位置，要么在原长度+原位置的位置。数组长度变为原来的2倍，表现在二进制上就是多了一个高位参与数组下标确定。此时，一个元素通过hash转换坐标的方法计算后，恰好出现一个现象：最高位是0则坐标不变，最高位是1则坐标变为“原长度+原坐标”。在扩容时，不需要重新计算元素的hash了，只需要判断最高位是1还是0就好了。
+参考链接： java中Map和Set的底层分析 HashMap扩容机制</description>
+    </item>
+    
+    <item>
+      <title>Jmeter(1)</title>
+      <link>https://sonemiyuki.cn/post/2021/07/11/get-post/</link>
+      <pubDate>Sun, 11 Jul 2021 11:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/11/get-post/</guid>
+      <description>Jmeter Jmeter脚本生成
+ 借助第三方工具录制  badboy 被淘汰 blazemeter 大陆无法注册账号   使用自带的http代理服务器方式生成  添加线程&amp;ndash;线程组 添加配置元件&amp;ndash;cookie管理器 添加非测试元件&amp;ndash;http代理服务器 配置http代理服务器并启动  端口：用户指定，和服务器无关 目标控制器： Type：有时候需要选Java   在客户端进行设置，使客户端请求通过代理。  Internet选项-连接-局域网设置     抓包手写  Jmeter代理服务器
+ 转发 翻译  </description>
+    </item>
+    
+    <item>
+      <title>性能测试Note（3）</title>
+      <link>https://sonemiyuki.cn/post/2021/07/10/network/</link>
+      <pubDate>Sat, 10 Jul 2021 16:54:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/10/network/</guid>
+      <description>基于LoadRunner的性能测试Note（3） 一小时内6000个用户开户
+用lr事务手测单个用户时间，假设单次15s 一个小时一个vuser可以完成240个用户开户 6000/240=25，可用25个vuser模拟一小时内的6000个开户操作
+unique number start 1 block 240*1.2=288 7200个testcase 确定需求，分析约束，准备数据。
+关联-参数化-检查点
+参数化：客户端提交给服务端的参数 关联：服务端返回给客户端的参数
+订购机票 open_index submit_login info_flight find_flight select_flight pay_flight sign_off
+账户参数化：username, usersession做关联
+出发和到达的城市需要随机化，随机某个具体航班
+web_reg_save_param(&amp;ldquo;fligts&amp;rdquo;, &amp;ldquo;LB=&amp;quot;&amp;gt;&amp;rdquo;, &amp;ldquo;RB=&amp;rdquo;,&amp;ldquo;ORD=All&amp;rdquo;,LAST); 根据业务适当去重 strcmp
+吞吐量，响应时间，系统资源&amp;hellip;&amp;hellip;
+结果分析：根据Analysis进行结果分析</description>
+    </item>
+    
     <item>
       <title>性能测试Note（2）</title>
       <link>https://sonemiyuki.cn/post/2021/07/09/network/</link>
       <pubDate>Fri, 09 Jul 2021 22:54:30 +0800</pubDate>
       
       <guid>https://sonemiyuki.cn/post/2021/07/09/network/</guid>
-      <description>性能测试Note（2） LR脚本开发 性能测试可以并发，效率高一点
+      <description>基于LoadRunner的性能测试Note（2） LR脚本开发 性能测试可以并发，效率高一点
 构造200个账号
  数据库写（存储过程） 自动化工具构造 LR参数化构造  50 account: var: username const: password
 方法1： VuserGenerator 业务过程分解 open_index into_register submit_register
@@ -43,7 +134,7 @@ LR参数化： Select next row
       <pubDate>Fri, 09 Jul 2021 20:54:30 +0800</pubDate>
       
       <guid>https://sonemiyuki.cn/post/2021/07/09/network/</guid>
-      <description>性能测试Note（1） 重视场景
+      <description>基于LoadRunner的性能测试Note（1） 重视场景
 效率： 资源使用情况，消耗的时间达到均衡
 基准测试，不追求极限 单元和集成也可以渗透性能测试
 接口测试重要性上升，组件化
@@ -66,16 +157,6 @@ VUGenerator： 登录业务，三个功能点， 打开首页 输入用户名密
 弄清楚考察并发数还是业务量。
 新需求： 5min内200次用户注册，响应时间不超过3s成功率100%，CPU内存使用率均不超过70%
 单次注册消耗时间,基于行为测试： 一次10.86s 560/10.86=27 200/27=8个VUser 278=216testcase 经验定律：*1.2 260个testcase</description>
-    </item>
-    
-    <item>
-      <title>计算机网络面经与常见QA（2）</title>
-      <link>https://sonemiyuki.cn/post/2021/07/09/network/</link>
-      <pubDate>Fri, 09 Jul 2021 08:54:30 +0800</pubDate>
-      
-      <guid>https://sonemiyuki.cn/post/2021/07/09/network/</guid>
-      <description>各层的报文格式   以太网帧  目标MAC地址（6B） 源MAC地址（6B） 类型（2B） 数据（46-1500B） FCS（4B）   IP数据报  版本（4bit） header长度（4bit），以32bit为单位 服务类型（8bit） 总长度（16bit） 上层协议标识（16bit）标记上层协议 标志：（3bit）用来表示是否有分片，是否允许分片等 片偏移量（13bit）以8bit为单位的片偏移量 生存时间（8bit）跳数限制，若TTL为0，则丢弃这个数据包 协议（8bit） 校验和（16bit）检验首部的校验和 源地址（32bit） 目的地址（32bit）   UDP数据报  源端口（16bit） 目的端口（16bit） UDP长度（16bit） UDP校验和（16bit） 伪首部：前缀源IP（4B），目的IP（4B），0（1B），17（1B），UPD长度（2B），以16个bit为单位，按位加法，然后取反。   TCP数据报  源端口（16bit） 目的端口（16bit） 数据序号seq（16bit） 确认序号ack（16bit） 偏移量（4bit） 保留（6bit） 六个标志位（6bit）  URG：紧急指针字段有效，尽快传输 ACK：设定ack字段有效 PSH：尽快将保温传给应用层 RST：要求重建TCP SYN：设定syn字段有效 fin：表示传输结束，请求释放连接   窗口字段（16bit） 校验和（16bit） 紧急指针（16bit）     建立TCP/UDP连接的调用   路由协议
-   RIP(Routing Information Protocol)路由信息协议  距离向量型的一种路由协议 30s一次,对全网广播,等待5次,将已知路由进行广播,然后下一跳继续广播,进行逐步传播   OSPF(Open Shortest Path First)开放最短路径优先  基于IP 适用泛洪法发送请求 发送信息是路由器临近的所有路由器的链路状态 链路状态变化才发送信息 Dijkstra 收敛快 划分自治系统 问候、数据库描述、链路状态请求、链路状态更新、链路状态确认   BGP(Border Gateway Protrol)边界网关协议  寻求一条能到达目的地并且比较好的路由 BGP发言人    等待2MSL的原因   保证客户端发送的最后一个ACK报文能够到达服务器。 新的连接中不会出现旧连接的请求报文。  TCP的可靠性   校验和 序列号 确认应答 超时重传  超时重传基于两个可能的原因  发送过去的包全体丢包,接到这个包之后接收方没有收到 接受的ACK报文丢包,接收方发现数据存在,仍然发送ACK应答   动态计算最大超时时间   连接管理  三次握手,四次挥手确保可靠的连接   流量管理  滑动窗口大小的内容实际上是接收端数据缓冲区的剩余大小。接收端会在确认应答发送ACK报文时，将自己的即时窗口大小填入，并跟随ACK报文一起发送过去。而发送方根据ACK报文里的窗口大小的值的改变进而改变自己的发送速度。如果接收到窗口大小的值为0，那么发送方将停止发送数据。并定期的向接收端发送窗口探测数据段，让接收端把窗口大小告诉发送端。   拥塞控制  慢启动:少量数据探路,拥塞窗口指数增长 增长过阈值之后线性增长 拥塞之后慢启动的阈值变为原来的一半,拥塞窗口重置为 1    糊涂窗口综合征    当TCP中发送端发送数据很慢或者接收端接收缓冲数据很慢,就会使得应用进程的有效载荷很小。</description>
     </item>
     
     <item>
@@ -104,6 +185,23 @@ bool withdraw(account_id, amount)在一个分布式系统里面，如果单纯�
  A说：B，请去某账户扣钱。 B完成了指令。 B对A说：我扣完了，返回你一个True，A收到了。 A说：B，请去某账户扣钱。 B完成了指令。 B对A说：由于余额等原因无法扣款，返回你一个False，A收到了。 事情往往不尽如人意，因为消息传递出现了两次，如果丢包了，有可能出现以下情况：   A说：B，请去某账户扣钱。 B没听到。 A说：B，请去某账户扣钱。 B完成了指令。B对A说：我扣完了，返回你一个True，A没收到 A说：B，请去某账户扣钱。 B完成了指令。B对A说：由于余额等原因无法扣款，返回你一个False，A没收到  从A的角度来看，如果迟迟没有收到Reply，有可能出现这三种情况之一，但是在目前设计下A无法通过已有的信息进行判断是三种情况的哪一种，也就无法确定是要叫B重新付款，还是返回付款成功，或者返回付款失败。
 我们可以引进中间件完成这个业务，但是这在架构上会增加和中间件的耦合程度。从设计的角度说，有一种被称作幂等设计的设计思路被用来解决类似的问题。
 int create_ticket() bool idempotent_withdraw(ticket_id, account_id, amount)A对B说，我要找你有一件事。B说，好的，你找我的事情我编号为5。A说，好的，5号事情是如此如此。B办完了，对A说，办完了。A返回。 在这样一个过程中，取号的过程损失很小，如果取号过程丢包了，只要重新取一个号码就可以了。但是当A收到取回的号码，这时候B就知道有一件事情要办。在这个假设下，B最多只会把这件特定的事情办一次成为AB之间的Common Sense。如果丢包导致A没有返回，A可以在调用上加上原来的ID，并且持续发送，因为B只会把这件事情办一次，所以可以持续发送，等待返回。</description>
+    </item>
+    
+    <item>
+      <title>操作系统(1)</title>
+      <link>https://sonemiyuki.cn/post/2021/05/09/get-post/</link>
+      <pubDate>Sun, 09 May 2021 22:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/05/09/get-post/</guid>
+      <description>1. 操作系统概述  执行指令：Fetch -&amp;gt; Execute  四种中断：
+ 程序中断：由程序执行结果产生（溢出，除以零，非法机器指令，访问不合法/无权限内存） 时钟中断：处理器内部的计时器产生，允许操作系统以一定的规则执行函数 IO中断：由IO控制器产生，用于发信号通知操作是否正常完成及其错无条件 硬件失效中断：硬件故障产生的中断  IO中断
+ 无中断：在写的时候直接写 短IO等待时间：处理器和IO并行，用中断处理器进程的方式处理IO的结束 长IO等待时间：等到下一个进程开始的时候对上一个进程的IO收尾，开始下一个IO的准备  中断执行
+ 本质上是栈的思想和应用  设备控制器或者其他系统硬件产生一个中断 处理器结束指令执行 处理器发送中断应答信号 PSW，PC入栈 根据中断加载新的PC值 保存剩余的处理状态信息 处理终端 恢复状态信息 恢复PSW，PC    多中断
+ 嵌套中断（优先级） 顺序中断（默认）  存储器的三大要素两两关系
+ 存储时间 位价格 总容量  速度降低，时间变高，价格降低，容量变大
+ 寄存器 Cache 内存 磁盘 磁带  设计Cache需要考虑的因素
+ 存储器大小 块的大小 mapping函数 替换算法 写策略 缓存级数  DMA
+ 可编程IO操作：需要程序员监控检查，耗费资源 中断驱动IO操作：IO准备好之后会对处理器进行中断，每个字都要通过处理器 DMA操作：DMA模块直接和存储器操作，传输整个数据块，传输完成产生中断  停止访存、周期挪用、交替访存    习题：</description>
     </item>
     
     <item>

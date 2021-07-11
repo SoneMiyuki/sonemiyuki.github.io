@@ -5,16 +5,16 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  	<meta property="og:title" content=" 世界的中心" />
+  	<meta property="og:title" content=" Java &middot;  世界的中心" />
   	<meta property="og:site_name" content="世界的中心" />
-  	<meta property="og:url" content="https://sonemiyuki.cn/" />
+  	<meta property="og:url" content="https://sonemiyuki.cn/tags/java/" />
     
     
     <meta property="og:type" content="website" />
     
 
   <title>
-     世界的中心
+     Java &middot;  世界的中心
   </title>
 
     <meta name="description" content="教学楼的天台，是世界的中心。" />
@@ -31,13 +31,15 @@
 
     
       
+          <link href="https://sonemiyuki.cn/index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
       
-        <link href="https://sonemiyuki.cn/index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
+      
+        <link href="https://sonemiyuki.cn/tags/java/index.xml" rel="alternate" type="application/rss+xml" title="Java &middot; 世界的中心" />
       
     
     <meta name="generator" content="Hugo 0.83.0" />
 
-    <link rel="canonical" href="https://sonemiyuki.cn/" />
+    <link rel="canonical" href="https://sonemiyuki.cn/tags/java/" />
 
      
 </head>
@@ -50,23 +52,26 @@
 
 
 
-<header class="main-header " style="background-image: url(https://sonemiyuki.cn/images/user.jpg)">
 
-
-    
+	<header class="main-header" style="background-image: url(https://sonemiyuki.cn/images/user.jpg)">
 
     <nav class="main-nav overlay clearfix">
+      
+        <a class="blog-logo" href="https://sonemiyuki.cn/"><img src="https://sonemiyuki.cn/images/user.png" alt="Home" /></a>
+      
+      
         
-            <a class="blog-logo" href="https://sonemiyuki.cn/"><img src="https://sonemiyuki.cn/images/user.png" alt="Blog Logo" /></a>
+          <a class="menu-button icon-feed" href="https://sonemiyuki.cn/tags/java/index.xml">&nbsp;&nbsp;Subscribe</a>
         
-        
+      
     </nav>
-<div class="vertical">
+    <div class="vertical">
+
         <div class="main-header-content inner">
             <h1 class="page-title">
-              <a class="btn-bootstrap-2 title-scroll" href="#content">世界的中心</a>
+
+              <a class="btn-bootstrap-2" href="#content">世界的中心</a>
           </h1>
-          <h2 class="page-description">教学楼的天台，是世界的中心。</h2>
         </div>
 </div>
     <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
@@ -77,237 +82,18 @@
     
     
     
-    
-    
 
-    <div class="extra-pagination inner">
-        <nav class="pagination" role="navigation">
+	<div class="extra-pagination inner">
+    <nav class="pagination" role="navigation">
 	
-	<span class="page-number">Page 1 of 3</span>
-	
-	    <a class="older-posts" href="https://sonemiyuki.cn/page/2/">Older Posts &rarr;</a>
+	<span class="page-number">Page 1 of 1</span>
 	
 </nav>
 
-    </div>
+	</div>
 
-    
-        
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/network/">计算机网络面经与常见QA（2）</a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <ol start="11">
-<li><strong>各层的报文格式</strong></li>
-</ol>
-<ul>
-<li>以太网帧
-<ul>
-<li>目标MAC地址（6B）</li>
-<li>源MAC地址（6B）</li>
-<li>类型（2B）</li>
-<li>数据（46-1500B）</li>
-<li>FCS（4B）</li>
-</ul>
-</li>
-<li>IP数据报
-<ul>
-<li>版本（4bit）</li>
-<li>header长度（4bit），以32bit为单位</li>
-<li>服务类型（8bit）</li>
-<li>总长度（16bit）</li>
-<li>上层协议标识（16bit）标记上层协议</li>
-<li>标志：（3bit）用来表示是否有分片，是否允许分片等</li>
-<li>片偏移量（13bit）以8bit为单位的片偏移量</li>
-<li>生存时间（8bit）跳数限制，若TTL为0，则丢弃这个数据包</li>
-<li>协议（8bit）</li>
-<li>校验和（16bit）检验首部的校验和</li>
-<li>源地址（32bit）</li>
-<li>目的地址（32bit）</li>
-</ul>
-</li>
-<li>UDP数据报
-<ul>
-<li>源端口（16bit）</li>
-<li>目的端口（16bit）</li>
-<li>UDP长度（16bit）</li>
-<li>UDP校验和（16bit）</li>
-<li>伪首部：前缀源IP（4B），目的IP（4B），0（1B），17（1B），UPD长度（2B），以16个bit为单位，按位加法，然后取反。</li>
-</ul>
-</li>
-<li>TCP数据报
-<ul>
-<li>源端口（16bit）</li>
-<li>目的端口（16bit）</li>
-<li>数据序号seq（16bit）</li>
-<li>确认序号ack（16bit）</li>
-<li>偏移量（4bit）</li>
-<li>保留（6bit）</li>
-<li>六个标志位（6bit）
-<ul>
-<li>URG：紧急指针字段有效，尽快传输</li>
-<li>ACK：设定ack字段有效</li>
-<li>PSH：尽快将保温传给应用层</li>
-<li>RST：要求重建TCP</li>
-<li>SYN：设定syn字段有效</li>
-<li>fin：表示传输结束，请求释放连接</li>
-</ul>
-</li>
-<li>窗口字段（16bit）</li>
-<li>校验和（16bit）</li>
-<li>紧急指针（16bit）</li>
-</ul>
-</li>
-</ul>
-<ol start="12">
-<li>
-<p><strong>建立TCP/UDP连接的调用</strong>
-<img src="https://sonemiyuki.cn/images/socketprocess.png" alt="TCP/UDP过程"></p>
-</li>
-<li>
-<p><strong>路由协议</strong></p>
-</li>
-</ol>
-<ul>
-<li><strong>RIP(Routing Information Protocol)路由信息协议</strong>
-<ul>
-<li>距离向量型的一种路由协议</li>
-<li>30s一次,对全网广播,等待5次,将已知路由进行广播,然后下一跳继续广播,进行逐步传播</li>
-</ul>
-</li>
-<li><strong>OSPF(Open Shortest Path First)开放最短路径优先</strong>
-<ul>
-<li>基于IP</li>
-<li>适用泛洪法发送请求</li>
-<li>发送信息是路由器临近的所有路由器的链路状态</li>
-<li>链路状态变化才发送信息</li>
-<li>Dijkstra</li>
-<li>收敛快</li>
-<li>划分自治系统</li>
-<li>问候、数据库描述、链路状态请求、链路状态更新、链路状态确认</li>
-</ul>
-</li>
-<li><strong>BGP(Border Gateway Protrol)边界网关协议</strong>
-<ul>
-<li>寻求一条能到达目的地并且比较好的路由</li>
-<li>BGP发言人</li>
-</ul>
-</li>
-</ul>
-<ol start="14">
-<li><strong>等待2MSL的原因</strong></li>
-</ol>
-<ul>
-<li>保证客户端发送的最后一个ACK报文能够到达服务器。</li>
-<li>新的连接中不会出现旧连接的请求报文。</li>
-</ul>
-<ol start="15">
-<li><strong>TCP的可靠性</strong></li>
-</ol>
-<ul>
-<li>校验和</li>
-<li>序列号</li>
-<li>确认应答</li>
-<li>超时重传
-<ul>
-<li>超时重传基于两个可能的原因
-<ul>
-<li>发送过去的包全体丢包,接到这个包之后接收方没有收到</li>
-<li>接受的ACK报文丢包,接收方发现数据存在,仍然发送ACK应答</li>
-</ul>
-</li>
-<li>动态计算最大超时时间</li>
-</ul>
-</li>
-<li>连接管理
-<ul>
-<li>三次握手,四次挥手确保可靠的连接</li>
-</ul>
-</li>
-<li>流量管理
-<ul>
-<li>滑动窗口大小的内容实际上是接收端数据缓冲区的剩余大小。接收端会在确认应答发送ACK报文时，将自己的即时窗口大小填入，并跟随ACK报文一起发送过去。而发送方根据ACK报文里的窗口大小的值的改变进而改变自己的发送速度。如果接收到窗口大小的值为0，那么发送方将停止发送数据。并定期的向接收端发送<strong>窗口探测</strong>数据段，让接收端把窗口大小告诉发送端。</li>
-</ul>
-</li>
-<li>拥塞控制
-<ul>
-<li>慢启动:少量数据探路,拥塞窗口指数增长</li>
-<li>增长过阈值之后线性增长</li>
-<li>拥塞之后慢启动的阈值变为原来的一半,拥塞窗口重置为 1</li>
-</ul>
-</li>
-</ul>
-<ol start="16">
-<li><strong>糊涂窗口综合征</strong></li>
-</ol>
-<ul>
-<li>
-<p>当TCP中发送端发送数据很慢或者接收端接收缓冲数据很慢,就会使得应用进程的有效载荷很小。</p>
-</li>
-<li>
-<p>发送端：利用算法强迫TCP收集一定数据为更大的数据块再发送，Nagle算法决定TCP的等待时延</p>
-</li>
-<li>
-<p>接收端：</p>
-<ul>
-<li>Clark解决方法 Clark解决方法是只要有数据到达就发送确认，但宣布的窗口大小为零，直到或者缓存空间已能放入具有最大长度的报文段，或者缓存空间的一半已经空了。</li>
-<li>延迟确认 第二个解决方法是延迟一段时间后再发送确认。这表示当一个报文段到达时并不立即发送确认。接收端在确认收到的报文段之前一直等待，直到入缓存有足够的空间为止。延迟的确认防止了发送端的TCP滑动其窗口。当发送端的TCP发送完其数据后，它就停下来了。这样就防止了这种症状。</li>
-</ul>
-</li>
-<li>
-<p><a href="https://www.cnblogs.com/mawanglin2008/articles/3607767.html">参考链接1-FTP的主动模式和被动模式</a></p>
-</li>
-<li>
-<p><a href="https://www.nowcoder.com/discuss/1937">参考链接2-面经</a></p>
-</li>
-<li>
-<p><a href="https://blog.csdn.net/chpdirector84/article/details/6033511">参考链接3-RARP</a></p>
-</li>
-<li>
-<p><a href="https://blog.csdn.net/qq_30852577/article/details/79009060">参考链接4-路由协议</a></p>
-</li>
-<li>
-<p><a href="https://blog.csdn.net/qzcsu/article/details/72861891">参考链接5-TCP面经</a></p>
-</li>
-<li>
-<p><a href="https://blog.csdn.net/liuchenxia8/article/details/80428157">参考链接6-TCP/IP</a></p>
-</li>
-<li>
-<p><a href="https://www.cnblogs.com/ggjucheng/archive/2012/02/03/2337046.html">参考链接7-糊涂窗口综合征</a></p>
-</li>
-</ul>
-<p>参考书目：
-《计算机网络（第7版）》谢希仁</p>
-
-          </section>
-      </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            miyuki
-        
-        on
-            
-                <a href="https://sonemiyuki.cn/tags/http/">#http</a>,
-            
-                <a href="https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/">#网络</a>,
-            
-        
-        <time class="post-date" datetime="2021-07-11T23:41:30&#43;08:00">
-            11 Jul 2021
-        </time>
-    </footer>
-</article>
-
-    
-        
+	
+	   
 <article class="post post">
     <header class="post-header">
         <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/java/">Java面经后端</a></h2>
@@ -338,8 +124,8 @@
     </footer>
 </article>
 
-    
-        
+	
+	   
 <article class="post post">
     <header class="post-header">
         <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/java/">Java面经基础（含OO）</a></h2>
@@ -434,8 +220,8 @@ String的equals重写将另一个对象强转String</p>
     </footer>
 </article>
 
-    
-        
+	
+	   
 <article class="post post">
     <header class="post-header">
         <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/java/">Java面经集合</a></h2>
@@ -492,89 +278,17 @@ String的equals重写将另一个对象强转String</p>
     </footer>
 </article>
 
-    
-        
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/get-post/">Jmeter(1)</a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <h4 id="jmeter">Jmeter</h4>
-<p>Jmeter脚本生成</p>
-<ul>
-<li>借助第三方工具录制
-<ul>
-<li>badboy 被淘汰</li>
-<li>blazemeter 大陆无法注册账号</li>
-</ul>
-</li>
-<li>使用自带的http代理服务器方式生成
-<ul>
-<li>添加线程&ndash;线程组</li>
-<li>添加配置元件&ndash;cookie管理器</li>
-<li>添加非测试元件&ndash;http代理服务器</li>
-<li>配置http代理服务器并启动
-<ul>
-<li>端口：用户指定，和服务器无关</li>
-<li>目标控制器：</li>
-<li>Type：有时候需要选Java</li>
-</ul>
-</li>
-<li>在客户端进行设置，使客户端请求通过代理。
-<ul>
-<li>Internet选项-连接-局域网设置</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>抓包手写</li>
-</ul>
-<p>Jmeter代理服务器</p>
-<ul>
-<li>转发</li>
-<li>翻译</li>
-</ul>
-
-          </section>
-      </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            miyuki
-        
-        on
-            
-                <a href="https://sonemiyuki.cn/tags/jmeter/">#Jmeter</a>,
-            
-                <a href="https://sonemiyuki.cn/tags/http/">#http</a>,
-            
-                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
-            
-        
-        <time class="post-date" datetime="2021-07-11T11:29:30&#43;08:00">
-            11 Jul 2021
-        </time>
-    </footer>
-</article>
-
-    
-
-    <nav class="pagination" role="navigation">
 	
-	<span class="page-number">Page 1 of 3</span>
+
+	<nav class="pagination" role="navigation">
 	
-	    <a class="older-posts" href="https://sonemiyuki.cn/page/2/">Older Posts &rarr;</a>
+	<span class="page-number">Page 1 of 1</span>
 	
 </nav>
 
-
 </main>
+
+
 
     <footer class="site-footer clearfix">
         <section class="copyright"><a href="">世界的中心</a> All rights reserved - 2021-</section>

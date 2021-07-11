@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jmeter on 世界的中心</title>
+    <link>https://sonemiyuki.cn/tags/jmeter/</link>
+    <description>Recent content in Jmeter on 世界的中心</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>All rights reserved - 2021-</copyright>
+    <lastBuildDate>Sun, 11 Jul 2021 11:29:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/jmeter/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jmeter(1)</title>
+      <link>https://sonemiyuki.cn/post/2021/07/11/get-post/</link>
+      <pubDate>Sun, 11 Jul 2021 11:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/11/get-post/</guid>
+      <description>Jmeter Jmeter脚本生成
+ 借助第三方工具录制  badboy 被淘汰 blazemeter 大陆无法注册账号   使用自带的http代理服务器方式生成  添加线程&amp;ndash;线程组 添加配置元件&amp;ndash;cookie管理器 添加非测试元件&amp;ndash;http代理服务器 配置http代理服务器并启动  端口：用户指定，和服务器无关 目标控制器： Type：有时候需要选Java   在客户端进行设置，使客户端请求通过代理。  Internet选项-连接-局域网设置     抓包手写  Jmeter代理服务器
+ 转发 翻译  </description>
+    </item>
+    
+  </channel>
+</rss>

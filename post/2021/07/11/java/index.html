@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  	<meta property="og:title" content=" Java面经集合 &middot;  世界的中心" />
+  	<meta property="og:site_name" content="世界的中心" />
+  	<meta property="og:url" content="https://sonemiyuki.cn/post/2021/07/11/java/" />
+    
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2021-07-11T22:29:30&#43;08:00" />
+
+    
+    <meta property="og:article:tag" content="Java" />
+    
+    
+
+  <title>
+     Java面经集合 &middot;  世界的中心
+  </title>
+
+    <meta name="description" content="教学楼的天台，是世界的中心。" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://sonemiyuki.cn/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="https://sonemiyuki.cn/images/apple-touch-icon.png" />
+    
+    <link rel="stylesheet" type="text/css" href="https://sonemiyuki.cn/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="https://sonemiyuki.cn/index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.83.0" />
+
+    <link rel="canonical" href="https://sonemiyuki.cn/post/2021/07/11/java/" />
+
+     
+</head>
+<body class="nav-closed">
+<div id="particles-js"></div>
+  
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header " style="background-image: url(https://sonemiyuki.cn/images/user.jpg)">
+
+    <nav class="main-nav overlay clearfix">
+        
+            <a class="blog-logo" href="https://sonemiyuki.cn/"><img src="https://sonemiyuki.cn/images/user.png" alt="Blog Logo" /></a>
+        
+        
+    </nav>
+<div class="vertical">
+        <div class="main-header-content inner">
+            <h1 class="page-title">
+              <a class="btn-bootstrap-2" href="#content">世界的中心</a>
+          </h1>
+          <h2 class="page-description">教学楼的天台，是世界的中心。</h2>
+        </div>
+</div>
+    <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
+</header>
+
+  <main id="content" class="content" role="main">
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Java面经集合</h1>
+        <section class="post-meta">
+        
+	<time class="post-date" datetime="2021-07-11">
+            2021-07-11
+          </time>
+        
+         
+          <span class="post-tag small"><a href="https://sonemiyuki.cn/tags/java/">#Java</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <h3 id="stringstringbuilderstringbuffer">String、StringBuilder、StringBuffer</h3>
+<p>String：final修饰，不可变，每次操作产生新对象，浪费时间空间</p>
+<p>StringBuffer和StringBuilder在原对象进行操作。StringBuffer的所有方法都是synchronize方法修饰的。</p>
+<p>性能 Builder &gt; Buffer &gt; String</p>
+<p>场景：改变字符串内容
+优先StringBuilder，多线程使用StringBuffer。</p>
+<h3 id="list-和-set">List 和 Set</h3>
+<p>List： 有序，可重复，允许多个null，可以用迭代器也可以用get方法访问元素</p>
+<p>Set：无序，不可重复，最多允许一个null，只能用迭代器遍历。</p>
+<p>HashSet底层是使用HashMap实现的。当使用add方法将对象添加到Set当中时，实际上是将该对象作为底层所维护的<strong>Map对象的key</strong>，而value则都是同一个Object对象（该对象我们用不上）；其他的都是通过定义的HashMap对象实现的。</p>
+<h3 id="arraylist-和-linkedlist">ArrayList 和 LinkedList</h3>
+<p>ArrayList：本质上基于数组，适合下标访问，具有1.5倍扩容机制，尾插法移动少，性能提高好。</p>
+<p>LinkedList：本质上基于链表时适合插入删除，不适合查询，必须用iterator遍历，否则时间复杂度过大。indexOf会遍历整个链表。</p>
+<h3 id="hashmap-和-hashtable">HashMap 和 HashTable</h3>
+<p>HashTable线程安全，所有方法synchronized修饰。HashMap允许null的key和value。</p>
+<p>底层实现：数组+链表
+数组：二次hash之后映射到一个数组上面那如果未冲突则直接存Node进去，如果冲突，equals判断，相同则取代钙元素，否则判断链表高度，链表高度达到8转为红黑树，低于6则转回链表。</p>
+<h3 id="hashmap扩容">HashMap扩容</h3>
+<p>capacity 即容量，默认16。loadFactor 加载因子，默认是0.75threshold 阈值。阈值=容量*加载因子。默认12。当元素数量超过阈值时便会触发扩容。</p>
+<p>当元素数量超过阈值时便会触发扩容。每次扩容的容量都是之前容量的2倍。</p>
+<p>HashMap的容量变化通常存在以下几种情况：
+空参数的构造函数：实例化的HashMap默认内部数组是null，即没有实例化。第一次调用put方法时，则会开始第一次初始化扩容，长度为16。有参构造函数：用于指定容量。会根据指定的正整数找到不小于指定容量的2的幂数，将这个数设置赋值给阈值（threshold）。第一次调用put方法时，会将阈值赋值给容量，然后让 阈值 = 容量 * 负载因子 。（因此并不是我们手动指定了容量就一定不会触发扩容，超过阈值后一样会扩容！！）如果不是第一次扩容，则容量变为原来的2倍，阈值也变为原来的2倍。（容量和阈值都变为原来的2倍时，负载因子还是不变）</p>
+<p>由于数组的容量是以2的幂次方扩容的，那么一个Entity在扩容时，新的位置要么在原位置，要么在原长度+原位置的位置。数组长度变为原来的2倍，表现在二进制上就是多了一个高位参与数组下标确定。此时，一个元素通过hash转换坐标的方法计算后，恰好出现一个现象：最高位是0则坐标不变，最高位是1则坐标变为“原长度+原坐标”。在扩容时，不需要重新计算元素的hash了，只需要判断最高位是1还是0就好了。</p>
+<p>参考链接：
+<a href="https://blog.csdn.net/prairie97/article/details/78481493">java中Map和Set的底层分析</a>
+<a href="https://zhuanlan.zhihu.com/p/114363420">HashMap扩容机制</a></p>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+
+        <a class="img" href="https://sonemiyuki.cn/" style="background-image: url(https://sonemiyuki.cn/images/user.png)"><span class="hidden">miyuki</span></a>
+    </figure>
+    
+
+    <section class="author">
+
+  <p>miyuki</p>
+  
+
+</section>
+
+
+    
+    <section class="share">
+      <h4>Share this post</h4>
+      <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Java%e9%9d%a2%e7%bb%8f%e9%9b%86%e5%90%88&amp;url=https%3a%2f%2fsonemiyuki.cn%2fpost%2f2021%2f07%2f11%2fjava%2f"
+          onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <span class="hidden">Twitter</span>
+      </a>
+      <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsonemiyuki.cn%2fpost%2f2021%2f07%2f11%2fjava%2f"
+          onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <span class="hidden">Facebook</span>
+      </a>
+      <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fsonemiyuki.cn%2fpost%2f2021%2f07%2f11%2fjava%2f"
+         onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <span class="hidden">Google+</span>
+      </a>
+    </section>
+    
+
+    
+    
+    
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">世界的中心</a> All rights reserved - 2021-</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="https://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/syui/hugo-theme-air">hugo-theme-air</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/index.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.min.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.js"></script>  
+
+</body>
+</html>
+

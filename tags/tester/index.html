@@ -86,11 +86,148 @@
 	<div class="extra-pagination inner">
     <nav class="pagination" role="navigation">
 	
-	<span class="page-number">Page 1 of 1</span>
+	<span class="page-number">Page 1 of 2</span>
+	
+	    <a class="older-posts" href="https://sonemiyuki.cn/tags/tester/page/2/">Older Posts &rarr;</a>
 	
 </nav>
 
 	</div>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/get-post/">Jmeter(1)</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h4 id="jmeter">Jmeter</h4>
+<p>Jmeter脚本生成</p>
+<ul>
+<li>借助第三方工具录制
+<ul>
+<li>badboy 被淘汰</li>
+<li>blazemeter 大陆无法注册账号</li>
+</ul>
+</li>
+<li>使用自带的http代理服务器方式生成
+<ul>
+<li>添加线程&ndash;线程组</li>
+<li>添加配置元件&ndash;cookie管理器</li>
+<li>添加非测试元件&ndash;http代理服务器</li>
+<li>配置http代理服务器并启动
+<ul>
+<li>端口：用户指定，和服务器无关</li>
+<li>目标控制器：</li>
+<li>Type：有时候需要选Java</li>
+</ul>
+</li>
+<li>在客户端进行设置，使客户端请求通过代理。
+<ul>
+<li>Internet选项-连接-局域网设置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>抓包手写</li>
+</ul>
+<p>Jmeter代理服务器</p>
+<ul>
+<li>转发</li>
+<li>翻译</li>
+</ul>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/jmeter/">#Jmeter</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/http/">#http</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-11T11:29:30&#43;08:00">
+            11 Jul 2021
+        </time>
+    </footer>
+</article>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/10/network/">性能测试Note（3）</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h1 id="基于loadrunner的性能测试note3">基于LoadRunner的性能测试Note（3）</h1>
+<p>一小时内6000个用户开户</p>
+<p>用lr事务手测单个用户时间，假设单次15s
+一个小时一个vuser可以完成240个用户开户
+6000/240=25，可用25个vuser模拟一小时内的6000个开户操作</p>
+<p>unique number
+start 1
+block 240*1.2=288
+7200个testcase
+确定需求，分析约束，准备数据。</p>
+<p>关联-参数化-检查点</p>
+<p>参数化：客户端提交给服务端的参数
+关联：服务端返回给客户端的参数</p>
+<p>订购机票
+open_index
+submit_login
+info_flight
+find_flight
+select_flight
+pay_flight
+sign_off</p>
+<p>账户参数化：username, usersession做关联</p>
+<p>出发和到达的城市需要随机化，随机某个具体航班</p>
+<p>web_reg_save_param(&ldquo;fligts&rdquo;, &ldquo;LB=&quot;&gt;&rdquo;, &ldquo;RB=<!-- raw HTML omitted -->&rdquo;,&ldquo;ORD=All&rdquo;,LAST);
+根据业务适当去重
+strcmp</p>
+<p>吞吐量，响应时间，系统资源&hellip;&hellip;</p>
+<p>结果分析：根据Analysis进行结果分析</p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/loadrunner/">#LoadRunner</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
+            
+                <a href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">#性能测试</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-10T16:54:30&#43;08:00">
+            10 Jul 2021
+        </time>
+    </footer>
+</article>
 
 	
 	   
@@ -101,7 +238,7 @@
     <section class="post-excerpt">
       <p>
           <section class="post-content">
-            <h1 id="性能测试note2">性能测试Note（2）</h1>
+            <h1 id="基于loadrunner的性能测试note2">基于LoadRunner的性能测试Note（2）</h1>
 <p>LR脚本开发
 性能测试可以并发，效率高一点</p>
 <p>构造200个账号</p>
@@ -194,6 +331,8 @@ LAST);
         
         on
             
+                <a href="https://sonemiyuki.cn/tags/loadrunner/">#LoadRunner</a>,
+            
                 <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
             
                 <a href="https://sonemiyuki.cn/tags/%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/">#性能测试</a>,
@@ -214,7 +353,7 @@ LAST);
     <section class="post-excerpt">
       <p>
           <section class="post-content">
-            <h1 id="性能测试note1">性能测试Note（1）</h1>
+            <h1 id="基于loadrunner的性能测试note1">基于LoadRunner的性能测试Note（1）</h1>
 <p>重视场景</p>
 <p>效率：
 资源使用情况，消耗的时间达到均衡</p>
@@ -321,6 +460,8 @@ submit_register</p>
             miyuki
         
         on
+            
+                <a href="https://sonemiyuki.cn/tags/loadrunner/">#LoadRunner</a>,
             
                 <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
             
@@ -475,111 +616,12 @@ POST：
 </article>
 
 	
-	   
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/05/06/py3unittest/">Python 3单元测试unittest及HTML报告生成速成</a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <h4 id="python3单元测试unittest及html报告生成速成">Python3单元测试unittest及HTML报告生成速成</h4>
-<p>前置知识：</p>
-<ul>
-<li>Python面向对象基本</li>
-<li>单元测试基本知识</li>
-<li>Junit等其他测试框架关于测试类、测试方法、测试套件等基本构件的知识</li>
-</ul>
-<p>我们先定义一个待测试的类和对象
-code.py</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">algor</span>:
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(a, b):
-        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b
-</code></pre></div><p>然后开一个测试文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">from</span> code <span style="color:#66d9ef">import</span> algor
-<span style="color:#f92672">import</span> unittest
-
-<span style="color:#75715e"># 下述文件是从py2拿过来的，需要改造。改造方法在后面</span>
-<span style="color:#f92672">import</span> HTMLTestRunner
-</code></pre></div><p>编写测试类：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestAlgor1</span>(unittest<span style="color:#f92672">.</span>TestCase):
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#75715e"># 类前执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUpClass</span>(self):
-        print(<span style="color:#e6db74">&#34;setUpClass&#34;</span>)
-    <span style="color:#75715e"># 类后执行</span>
-    <span style="color:#a6e22e">@classmethod</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDownClass</span>(self):
-        print(<span style="color:#e6db74">&#34;tearDownClass&#34;</span>)
-    <span style="color:#75715e"># 方法前执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
-        print(<span style="color:#e6db74">&#34;setUp&#34;</span>)
-    <span style="color:#75715e"># 方法后执行</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tearDown</span>(self):
-        print(<span style="color:#e6db74">&#34;tearDown&#34;</span>)
-    <span style="color:#75715e"># 测试方法，一般命名为测试某某某类</span>
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">testAdd1</span>(self):
-        self<span style="color:#f92672">.</span>assertEquals(algor<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>), <span style="color:#ae81ff">4</span>)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">testAdd2</span>(self):
-        self<span style="color:#f92672">.</span>assertEquals(algor<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">114</span>, <span style="color:#ae81ff">514</span>), <span style="color:#ae81ff">628</span>)
-</code></pre></div><p>主函数：构建测试套件和生成报告：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Python3" data-lang="Python3"><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
-    suite <span style="color:#f92672">=</span> unittest<span style="color:#f92672">.</span>TestSuite()
-    suite<span style="color:#f92672">.</span>addTest(TestAlgor1(<span style="color:#e6db74">&#34;testAdd1&#34;</span>))
-    suite<span style="color:#f92672">.</span>addTest(TestAlgor1(<span style="color:#e6db74">&#34;testAdd2&#34;</span>))
-    filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./apptestresult.html&#39;</span>
-    fb <span style="color:#f92672">=</span> open(filename, <span style="color:#e6db74">&#39;wb&#39;</span>)
-    runner <span style="color:#f92672">=</span> HTMLTestRunner<span style="color:#f92672">.</span>HTMLTestRscaunner(stream<span style="color:#f92672">=</span>fb, title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;测试HTMLTestRunner&#34;</span>, description<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;测试HTMLTestRunner&#34;</span>)
-    runner<span style="color:#f92672">.</span>run(suite)
-    fb<span style="color:#f92672">.</span>close() 
-</code></pre></div><p>上述方案是一个基于python2里面HTMLTestRunner模块的实现，需要先下载HTMLTestRunner.py文件然后进行改进以在py3环境中使用</p>
-<p>第94行，将import StringIO修改成import io</p>
-<p>第539行，将self.outputBuffer = StringIO.StringIO()修改成self.outputBuffer = io.StringIO()</p>
-<p>第642行，将if not rmap.has_key(cls):修改成if not cls in rmap:</p>
-<p>第766行，将uo = o.decode(&lsquo;latin-1&rsquo;)修改成uo = e</p>
-<p>第772行，将ue = e.decode(&lsquo;latin-1&rsquo;)修改成ue = e</p>
-<p>第631行，将print &raquo; sys.stderr, &lsquo;\nTime Elapsed: %s&rsquo; % (self.stopTime-self.startTime)修改成print(sys.stderr, &lsquo;\nTime Elapsed: %s&rsquo; % (self.stopTime-self.startTime))</p>
-<p>其中，Python3中，已经没有StringIO了。取而代之的是io.StringIO。
-<a href="https://www.cnblogs.com/huny/p/12078784.html">参见</a></p>
-<p>在python3有第三方库可以实现相关功能，这个库是html-testRunner
-注意import的大小写</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">import</span> HtmlTestRunner
-</code></pre></div><p>主函数只要写</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">unittest<span style="color:#f92672">.</span>main(testRunner<span style="color:#f92672">=</span>HtmlTestRunner<span style="color:#f92672">.</span>HTMLTestRunner(output<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;example_dir&#39;</span>))
-</code></pre></div><p><a href="https://pypi.org/project/html-testRunner/#description">参见</a></p>
-
-          </section>
-      </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            miyuki
-        
-        on
-            
-                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
-            
-                <a href="https://sonemiyuki.cn/tags/python/">#Python</a>,
-            
-                <a href="https://sonemiyuki.cn/tags/unittest/">#unittest</a>,
-            
-        
-        <time class="post-date" datetime="2021-05-06T10:54:24&#43;08:00">
-            6 May 2021
-        </time>
-    </footer>
-</article>
-
-	
 
 	<nav class="pagination" role="navigation">
 	
-	<span class="page-number">Page 1 of 1</span>
+	<span class="page-number">Page 1 of 2</span>
+	
+	    <a class="older-posts" href="https://sonemiyuki.cn/tags/tester/page/2/">Older Posts &rarr;</a>
 	
 </nav>
 

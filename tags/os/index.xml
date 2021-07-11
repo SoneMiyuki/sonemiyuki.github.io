@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>os on 世界的中心</title>
+    <link>https://sonemiyuki.cn/tags/os/</link>
+    <description>Recent content in os on 世界的中心</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>All rights reserved - 2021-</copyright>
+    <lastBuildDate>Sun, 09 May 2021 22:29:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/os/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>操作系统(1)</title>
+      <link>https://sonemiyuki.cn/post/2021/05/09/get-post/</link>
+      <pubDate>Sun, 09 May 2021 22:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/05/09/get-post/</guid>
+      <description>1. 操作系统概述  执行指令：Fetch -&amp;gt; Execute  四种中断：
+ 程序中断：由程序执行结果产生（溢出，除以零，非法机器指令，访问不合法/无权限内存） 时钟中断：处理器内部的计时器产生，允许操作系统以一定的规则执行函数 IO中断：由IO控制器产生，用于发信号通知操作是否正常完成及其错无条件 硬件失效中断：硬件故障产生的中断  IO中断
+ 无中断：在写的时候直接写 短IO等待时间：处理器和IO并行，用中断处理器进程的方式处理IO的结束 长IO等待时间：等到下一个进程开始的时候对上一个进程的IO收尾，开始下一个IO的准备  中断执行
+ 本质上是栈的思想和应用  设备控制器或者其他系统硬件产生一个中断 处理器结束指令执行 处理器发送中断应答信号 PSW，PC入栈 根据中断加载新的PC值 保存剩余的处理状态信息 处理终端 恢复状态信息 恢复PSW，PC    多中断
+ 嵌套中断（优先级） 顺序中断（默认）  存储器的三大要素两两关系
+ 存储时间 位价格 总容量  速度降低，时间变高，价格降低，容量变大
+ 寄存器 Cache 内存 磁盘 磁带  设计Cache需要考虑的因素
+ 存储器大小 块的大小 mapping函数 替换算法 写策略 缓存级数  DMA
+ 可编程IO操作：需要程序员监控检查，耗费资源 中断驱动IO操作：IO准备好之后会对处理器进行中断，每个字都要通过处理器 DMA操作：DMA模块直接和存储器操作，传输整个数据块，传输完成产生中断  停止访存、周期挪用、交替访存    习题：</description>
+    </item>
+    
+  </channel>
+</rss>

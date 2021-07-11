@@ -7,14 +7,44 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Fri, 09 Jul 2021 22:54:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/tester/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Jul 2021 11:29:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/tester/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Jmeter(1)</title>
+      <link>https://sonemiyuki.cn/post/2021/07/11/get-post/</link>
+      <pubDate>Sun, 11 Jul 2021 11:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/11/get-post/</guid>
+      <description>Jmeter Jmeter脚本生成
+ 借助第三方工具录制  badboy 被淘汰 blazemeter 大陆无法注册账号   使用自带的http代理服务器方式生成  添加线程&amp;ndash;线程组 添加配置元件&amp;ndash;cookie管理器 添加非测试元件&amp;ndash;http代理服务器 配置http代理服务器并启动  端口：用户指定，和服务器无关 目标控制器： Type：有时候需要选Java   在客户端进行设置，使客户端请求通过代理。  Internet选项-连接-局域网设置     抓包手写  Jmeter代理服务器
+ 转发 翻译  </description>
+    </item>
+    
+    <item>
+      <title>性能测试Note（3）</title>
+      <link>https://sonemiyuki.cn/post/2021/07/10/network/</link>
+      <pubDate>Sat, 10 Jul 2021 16:54:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/10/network/</guid>
+      <description>基于LoadRunner的性能测试Note（3） 一小时内6000个用户开户
+用lr事务手测单个用户时间，假设单次15s 一个小时一个vuser可以完成240个用户开户 6000/240=25，可用25个vuser模拟一小时内的6000个开户操作
+unique number start 1 block 240*1.2=288 7200个testcase 确定需求，分析约束，准备数据。
+关联-参数化-检查点
+参数化：客户端提交给服务端的参数 关联：服务端返回给客户端的参数
+订购机票 open_index submit_login info_flight find_flight select_flight pay_flight sign_off
+账户参数化：username, usersession做关联
+出发和到达的城市需要随机化，随机某个具体航班
+web_reg_save_param(&amp;ldquo;fligts&amp;rdquo;, &amp;ldquo;LB=&amp;quot;&amp;gt;&amp;rdquo;, &amp;ldquo;RB=&amp;rdquo;,&amp;ldquo;ORD=All&amp;rdquo;,LAST); 根据业务适当去重 strcmp
+吞吐量，响应时间，系统资源&amp;hellip;&amp;hellip;
+结果分析：根据Analysis进行结果分析</description>
+    </item>
+    
     <item>
       <title>性能测试Note（2）</title>
       <link>https://sonemiyuki.cn/post/2021/07/09/network/</link>
       <pubDate>Fri, 09 Jul 2021 22:54:30 +0800</pubDate>
       
       <guid>https://sonemiyuki.cn/post/2021/07/09/network/</guid>
-      <description>性能测试Note（2） LR脚本开发 性能测试可以并发，效率高一点
+      <description>基于LoadRunner的性能测试Note（2） LR脚本开发 性能测试可以并发，效率高一点
 构造200个账号
  数据库写（存储过程） 自动化工具构造 LR参数化构造  50 account: var: username const: password
 方法1： VuserGenerator 业务过程分解 open_index into_register submit_register
@@ -43,7 +73,7 @@ LR参数化： Select next row
       <pubDate>Fri, 09 Jul 2021 20:54:30 +0800</pubDate>
       
       <guid>https://sonemiyuki.cn/post/2021/07/09/network/</guid>
-      <description>性能测试Note（1） 重视场景
+      <description>基于LoadRunner的性能测试Note（1） 重视场景
 效率： 资源使用情况，消耗的时间达到均衡
 基准测试，不追求极限 单元和集成也可以渗透性能测试
 接口测试重要性上升，组件化
