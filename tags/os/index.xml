@@ -7,13 +7,58 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Sun, 09 May 2021 22:29:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/os/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Jul 2021 19:30:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/os/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>操作系统(3)</title>
+      <link>https://sonemiyuki.cn/post/2021/07/12/get-post/</link>
+      <pubDate>Mon, 12 Jul 2021 19:30:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/12/get-post/</guid>
+      <description>单处理器调度  长程调度  新建 销毁   中程调度  换入 换出   短程调度  时钟中断 IO中断 系统调用 信号    长程调度决定了那个程序可以进入系统中被处理
+进程越多，每个进程时间越少，调度代价越大。
+短程调度算法
+ 周转时间 响应时间 最后期限 可预测性  短程调度考虑性能指标
+ 吞吐量 处理器使用率  考虑其他因素
+ 公平性 优先级 平衡资源  优先级：每个进程有一个优先级，选择优先级高的进程。多个优先级，多个就绪队列，低优先级的有可能饥饿，因此优先级是动态改变的。
+选择函数：确定在就绪进程中选择哪个进程在下一次执行
+决策模式（Decision Mode）
+ 非抢占 抢占  进程周转时间 = 结束 - 到达 = 等待 + 服务
+归一化周转时间 = 周转时间 / 服务时间
+调度算法：
+ FCFS 轮转 SPN（最短优先） SRT（最短剩余时间） HRRN（最高响应比）  IO管理与磁盘调度 IO设备的三种类别</description>
+    </item>
+    
+    <item>
+      <title>操作系统(2)</title>
+      <link>https://sonemiyuki.cn/post/2021/07/12/get-post/</link>
+      <pubDate>Mon, 12 Jul 2021 19:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/12/get-post/</guid>
+      <description>进程与线程 进程：
+ 资源所有权 调度/执行  多线程OS：
+支持在一个进程中执行多个线程的能力
+资源分配和保护的单位
+线程具有
+ 线程状态 线程上下文（寄存器，计数器） 执行栈 静态存储空间  多线程的优点：
+创建代价小，销毁代价小，切换代价小，通信代价小。
+线程的基本操作：
+ 派生 阻塞 解除阻塞 结束  RPC：
+ 单线程 多线程  纯用户级线程：
+优点：
+ 不需要模式转换 调度算法是应用程序专用的 可以在任意OS中运行  缺点：
+ 系统调用引发线程组所有线程都被阻塞 无法利用多处理器技术  纯内核级线程：
+优点：
+ 内核可以调度同一个进程的多个线程再多个处理器上同时运行 线程阻塞不会引起同一进程内其余线程的阻塞 内核例程本身可以使用多线程  缺点：
+ 线程的大量模式切换  组合方法 ＝用户级线程＋内核级线程 线程在用户空间中创建 线程的调度和同步也在应用程序中进行
+内存管理  重定位 保护 共享 逻辑组织  模块可以单独编写和编译 可以执行模块级别的保护 可以在进程间共享模块   物理组织  内存分区</description>
+    </item>
+    
     <item>
       <title>操作系统(1)</title>
-      <link>https://sonemiyuki.cn/post/2021/05/09/get-post/</link>
-      <pubDate>Sun, 09 May 2021 22:29:30 +0800</pubDate>
+      <link>https://sonemiyuki.cn/post/2021/07/11/get-post/</link>
+      <pubDate>Sun, 11 Jul 2021 22:29:30 +0800</pubDate>
       
-      <guid>https://sonemiyuki.cn/post/2021/05/09/get-post/</guid>
+      <guid>https://sonemiyuki.cn/post/2021/07/11/get-post/</guid>
       <description>1. 操作系统概述  执行指令：Fetch -&amp;gt; Execute  四种中断：
  程序中断：由程序执行结果产生（溢出，除以零，非法机器指令，访问不合法/无权限内存） 时钟中断：处理器内部的计时器产生，允许操作系统以一定的规则执行函数 IO中断：由IO控制器产生，用于发信号通知操作是否正常完成及其错无条件 硬件失效中断：硬件故障产生的中断  IO中断
  无中断：在写的时候直接写 短IO等待时间：处理器和IO并行，用中断处理器进程的方式处理IO的结束 长IO等待时间：等到下一个进程开始的时候对上一个进程的IO收尾，开始下一个IO的准备  中断执行

@@ -7,14 +7,74 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Sun, 11 Jul 2021 23:41:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Jul 2021 19:30:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>操作系统(3)</title>
+      <link>https://sonemiyuki.cn/post/2021/07/12/get-post/</link>
+      <pubDate>Mon, 12 Jul 2021 19:30:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/12/get-post/</guid>
+      <description>单处理器调度  长程调度  新建 销毁   中程调度  换入 换出   短程调度  时钟中断 IO中断 系统调用 信号    长程调度决定了那个程序可以进入系统中被处理
+进程越多，每个进程时间越少，调度代价越大。
+短程调度算法
+ 周转时间 响应时间 最后期限 可预测性  短程调度考虑性能指标
+ 吞吐量 处理器使用率  考虑其他因素
+ 公平性 优先级 平衡资源  优先级：每个进程有一个优先级，选择优先级高的进程。多个优先级，多个就绪队列，低优先级的有可能饥饿，因此优先级是动态改变的。
+选择函数：确定在就绪进程中选择哪个进程在下一次执行
+决策模式（Decision Mode）
+ 非抢占 抢占  进程周转时间 = 结束 - 到达 = 等待 + 服务
+归一化周转时间 = 周转时间 / 服务时间
+调度算法：
+ FCFS 轮转 SPN（最短优先） SRT（最短剩余时间） HRRN（最高响应比）  IO管理与磁盘调度 IO设备的三种类别</description>
+    </item>
+    
+    <item>
+      <title>操作系统(2)</title>
+      <link>https://sonemiyuki.cn/post/2021/07/12/get-post/</link>
+      <pubDate>Mon, 12 Jul 2021 19:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/12/get-post/</guid>
+      <description>进程与线程 进程：
+ 资源所有权 调度/执行  多线程OS：
+支持在一个进程中执行多个线程的能力
+资源分配和保护的单位
+线程具有
+ 线程状态 线程上下文（寄存器，计数器） 执行栈 静态存储空间  多线程的优点：
+创建代价小，销毁代价小，切换代价小，通信代价小。
+线程的基本操作：
+ 派生 阻塞 解除阻塞 结束  RPC：
+ 单线程 多线程  纯用户级线程：
+优点：
+ 不需要模式转换 调度算法是应用程序专用的 可以在任意OS中运行  缺点：
+ 系统调用引发线程组所有线程都被阻塞 无法利用多处理器技术  纯内核级线程：
+优点：
+ 内核可以调度同一个进程的多个线程再多个处理器上同时运行 线程阻塞不会引起同一进程内其余线程的阻塞 内核例程本身可以使用多线程  缺点：
+ 线程的大量模式切换  组合方法 ＝用户级线程＋内核级线程 线程在用户空间中创建 线程的调度和同步也在应用程序中进行
+内存管理  重定位 保护 共享 逻辑组织  模块可以单独编写和编译 可以执行模块级别的保护 可以在进程间共享模块   物理组织  内存分区</description>
+    </item>
+    
+    <item>
+      <title>Java集合类数据结构</title>
+      <link>https://sonemiyuki.cn/post/2021/07/12/java/</link>
+      <pubDate>Mon, 12 Jul 2021 16:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/12/java/</guid>
+      <description>Collection Collection提供了一系列接口给集合实现。
+Iterator Iterator：用于遍历集合的对象，本身是同名设计模式的体现。
+AbstractList AbstractList的算法是基于内部Iterator遍历实现的，用一个cursor和size()函数控制迭代的数量
+Spliterator Spliterator是Java 8中加入的一个新接口；这个名字代表“可拆分迭代器”（splitable iterator）。和Iterator一样，Spliterator也用于遍历数据源中的元素，但它是为了并行执行而设计的。Java 8已经为集合框架中包含的所有数据结构提供了一个默认的Spliterator实现。集合实现了Spliterator接口，接口提供了一个spliterator方法。
+Spliterator可以单独遍历元素（tryAdvance()）或批量顺序遍历元素（forEachRemaining()）。Spliterator还可以将它的一些元素（使用trySplit()）进行分区作为另一个Spliterator，以用于可能并行的操作。使用无法拆分的Spliterator或以高度不平衡或低效的方式进行操作不太可能从并行性中受益。遍历和拆分至用完元素;每个Spliterator仅对单个批量计算有用。
+这个就是用来多线程并行迭代的迭代器，这个迭代器的主要作用就是把集合分成了好几段，每个线程执行一段，因此是线程安全的。
+//如果存在剩余元素，则对其执行给定操作，返回true；否则返回false。如果此Spliterator为ORDERED，则会对遇见顺序中的下一个元素执行操作。操作抛出的异常会转发给调用者。 boolean tryAdvance(Consumer&amp;lt;? super T&amp;gt; action); //按顺序对每个剩余元素执行给定操作，直到所有元素都已处理或操作抛出异常为止。如果此Spliterator为ORDERED，则会按遇见顺序执行操作。操作抛出的异常会转发给调用者。默认方法调用tryAdvance方法 default void forEachRemaining(Consumer&amp;lt;? super T&amp;gt; action) { do { } while (tryAdvance(action)); } //对任务分割，返回一个新的Spliterator迭代器 Spliterator&amp;lt;T&amp;gt; trySplit(); //用于估算还剩下多少个元素需要遍历 long estimateSize(); //当迭代器拥有SIZED特征时，返回剩余元素个数；否则返回-1 default long getExactSizeIfKnown() { return (characteristics() &amp;amp; SIZED) == 0 ? -1L : estimateSize(); } //返回当前对象有哪些特征值 int characteristics(); //是否具有当前特征值 default boolean hasCharacteristics(int characteristics) { return (characteristics() &amp;amp; characteristics) == characteristics; } //如果Spliterator的list是通过Comparator排序的，则返回Comparator //如果Spliterator的list是自然排序的 ，则返回null //其他情况下抛错 default Comparator&amp;lt;?</description>
+    </item>
+    
     <item>
       <title>计算机网络面经与常见QA（2）</title>
       <link>https://sonemiyuki.cn/post/2021/07/11/network/</link>
       <pubDate>Sun, 11 Jul 2021 23:41:30 +0800</pubDate>
       
       <guid>https://sonemiyuki.cn/post/2021/07/11/network/</guid>
-      <description>各层的报文格式   以太网帧  目标MAC地址（6B） 源MAC地址（6B） 类型（2B） 数据（46-1500B） FCS（4B）   IP数据报  版本（4bit） header长度（4bit），以32bit为单位 服务类型（8bit） 总长度（16bit） 上层协议标识（16bit）标记上层协议 标志：（3bit）用来表示是否有分片，是否允许分片等 片偏移量（13bit）以8bit为单位的片偏移量 生存时间（8bit）跳数限制，若TTL为0，则丢弃这个数据包 协议（8bit） 校验和（16bit）检验首部的校验和 源地址（32bit） 目的地址（32bit）   UDP数据报  源端口（16bit） 目的端口（16bit） UDP长度（16bit） UDP校验和（16bit） 伪首部：前缀源IP（4B），目的IP（4B），0（1B），17（1B），UPD长度（2B），以16个bit为单位，按位加法，然后取反。   TCP数据报  源端口（16bit） 目的端口（16bit） 数据序号seq（16bit） 确认序号ack（16bit） 偏移量（4bit） 保留（6bit） 六个标志位（6bit）  URG：紧急指针字段有效，尽快传输 ACK：设定ack字段有效 PSH：尽快将保温传给应用层 RST：要求重建TCP SYN：设定syn字段有效 fin：表示传输结束，请求释放连接   窗口字段（16bit） 校验和（16bit） 紧急指针（16bit）     建立TCP/UDP连接的调用   路由协议
+      <description>各层的报文格式   以太网帧  目标MAC地址（6B） 源MAC地址（6B） 类型（2B） 数据（46-1500B） FCS（4B）   IP数据报  版本（4bit） header长度（4bit），以32bit为单位 服务类型（8bit） 总长度（16bit） 上层协议标识（16bit）标记上层协议 标志：（3bit）用来表示是否有分片，是否允许分片等 片偏移量（13bit）以8bit为单位的片偏移量 生存时间（8bit）跳数限制，若TTL为0，则丢弃这个数据包 协议（8bit） 校验和（16bit）检验首部的校验和 源地址（32bit） 目的地址（32bit）   UDP数据报  源端口（16bit） 目的端口（16bit） UDP长度（16bit） UDP校验和（16bit） 伪首部：前缀源IP（4B），目的IP（4B），0（1B），17（1B），UPD长度（2B），以16个bit为单位，按位加法，然后取反。   TCP数据报  源端口（16bit） 目的端口（16bit） 数据序号seq（16bit） 确认序号ack（16bit） 偏移量（4bit） 保留（6bit） 六个标志位（6bit）  URG：紧急指针字段有效，尽快传输 ACK：设定ack字段有效 PSH：尽快将报文传给应用层 RST：要求重建TCP SYN：设定syn字段有效 FIN：表示传输结束，请求释放连接   窗口字段（16bit） 校验和（16bit） 紧急指针（16bit）     建立TCP/UDP连接的调用   路由协议
    RIP(Routing Information Protocol)路由信息协议  距离向量型的一种路由协议 30s一次,对全网广播,等待5次,将已知路由进行广播,然后下一跳继续广播,进行逐步传播   OSPF(Open Shortest Path First)开放最短路径优先  基于IP 适用泛洪法发送请求 发送信息是路由器临近的所有路由器的链路状态 链路状态变化才发送信息 Dijkstra 收敛快 划分自治系统 问候、数据库描述、链路状态请求、链路状态更新、链路状态确认   BGP(Border Gateway Protrol)边界网关协议  寻求一条能到达目的地并且比较好的路由 BGP发言人    等待2MSL的原因   保证客户端发送的最后一个ACK报文能够到达服务器。 新的连接中不会出现旧连接的请求报文。  TCP的可靠性   校验和 序列号 确认应答 超时重传  超时重传基于两个可能的原因  发送过去的包全体丢包,接到这个包之后接收方没有收到 接受的ACK报文丢包,接收方发现数据存在,仍然发送ACK应答   动态计算最大超时时间   连接管理  三次握手,四次挥手确保可靠的连接   流量管理  滑动窗口大小的内容实际上是接收端数据缓冲区的剩余大小。接收端会在确认应答发送ACK报文时，将自己的即时窗口大小填入，并跟随ACK报文一起发送过去。而发送方根据ACK报文里的窗口大小的值的改变进而改变自己的发送速度。如果接收到窗口大小的值为0，那么发送方将停止发送数据。并定期的向接收端发送窗口探测数据段，让接收端把窗口大小告诉发送端。   拥塞控制  慢启动:少量数据探路,拥塞窗口指数增长 增长过阈值之后线性增长 拥塞之后慢启动的阈值变为原来的一半,拥塞窗口重置为 1    糊涂窗口综合征    当TCP中发送端发送数据很慢或者接收端接收缓冲数据很慢,就会使得应用进程的有效载荷很小。</description>
     </item>
     
@@ -66,7 +126,24 @@ HashMap扩容 capacity 即容量，默认16。loadFactor 加载因子，默认�
 当元素数量超过阈值时便会触发扩容。每次扩容的容量都是之前容量的2倍。
 HashMap的容量变化通常存在以下几种情况： 空参数的构造函数：实例化的HashMap默认内部数组是null，即没有实例化。第一次调用put方法时，则会开始第一次初始化扩容，长度为16。有参构造函数：用于指定容量。会根据指定的正整数找到不小于指定容量的2的幂数，将这个数设置赋值给阈值（threshold）。第一次调用put方法时，会将阈值赋值给容量，然后让 阈值 = 容量 * 负载因子 。（因此并不是我们手动指定了容量就一定不会触发扩容，超过阈值后一样会扩容！！）如果不是第一次扩容，则容量变为原来的2倍，阈值也变为原来的2倍。（容量和阈值都变为原来的2倍时，负载因子还是不变）
 由于数组的容量是以2的幂次方扩容的，那么一个Entity在扩容时，新的位置要么在原位置，要么在原长度+原位置的位置。数组长度变为原来的2倍，表现在二进制上就是多了一个高位参与数组下标确定。此时，一个元素通过hash转换坐标的方法计算后，恰好出现一个现象：最高位是0则坐标不变，最高位是1则坐标变为“原长度+原坐标”。在扩容时，不需要重新计算元素的hash了，只需要判断最高位是1还是0就好了。
-参考链接： java中Map和Set的底层分析 HashMap扩容机制</description>
+参考链接： java中Map和Set的底层分析 HashMap扩容机制 Java集合类 Spliterator 1 Spliterator 2</description>
+    </item>
+    
+    <item>
+      <title>操作系统(1)</title>
+      <link>https://sonemiyuki.cn/post/2021/07/11/get-post/</link>
+      <pubDate>Sun, 11 Jul 2021 22:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/11/get-post/</guid>
+      <description>1. 操作系统概述  执行指令：Fetch -&amp;gt; Execute  四种中断：
+ 程序中断：由程序执行结果产生（溢出，除以零，非法机器指令，访问不合法/无权限内存） 时钟中断：处理器内部的计时器产生，允许操作系统以一定的规则执行函数 IO中断：由IO控制器产生，用于发信号通知操作是否正常完成及其错无条件 硬件失效中断：硬件故障产生的中断  IO中断
+ 无中断：在写的时候直接写 短IO等待时间：处理器和IO并行，用中断处理器进程的方式处理IO的结束 长IO等待时间：等到下一个进程开始的时候对上一个进程的IO收尾，开始下一个IO的准备  中断执行
+ 本质上是栈的思想和应用  设备控制器或者其他系统硬件产生一个中断 处理器结束指令执行 处理器发送中断应答信号 PSW，PC入栈 根据中断加载新的PC值 保存剩余的处理状态信息 处理终端 恢复状态信息 恢复PSW，PC    多中断
+ 嵌套中断（优先级） 顺序中断（默认）  存储器的三大要素两两关系
+ 存储时间 位价格 总容量  速度降低，时间变高，价格降低，容量变大
+ 寄存器 Cache 内存 磁盘 磁带  设计Cache需要考虑的因素
+ 存储器大小 块的大小 mapping函数 替换算法 写策略 缓存级数  DMA
+ 可编程IO操作：需要程序员监控检查，耗费资源 中断驱动IO操作：IO准备好之后会对处理器进行中断，每个字都要通过处理器 DMA操作：DMA模块直接和存储器操作，传输整个数据块，传输完成产生中断  停止访存、周期挪用、交替访存    习题：</description>
     </item>
     
     <item>
@@ -185,23 +262,6 @@ bool withdraw(account_id, amount)在一个分布式系统里面，如果单纯�
  A说：B，请去某账户扣钱。 B完成了指令。 B对A说：我扣完了，返回你一个True，A收到了。 A说：B，请去某账户扣钱。 B完成了指令。 B对A说：由于余额等原因无法扣款，返回你一个False，A收到了。 事情往往不尽如人意，因为消息传递出现了两次，如果丢包了，有可能出现以下情况：   A说：B，请去某账户扣钱。 B没听到。 A说：B，请去某账户扣钱。 B完成了指令。B对A说：我扣完了，返回你一个True，A没收到 A说：B，请去某账户扣钱。 B完成了指令。B对A说：由于余额等原因无法扣款，返回你一个False，A没收到  从A的角度来看，如果迟迟没有收到Reply，有可能出现这三种情况之一，但是在目前设计下A无法通过已有的信息进行判断是三种情况的哪一种，也就无法确定是要叫B重新付款，还是返回付款成功，或者返回付款失败。
 我们可以引进中间件完成这个业务，但是这在架构上会增加和中间件的耦合程度。从设计的角度说，有一种被称作幂等设计的设计思路被用来解决类似的问题。
 int create_ticket() bool idempotent_withdraw(ticket_id, account_id, amount)A对B说，我要找你有一件事。B说，好的，你找我的事情我编号为5。A说，好的，5号事情是如此如此。B办完了，对A说，办完了。A返回。 在这样一个过程中，取号的过程损失很小，如果取号过程丢包了，只要重新取一个号码就可以了。但是当A收到取回的号码，这时候B就知道有一件事情要办。在这个假设下，B最多只会把这件特定的事情办一次成为AB之间的Common Sense。如果丢包导致A没有返回，A可以在调用上加上原来的ID，并且持续发送，因为B只会把这件事情办一次，所以可以持续发送，等待返回。</description>
-    </item>
-    
-    <item>
-      <title>操作系统(1)</title>
-      <link>https://sonemiyuki.cn/post/2021/05/09/get-post/</link>
-      <pubDate>Sun, 09 May 2021 22:29:30 +0800</pubDate>
-      
-      <guid>https://sonemiyuki.cn/post/2021/05/09/get-post/</guid>
-      <description>1. 操作系统概述  执行指令：Fetch -&amp;gt; Execute  四种中断：
- 程序中断：由程序执行结果产生（溢出，除以零，非法机器指令，访问不合法/无权限内存） 时钟中断：处理器内部的计时器产生，允许操作系统以一定的规则执行函数 IO中断：由IO控制器产生，用于发信号通知操作是否正常完成及其错无条件 硬件失效中断：硬件故障产生的中断  IO中断
- 无中断：在写的时候直接写 短IO等待时间：处理器和IO并行，用中断处理器进程的方式处理IO的结束 长IO等待时间：等到下一个进程开始的时候对上一个进程的IO收尾，开始下一个IO的准备  中断执行
- 本质上是栈的思想和应用  设备控制器或者其他系统硬件产生一个中断 处理器结束指令执行 处理器发送中断应答信号 PSW，PC入栈 根据中断加载新的PC值 保存剩余的处理状态信息 处理终端 恢复状态信息 恢复PSW，PC    多中断
- 嵌套中断（优先级） 顺序中断（默认）  存储器的三大要素两两关系
- 存储时间 位价格 总容量  速度降低，时间变高，价格降低，容量变大
- 寄存器 Cache 内存 磁盘 磁带  设计Cache需要考虑的因素
- 存储器大小 块的大小 mapping函数 替换算法 写策略 缓存级数  DMA
- 可编程IO操作：需要程序员监控检查，耗费资源 中断驱动IO操作：IO准备好之后会对处理器进行中断，每个字都要通过处理器 DMA操作：DMA模块直接和存储器操作，传输整个数据块，传输完成产生中断  停止访存、周期挪用、交替访存    习题：</description>
     </item>
     
     <item>

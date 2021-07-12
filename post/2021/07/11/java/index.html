@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  	<meta property="og:title" content=" Java面经集合 &middot;  世界的中心" />
+  	<meta property="og:title" content=" Java面经基础（含OO） &middot;  世界的中心" />
   	<meta property="og:site_name" content="世界的中心" />
   	<meta property="og:url" content="https://sonemiyuki.cn/post/2021/07/11/java/" />
     
@@ -20,7 +20,7 @@
     
 
   <title>
-     Java面经集合 &middot;  世界的中心
+     Java面经基础（含OO） &middot;  世界的中心
   </title>
 
     <meta name="description" content="教学楼的天台，是世界的中心。" />
@@ -81,7 +81,7 @@
   <article class="post post">
 
     <header class="post-header">
-        <h1 class="post-title">Java面经集合</h1>
+        <h1 class="post-title">Java面经基础（含OO）</h1>
         <section class="post-meta">
         
 	<time class="post-date" datetime="2021-07-11">
@@ -95,32 +95,148 @@
     </header>
 
     <section class="post-content">
-      <h3 id="stringstringbuilderstringbuffer">String、StringBuilder、StringBuffer</h3>
-<p>String：final修饰，不可变，每次操作产生新对象，浪费时间空间</p>
-<p>StringBuffer和StringBuilder在原对象进行操作。StringBuffer的所有方法都是synchronize方法修饰的。</p>
-<p>性能 Builder &gt; Buffer &gt; String</p>
-<p>场景：改变字符串内容
-优先StringBuilder，多线程使用StringBuffer。</p>
-<h3 id="list-和-set">List 和 Set</h3>
-<p>List： 有序，可重复，允许多个null，可以用迭代器也可以用get方法访问元素</p>
-<p>Set：无序，不可重复，最多允许一个null，只能用迭代器遍历。</p>
-<p>HashSet底层是使用HashMap实现的。当使用add方法将对象添加到Set当中时，实际上是将该对象作为底层所维护的<strong>Map对象的key</strong>，而value则都是同一个Object对象（该对象我们用不上）；其他的都是通过定义的HashMap对象实现的。</p>
-<h3 id="arraylist-和-linkedlist">ArrayList 和 LinkedList</h3>
-<p>ArrayList：本质上基于数组，适合下标访问，具有1.5倍扩容机制，尾插法移动少，性能提高好。</p>
-<p>LinkedList：本质上基于链表时适合插入删除，不适合查询，必须用iterator遍历，否则时间复杂度过大。indexOf会遍历整个链表。</p>
-<h3 id="hashmap-和-hashtable">HashMap 和 HashTable</h3>
-<p>HashTable线程安全，所有方法synchronized修饰。HashMap允许null的key和value。</p>
-<p>底层实现：数组+链表
-数组：二次hash之后映射到一个数组上面那如果未冲突则直接存Node进去，如果冲突，equals判断，相同则取代钙元素，否则判断链表高度，链表高度达到8转为红黑树，低于6则转回链表。</p>
-<h3 id="hashmap扩容">HashMap扩容</h3>
-<p>capacity 即容量，默认16。loadFactor 加载因子，默认是0.75threshold 阈值。阈值=容量*加载因子。默认12。当元素数量超过阈值时便会触发扩容。</p>
-<p>当元素数量超过阈值时便会触发扩容。每次扩容的容量都是之前容量的2倍。</p>
-<p>HashMap的容量变化通常存在以下几种情况：
-空参数的构造函数：实例化的HashMap默认内部数组是null，即没有实例化。第一次调用put方法时，则会开始第一次初始化扩容，长度为16。有参构造函数：用于指定容量。会根据指定的正整数找到不小于指定容量的2的幂数，将这个数设置赋值给阈值（threshold）。第一次调用put方法时，会将阈值赋值给容量，然后让 阈值 = 容量 * 负载因子 。（因此并不是我们手动指定了容量就一定不会触发扩容，超过阈值后一样会扩容！！）如果不是第一次扩容，则容量变为原来的2倍，阈值也变为原来的2倍。（容量和阈值都变为原来的2倍时，负载因子还是不变）</p>
-<p>由于数组的容量是以2的幂次方扩容的，那么一个Entity在扩容时，新的位置要么在原位置，要么在原长度+原位置的位置。数组长度变为原来的2倍，表现在二进制上就是多了一个高位参与数组下标确定。此时，一个元素通过hash转换坐标的方法计算后，恰好出现一个现象：最高位是0则坐标不变，最高位是1则坐标变为“原长度+原坐标”。在扩容时，不需要重新计算元素的hash了，只需要判断最高位是1还是0就好了。</p>
+      <h3 id="oo的优点和三个特性">OO的优点和三个特性</h3>
+<p>优点：基于面向过程，易于复用，易于理解，可扩展，可维护</p>
+<ul>
+<li>封装
+<ul>
+<li>外部不关心也无法修改内部实现</li>
+</ul>
+</li>
+<li>继承
+<ul>
+<li>继承基类的方法并做出改变</li>
+</ul>
+</li>
+<li>多态
+<ul>
+<li>同一个方法，不同的实现</li>
+</ul>
+</li>
+</ul>
+<h3 id="java编译过程">Java编译过程</h3>
+<ol>
+<li>编译：创建完源文件之后，程序先要被JVM中的java编译器进行编译为.class文件。java编译一个类时，如果这个类所依赖的类还没有被编译，编译器会自动的先编译这个所依赖的类，然后引用。
+编译后的字节码文件格式主要分为两部分：常量池和方法字节码。常量池记录的是代码出现过的字面量（文本字符串、八种基本类型的值、被声明为final的常量等）以及符号引用（类和方法的全限定名、字段的名称和描述符、方法的名称和描述符）方法字节码中放的是各个方法的字节码（依赖操作数栈和局部变量表，由JVM解释执行）</li>
+<li>经过JVM的解释运行
+加载 &ndash;&gt; 验证 &ndash;&gt; 准备 &ndash;&gt; 解析 &ndash;&gt; 初始化（其中验证、准备、解析统称为类的连接）</li>
+</ol>
+<h3 id="jdk-jvm-jre">JDK JVM JRE</h3>
+<p>注意JRE包含bin和lib，bin是JVM虚拟机，lib是映射到不同操作系统所需要的库。</p>
+<h3 id="-和-equals">== 和 equals</h3>
+<p>== 比较的是栈里面的值，基础数据类型比较基础数据类型，对象比较地址</p>
+<p>equals默认用==进行比较
+String的equals重写将另一个对象强转String</p>
+<h3 id="final">final</h3>
+<p>final的作用</p>
+<ul>
+<li>修饰类：类不能被继承</li>
+<li>修饰方法：可以重载不能重写</li>
+<li>修饰变量：常变量，不能更改值</li>
+<li>修饰类变量：声明，非静态初始化块，构造器</li>
+<li>类变量：静态初始化块，声明</li>
+<li>作用在栈上，基础变量不能改，引用的值可变</li>
+</ul>
+<h3 id="为什么局部内部类和匿名内部类只能访问局部final类型的变量">为什么局部内部类和匿名内部类只能访问局部final类型的变量</h3>
+<p>编译生成class文件，内部类的class文件会独立出来。外部类方法结束局部变量销毁，但是内部类如果还在执行就会出问题。将局部变量复制作为内部类的成员变量，延长其生命周期。</p>
+<p>final是某种保持一致性的妥协</p>
+<h3 id="重载和重写">重载和重写</h3>
+<p>重载： 同一个类、方法名相同，参数名（类型、个数、顺序）不同，返回值修饰符可以不同；</p>
+<p>重写：父子类中，方法名参数名必须相同，返回值范围和抛出异常值范围小于等于父类，修饰符范围大于等于父类，无法重写父类private方法。</p>
+<h3 id="接口和抽象类">接口和抽象类</h3>
+<ul>
+<li>抽象类可以有普通成员函数，接口的方法必须全部抽象</li>
+<li>抽象类成员变量类型比较宽，看接口的成员变量必须是public static final</li>
+<li>抽象类单继承，可以通过接口实现多继承</li>
+</ul>
+<p>接口：对类的行为进行约束，约定了一定要有某个方法。like-a。</p>
+<p>抽象类设计的本质是代码复用。需要不同的类具有某种相同的行为，还需要这些类的这些方法实现方法一致。is-a。</p>
+<p>关注事物的本质用抽象类，关注某些操作用接口。</p>
+<p>定义抽象类的代价比较高，定义接口可以降低设计难度。</p>
+<p>抽象类被应用于模板方法中。</p>
+<h2 id="hashcode-和-equals">hashCode 和 equals</h2>
+<p>hashCode:获取哈希值，或者说将其map到int的范围内。</p>
+<p>对象加入HashSet的时候，HashSet会先计算对象的HashCode判断对象加入的位置，看该位置是否还有值，若无，java假设对象没有重复出现，如果发现有，调用equals检查是否相同。核心在减少equals的次数</p>
+<h2 id="default-关键字">default 关键字</h2>
+<p>Java 8在增强集合的过程中引进了default关键字。让其支持lambda表达式的时候，就面临了这样的挑战。为了克服这个困难，Java 8中引入了一个新的概念，叫做default方法，也可以称为Defender方法，或者虚拟扩展方法（Virtual extension methods)。
+Default方法是指，在接口内部包含了一些默认的方法实现（也就是接口中可以包含方法体，这打破了Java之前版本对接口的语法限制），从而使得接口在进行扩展的时候，不会破坏与接口相关的实现类代码。
+Default方法实现了对接口的扩展。
+同名的default方法必须在扩展类中被重写。
+Iterator接口的default方法是这样的：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">default</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">remove</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsupportedOperationException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;remove&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>如果不重写，默认Iterator无法使用Remove方法，反之，若重写，就代表支持。</p>
+<h3 id="jdk-8-function接口">JDK 8 Function接口</h3>
+<p>类似于数学上的函数，需要实现一个从泛型T到泛型R的函数映射，实现apply方法。</p>
+<p>compose 和 andThen</p>
+<p>compose括号里的before函数先走，然后是调用函数，然后是andThen括号里的after函数。</p>
+<p><img src="https://sonemiyuki.cn/images/java/FunctionInterface.png" alt="compose 和 andThen"></p>
+<h3 id="transient关键字">transient关键字</h3>
+<p>transient是短暂的意思。对于transient 修饰的成员变量，在类的实例对象的序列化处理过程中会被忽略。 因此，transient变量不会贯穿对象的序列化和反序列化，生命周期仅存于调用者的内存中而不会写到磁盘里进行持久化。</p>
+<h3 id="synchronized关键字">synchronized关键字</h3>
+<p>synchronized锁什么？锁对象。</p>
+<p>锁的对象包括：</p>
+<ul>
+<li>this</li>
+<li>临界资源对象</li>
+<li>Class 类对象。</li>
+</ul>
+<p>保证同一时刻最多只有1个线程执行 被Synchronized修饰的方法 / 代码</p>
+<ul>
+<li>修饰 实例方法 / 代码块时，（同步）保护的是同一个对象方法的调用 &amp; 当前实例对象</li>
+<li>修饰 静态方法 / 代码块时，（同步）保护的是 静态方法的调用 &amp; class 类对象</li>
+</ul>
+<p>原理</p>
+<ol>
+<li>依赖JVM实现JVM等级的同步</li>
+<li>底层通过一个monitor完成，wait，notify方法也依赖于monitor对象</li>
+</ol>
+<p>特点：原子性、可见性、有序性、可重入性、重量级</p>
+<p>机理：</p>
+<ol>
+<li>维护锁的持有线程和持有数量</li>
+<li>调用synchronized代码是检查对象是否被锁
+<ol>
+<li>是的话检查是否被当前线程锁定</li>
+<li>不是的话假如等待队列，计数加1</li>
+</ol>
+</li>
+<li>释放的时候计数减1</li>
+<li>计数为0释放锁</li>
+</ol>
+<p>当锁定对象为this 时，相当于同步方法。</p>
+<p>Java 中锁的种类大致分为</p>
+<ul>
+<li>偏向锁</li>
+<li>自旋锁</li>
+<li>轻量级锁</li>
+<li>重量级锁</li>
+</ul>
+<p>因为 synchronized 无论是同步的方法还是同步的代码块，都会先把主内存的数据拷贝到工作内存中，同步代码块结束，会把工作内存中的数据更新到主内存中，这样主内存中的数据一定是最新的。更重要的是禁用了乱序重组以及保证了值对存储器的写入，这样就可以保证可见性。</p>
+<p>缺点：</p>
+<ul>
+<li>等待线程无法控制</li>
+<li>线程存在插队现象</li>
+</ul>
+<p>同步方法：</p>
+<p>同步方法锁定的是当前对象。当多线程通过同一个对象引用多次调用当前同步方法时，需同步执行。
+也就是说当一个线程访问同步方法时，其他线程访问这个方法将会被阻塞(等待锁)。</p>
+<p>同步代码块：
+用细粒度的同步增加效率。</p>
+<ul>
+<li>注意把IO语句移出同步块</li>
+</ul>
+<p>synchronized(非this对象 object)，这个对象如果是实例变量的话，指的是对象的引用，只要对象的引用不变，即使改变了对象的属性，运行结果依然是同步的。</p>
+<p>锁的是堆内存中的对象，而不是引用。</p>
+<p>synchronized 还可以应用在静态方法上，如果这么写，则代表的是对当前 .java 文件对应的 Class 类加锁。</p>
+<p>发生异常自动释放锁</p>
 <p>参考链接：
-<a href="https://blog.csdn.net/prairie97/article/details/78481493">java中Map和Set的底层分析</a>
-<a href="https://zhuanlan.zhihu.com/p/114363420">HashMap扩容机制</a></p>
+<a href="https://blog.csdn.net/super_YC/article/details/71439786">java 程序编译和运行过程详解</a>
+<a href="https://blog.csdn.net/qq_41595139/article/details/108367464">Default关键字</a>
+<a href="https://blog.csdn.net/wang_zqiang/article/details/86595735">Function接口简介</a>
+<a href="https://blog.csdn.net/a1102325298/article/details/82595923">synchronized关键字</a>
+<a href="https://www.jianshu.com/p/2ed498b43628">synchronized关键字2</a></p>
 
     </section>
 
@@ -146,7 +262,7 @@
     
     <section class="share">
       <h4>Share this post</h4>
-      <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Java%e9%9d%a2%e7%bb%8f%e9%9b%86%e5%90%88&amp;url=https%3a%2f%2fsonemiyuki.cn%2fpost%2f2021%2f07%2f11%2fjava%2f"
+      <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Java%e9%9d%a2%e7%bb%8f%e5%9f%ba%e7%a1%80%ef%bc%88%e5%90%abOO%ef%bc%89&amp;url=https%3a%2f%2fsonemiyuki.cn%2fpost%2f2021%2f07%2f11%2fjava%2f"
           onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
           <span class="hidden">Twitter</span>
       </a>

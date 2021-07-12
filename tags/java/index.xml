@@ -7,7 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <copyright>All rights reserved - 2021-</copyright>
-    <lastBuildDate>Sun, 11 Jul 2021 22:29:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Jul 2021 16:29:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Java集合类数据结构</title>
+      <link>https://sonemiyuki.cn/post/2021/07/12/java/</link>
+      <pubDate>Mon, 12 Jul 2021 16:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/12/java/</guid>
+      <description>Collection Collection提供了一系列接口给集合实现。
+Iterator Iterator：用于遍历集合的对象，本身是同名设计模式的体现。
+AbstractList AbstractList的算法是基于内部Iterator遍历实现的，用一个cursor和size()函数控制迭代的数量
+Spliterator Spliterator是Java 8中加入的一个新接口；这个名字代表“可拆分迭代器”（splitable iterator）。和Iterator一样，Spliterator也用于遍历数据源中的元素，但它是为了并行执行而设计的。Java 8已经为集合框架中包含的所有数据结构提供了一个默认的Spliterator实现。集合实现了Spliterator接口，接口提供了一个spliterator方法。
+Spliterator可以单独遍历元素（tryAdvance()）或批量顺序遍历元素（forEachRemaining()）。Spliterator还可以将它的一些元素（使用trySplit()）进行分区作为另一个Spliterator，以用于可能并行的操作。使用无法拆分的Spliterator或以高度不平衡或低效的方式进行操作不太可能从并行性中受益。遍历和拆分至用完元素;每个Spliterator仅对单个批量计算有用。
+这个就是用来多线程并行迭代的迭代器，这个迭代器的主要作用就是把集合分成了好几段，每个线程执行一段，因此是线程安全的。
+//如果存在剩余元素，则对其执行给定操作，返回true；否则返回false。如果此Spliterator为ORDERED，则会对遇见顺序中的下一个元素执行操作。操作抛出的异常会转发给调用者。 boolean tryAdvance(Consumer&amp;lt;? super T&amp;gt; action); //按顺序对每个剩余元素执行给定操作，直到所有元素都已处理或操作抛出异常为止。如果此Spliterator为ORDERED，则会按遇见顺序执行操作。操作抛出的异常会转发给调用者。默认方法调用tryAdvance方法 default void forEachRemaining(Consumer&amp;lt;? super T&amp;gt; action) { do { } while (tryAdvance(action)); } //对任务分割，返回一个新的Spliterator迭代器 Spliterator&amp;lt;T&amp;gt; trySplit(); //用于估算还剩下多少个元素需要遍历 long estimateSize(); //当迭代器拥有SIZED特征时，返回剩余元素个数；否则返回-1 default long getExactSizeIfKnown() { return (characteristics() &amp;amp; SIZED) == 0 ? -1L : estimateSize(); } //返回当前对象有哪些特征值 int characteristics(); //是否具有当前特征值 default boolean hasCharacteristics(int characteristics) { return (characteristics() &amp;amp; characteristics) == characteristics; } //如果Spliterator的list是通过Comparator排序的，则返回Comparator //如果Spliterator的list是自然排序的 ，则返回null //其他情况下抛错 default Comparator&amp;lt;?</description>
+    </item>
+    
     <item>
       <title>Java面经后端</title>
       <link>https://sonemiyuki.cn/post/2021/07/11/java/</link>
@@ -56,7 +71,7 @@ HashMap扩容 capacity 即容量，默认16。loadFactor 加载因子，默认�
 当元素数量超过阈值时便会触发扩容。每次扩容的容量都是之前容量的2倍。
 HashMap的容量变化通常存在以下几种情况： 空参数的构造函数：实例化的HashMap默认内部数组是null，即没有实例化。第一次调用put方法时，则会开始第一次初始化扩容，长度为16。有参构造函数：用于指定容量。会根据指定的正整数找到不小于指定容量的2的幂数，将这个数设置赋值给阈值（threshold）。第一次调用put方法时，会将阈值赋值给容量，然后让 阈值 = 容量 * 负载因子 。（因此并不是我们手动指定了容量就一定不会触发扩容，超过阈值后一样会扩容！！）如果不是第一次扩容，则容量变为原来的2倍，阈值也变为原来的2倍。（容量和阈值都变为原来的2倍时，负载因子还是不变）
 由于数组的容量是以2的幂次方扩容的，那么一个Entity在扩容时，新的位置要么在原位置，要么在原长度+原位置的位置。数组长度变为原来的2倍，表现在二进制上就是多了一个高位参与数组下标确定。此时，一个元素通过hash转换坐标的方法计算后，恰好出现一个现象：最高位是0则坐标不变，最高位是1则坐标变为“原长度+原坐标”。在扩容时，不需要重新计算元素的hash了，只需要判断最高位是1还是0就好了。
-参考链接： java中Map和Set的底层分析 HashMap扩容机制</description>
+参考链接： java中Map和Set的底层分析 HashMap扩容机制 Java集合类 Spliterator 1 Spliterator 2</description>
     </item>
     
   </channel>

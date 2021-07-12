@@ -98,6 +98,622 @@
 	   
 <article class="post post">
     <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/12/get-post/">操作系统(3)</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h3 id="单处理器调度">单处理器调度</h3>
+<ul>
+<li>长程调度
+<ul>
+<li>新建</li>
+<li>销毁</li>
+</ul>
+</li>
+<li>中程调度
+<ul>
+<li>换入</li>
+<li>换出</li>
+</ul>
+</li>
+<li>短程调度
+<ul>
+<li>时钟中断</li>
+<li>IO中断</li>
+<li>系统调用</li>
+<li>信号</li>
+</ul>
+</li>
+</ul>
+<p>长程调度决定了那个程序可以进入系统中被处理</p>
+<p>进程越多，每个进程时间越少，调度代价越大。</p>
+<p>短程调度算法</p>
+<ul>
+<li>周转时间</li>
+<li>响应时间</li>
+<li>最后期限</li>
+<li>可预测性</li>
+</ul>
+<p>短程调度考虑性能指标</p>
+<ul>
+<li>吞吐量</li>
+<li>处理器使用率</li>
+</ul>
+<p>考虑其他因素</p>
+<ul>
+<li>公平性</li>
+<li>优先级</li>
+<li>平衡资源</li>
+</ul>
+<p>优先级：每个进程有一个优先级，选择优先级高的进程。多个优先级，多个就绪队列，低优先级的有可能饥饿，因此优先级是动态改变的。</p>
+<p>选择函数：确定在就绪进程中选择哪个进程在下一次执行</p>
+<p>决策模式（Decision Mode）</p>
+<ul>
+<li>非抢占</li>
+<li>抢占</li>
+</ul>
+<p>进程周转时间 = 结束 - 到达 = 等待 + 服务</p>
+<p>归一化周转时间 = 周转时间 / 服务时间</p>
+<p>调度算法：</p>
+<ul>
+<li>FCFS</li>
+<li>轮转</li>
+<li>SPN（最短优先）</li>
+<li>SRT（最短剩余时间）</li>
+<li>HRRN（最高响应比）</li>
+</ul>
+<h3 id="io管理与磁盘调度">IO管理与磁盘调度</h3>
+<p>IO设备的三种类别</p>
+<ul>
+<li>人类可读</li>
+<li>机器可读</li>
+<li>通信设备</li>
+</ul>
+<p>三种IO通信技术</p>
+<ul>
+<li>可编程IO
+<ul>
+<li>I/O处理模块设置I/O状态寄存器中相应的位。处理器不断询问I/O模块的状态，严重降低了系统的性能。</li>
+</ul>
+</li>
+<li>中断驱动IO
+<ul>
+<li>每个字的读写都需要通过处理器进行，消耗了大量的处理器时间。</li>
+</ul>
+</li>
+<li>DMA
+<ul>
+<li>依托分离的DMA总线</li>
+</ul>
+</li>
+</ul>
+<p>操作系统的设计</p>
+<p>IO Buffer</p>
+<p>进程必须等待IO操作完成后继续执行</p>
+<p>可能出现单进程死锁————进程在IO开始前被换出</p>
+<p>面向块的缓冲</p>
+<ul>
+<li>一次传递一块</li>
+<li>磁盘磁带</li>
+</ul>
+<p>面向流的IO</p>
+<ul>
+<li>字节流形式传递信息</li>
+<li>打印机、鼠标</li>
+</ul>
+<p>OS给一个I/O请求分配一个位于主存中系统部分的缓冲区</p>
+<p>面向块</p>
+<ul>
+<li>输入传送的数据被放到系统缓冲区中</li>
+<li>传送完成时，进程把块移动到用户空间
+进程请求另外一块</li>
+<li>在下一块数据正在读取的时候，用户进程可以处理一块数据</li>
+<li>可以换出进程</li>
+<li>输入是发生在系统内存，而非用户内存</li>
+</ul>
+<p>面向流
+每次传送一行或一个字节
+一次一行：适用于滚动方式的终端，用户输入一行后回车。行式打印机。</p>
+<p>使用两个系统缓冲区
+一个进程往一个缓冲区中传送数据（或从这个缓冲区中取数据）的同时，OS正在清空（或者填充）另外一个缓冲区</p>
+<p>多于两个的缓冲区
+每个缓冲区是循环缓冲区中的单元
+用于使得I/O操作跟上进程速度</p>
+<p>缓冲是用来平滑I/O需求的峰值的一种技术，但当进程的平均需求大于I/O设备的服务能力时，缓冲再多也不能让I/O设备与这个进程一直并驾齐驱。</p>
+<p>调度算法
+先进先出FIFO
+优先级PRI
+后进先出LIFO
+最短服务时间优先SSTF
+SCAN
+磁头臂仅仅沿一个方向移动，并在途中满足所有未完成的请求
+到达最后一个磁道或该方向上没有其它请求，停止
+反向移动
+C-SCAN
+循环SCAN
+N-Step-SCAN
+把队列分成长度为N的子队列，每次用SCAN扫描一子队列，在扫描期间，新请求必须加到其它队列中
+FSCAN
+分成两个子队列，开始时候，所有请求在一个队列中，扫描时，新请求入另外一个队列</p>
+<p>RAID0 - RAID6</p>
+<p>磁盘cache
+基于频率决定</p>
+<h3 id="文件管理">文件管理</h3>
+<p>文件管理功能</p>
+<ul>
+<li>识别和定位文件</li>
+<li>使用目录来描述所有文件的位置以及属性</li>
+<li>在一个共享系统中描述用户权限控制</li>
+<li>记录和块之间的映射组织</li>
+<li>为文件分配空闲区块</li>
+<li>管理空闲区块</li>
+</ul>
+<p>文件组织原则</p>
+<ul>
+<li>访问快速</li>
+<li>易于修改</li>
+<li>节约存储空间</li>
+<li>维护简单</li>
+<li>可靠性</li>
+</ul>
+<p>五种基本的文件组织方式</p>
+<ul>
+<li>堆</li>
+<li>顺序文件</li>
+<li>索引顺序文件</li>
+<li>索引文件</li>
+<li>直接或散列文件</li>
+</ul>
+<p>文件分配方式</p>
+<ul>
+<li>连续</li>
+<li>链式</li>
+<li>索引</li>
+</ul>
+<p>空间管理</p>
+<ul>
+<li>磁盘分配表</li>
+<li>位表</li>
+<li>链式空闲区</li>
+<li>索引</li>
+<li>空闲块列表</li>
+</ul>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/os/">#os</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-12T19:30:30&#43;08:00">
+            12 Jul 2021
+        </time>
+    </footer>
+</article>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/12/get-post/">操作系统(2)</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h3 id="进程与线程">进程与线程</h3>
+<p>进程：</p>
+<ul>
+<li>资源所有权</li>
+<li>调度/执行</li>
+</ul>
+<p>多线程OS：</p>
+<p>支持在一个进程中执行多个线程的能力</p>
+<p>资源分配和保护的单位</p>
+<p>线程具有</p>
+<ul>
+<li>线程状态</li>
+<li>线程上下文（寄存器，计数器）</li>
+<li>执行栈</li>
+<li>静态存储空间</li>
+</ul>
+<p>多线程的优点：</p>
+<p>创建代价小，销毁代价小，切换代价小，通信代价小。</p>
+<p>线程的基本操作：</p>
+<ul>
+<li>派生</li>
+<li>阻塞</li>
+<li>解除阻塞</li>
+<li>结束</li>
+</ul>
+<p>RPC：</p>
+<ul>
+<li>单线程</li>
+<li>多线程</li>
+</ul>
+<p>纯用户级线程：</p>
+<p>优点：</p>
+<ul>
+<li>不需要模式转换</li>
+<li>调度算法是应用程序专用的</li>
+<li>可以在任意OS中运行</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>系统调用引发线程组所有线程都被阻塞</li>
+<li>无法利用多处理器技术</li>
+</ul>
+<p>纯内核级线程：</p>
+<p>优点：</p>
+<ul>
+<li>内核可以调度同一个进程的多个线程再多个处理器上同时运行</li>
+<li>线程阻塞不会引起同一进程内其余线程的阻塞</li>
+<li>内核例程本身可以使用多线程</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>线程的大量模式切换</li>
+</ul>
+<p>组合方法
+＝用户级线程＋内核级线程
+线程在用户空间中创建
+线程的调度和同步也在应用程序中进行</p>
+<h3 id="内存管理">内存管理</h3>
+<ul>
+<li>重定位</li>
+<li>保护</li>
+<li>共享</li>
+<li>逻辑组织
+<ul>
+<li>模块可以单独编写和编译</li>
+<li>可以执行模块级别的保护</li>
+<li>可以在进程间共享模块</li>
+</ul>
+</li>
+<li>物理组织</li>
+</ul>
+<p>内存分区</p>
+<p>固定分区</p>
+<ul>
+<li>程序在一个分区中</li>
+<li>OS负责交换分区</li>
+<li>程序太大，程序员必须进行覆盖设计以使得程序能够装入一个分区内运行</li>
+<li>内部碎片多，主存利用率低</li>
+</ul>
+<p>大小相等的分区：任意一块均可</p>
+<p>大小不等的分区：</p>
+<ul>
+<li>最小适合算法
+<ul>
+<li>分区数目固定，内部碎片多</li>
+</ul>
+</li>
+</ul>
+<p>动态分区</p>
+<ul>
+<li>
+<p>长度数目可变</p>
+</li>
+<li>
+<p>允许分配给进程所需要的空间</p>
+</li>
+<li>
+<p>外部碎片</p>
+</li>
+<li>
+<p>压缩技术</p>
+</li>
+<li>
+<p>最佳适配</p>
+<ul>
+<li>性能差</li>
+<li>经常要压缩</li>
+<li>碎片难以利用</li>
+</ul>
+</li>
+<li>
+<p>首次适配</p>
+<ul>
+<li>从开始扫描内存，选择第一块可用内存</li>
+<li>速度最快</li>
+<li>查找效率不高</li>
+</ul>
+</li>
+<li>
+<p>下一个适配</p>
+<ul>
+<li>最后经常有一个大块</li>
+<li>大块被分成小块</li>
+<li>需要压缩整理</li>
+</ul>
+</li>
+<li>
+<p>最差适配</p>
+</li>
+</ul>
+<p>伙伴系统</p>
+<ul>
+<li>基于二的幂次和二进制</li>
+</ul>
+<p>重定向</p>
+<ul>
+<li>
+<p>逻辑地址</p>
+</li>
+<li>
+<p>相对地址</p>
+</li>
+<li>
+<p>物理地址</p>
+</li>
+<li>
+<p>基地址寄存器</p>
+</li>
+<li>
+<p>边界寄存器</p>
+</li>
+<li>
+<p>在进程加载、交换、压缩的时候设置</p>
+</li>
+</ul>
+<p>内存分页技术</p>
+<p>内存分帧，进程分页，页帧等大小。</p>
+<p>OS为每个进程维护一个页表，维护页到帧的映射，此时内存地址 = 页号 + 偏移量。</p>
+<p>内存分段技术</p>
+<p>程序有个最大段长度
+地址 = 段号 + 偏移量
+维护段表</p>
+<h3 id="虚拟内存技术">虚拟内存技术</h3>
+<p>内存访问被动态地映射成物理地址
+一个进程可能被分成多个块，这些块不需要加载在内存的连续地址空间中
+在运行期间，一个进程的所有块不需要全部加载到内存</p>
+<ul>
+<li>OS将内存分解成给一系列供程序使用的块。</li>
+<li>常驻集：进程执行中的任何时候都在主存中的部分</li>
+<li>当访问一个不在内存中的地址时，产生一个中断</li>
+<li>OS用块的形式来调度和管理进程</li>
+</ul>
+<p>如果一个内存块需要被其它进程使用，该块的进程内容就需要被交换出去。
+处理器大部分的时间都用于交换块，而不是执行指令。</p>
+<p>一个进程中的代码和数据的访问有集簇的倾向
+因此，假设在很短时间内，仅需要访问进程的一部分块是合理的
+对未来可能使用到的块进程预测 避免系统抖动 虚拟内存机制是合理的</p>
+<p>每个进程有一个自己的页表</p>
+<p><a href="F:%5CHugo%5Cblog%5Cstatic%5Cimages%5Cos%5Cpage-table.png">页表项</a></p>
+<p>每个页表项包含进程的页、内存的帧、以及二者的对应关系
+一个位用于表明该页是否在主存中
+一个位用于表明该页是否被修改
+其它项</p>
+<p><a href="https://sonemiyuki.cn/images/os/memory-page.png">内存分页系统</a></p>
+<p>页表很大的时候采用二级页表，只有部分页表在内存中。</p>
+<p><a href="https://sonemiyuki.cn/images/os/2-level-pages.png">二级页表</a></p>
+<p>反向页表：</p>
+<p>虚拟地址的页被hash之后指向反向页表
+每个物理内存帧对应一个反向列表帧</p>
+<p>访问内存的时间问题：用cache解决</p>
+<p>先查TLB，如果没有就去查页表，如果在主存就更新TLB，不然就访问二级存储把页取出来</p>
+<p>分段类似</p>
+<p>段页式：一个段表，多个页表</p>
+<p>读取内存策略：</p>
+<ul>
+<li>请求式分页
+<ul>
+<li>不请不取</li>
+</ul>
+</li>
+<li>预约式分页
+<ul>
+<li>取进程的连续页</li>
+</ul>
+</li>
+</ul>
+<p>换页策略：</p>
+<p>帧有个lock位锁定不会被替换，如OS内核，重要控制结构，IO缓冲区等。</p>
+<ul>
+<li>OPT</li>
+<li>LRU</li>
+<li>FIFO</li>
+<li>Clock</li>
+</ul>
+<p>更强的时钟算法：</p>
+<p>使用位 + 修改位</p>
+<ul>
+<li>查找第一个u = 0; m = 0的帧</li>
+<li>查找第一个u = 0, m = 1的帧</li>
+<li>没找到，u均改为0，转到第一步</li>
+</ul>
+<p>驻留集合管理</p>
+<p>研究的是给进程分配多大的内存空间</p>
+<ul>
+<li>固定分配策略</li>
+<li>可变分配策略</li>
+<li>窗口越大错误率与越小</li>
+</ul>
+<p>清除策略</p>
+<ul>
+<li>请求式清除</li>
+<li>预约式清除</li>
+</ul>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/os/">#os</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-12T19:29:30&#43;08:00">
+            12 Jul 2021
+        </time>
+    </footer>
+</article>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/12/java/">Java集合类数据结构</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h3 id="collection">Collection</h3>
+<p><img src="https://sonemiyuki.cn/images/java/Collections.png" alt="Collections"></p>
+<p>Collection提供了一系列接口给集合实现。</p>
+<h3 id="iterator">Iterator</h3>
+<p>Iterator：用于遍历集合的对象，本身是同名设计模式的体现。</p>
+<h3 id="abstractlist">AbstractList</h3>
+<p>AbstractList的算法是基于内部Iterator遍历实现的，用一个cursor和size()函数控制迭代的数量</p>
+<h3 id="spliterator">Spliterator</h3>
+<p>Spliterator是Java 8中加入的一个新接口；这个名字代表“可拆分迭代器”（splitable iterator）。和Iterator一样，Spliterator也用于遍历数据源中的元素，但它是为了并行执行而设计的。Java 8已经为集合框架中包含的所有数据结构提供了一个默认的Spliterator实现。集合实现了Spliterator接口，接口提供了一个spliterator方法。</p>
+<p>Spliterator可以单独遍历元素（tryAdvance()）或批量顺序遍历元素（forEachRemaining()）。Spliterator还可以将它的一些元素（使用trySplit()）进行分区作为另一个Spliterator，以用于可能并行的操作。使用无法拆分的Spliterator或以高度不平衡或低效的方式进行操作不太可能从并行性中受益。遍历和拆分至用完元素;每个Spliterator仅对单个批量计算有用。</p>
+<p>这个就是用来多线程并行迭代的迭代器，这个迭代器的主要作用就是把集合分成了好几段，每个线程执行一段，因此是线程安全的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">//如果存在剩余元素，则对其执行给定操作，返回true；否则返回false。如果此Spliterator为ORDERED，则会对遇见顺序中的下一个元素执行操作。操作抛出的异常会转发给调用者。
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">tryAdvance</span><span style="color:#f92672">(</span>Consumer<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">super</span> T<span style="color:#f92672">&gt;</span> action<span style="color:#f92672">);</span>
+ 
+<span style="color:#75715e">//按顺序对每个剩余元素执行给定操作，直到所有元素都已处理或操作抛出异常为止。如果此Spliterator为ORDERED，则会按遇见顺序执行操作。操作抛出的异常会转发给调用者。默认方法调用tryAdvance方法
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">default</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">forEachRemaining</span><span style="color:#f92672">(</span>Consumer<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">super</span> T<span style="color:#f92672">&gt;</span> action<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+   <span style="color:#66d9ef">do</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span> <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>tryAdvance<span style="color:#f92672">(</span>action<span style="color:#f92672">));</span>
+<span style="color:#f92672">}</span>
+ 
+<span style="color:#75715e">//对任务分割，返回一个新的Spliterator迭代器
+</span><span style="color:#75715e"></span>Spliterator<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">trySplit</span><span style="color:#f92672">();</span>
+ 
+<span style="color:#75715e">//用于估算还剩下多少个元素需要遍历
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">long</span> <span style="color:#a6e22e">estimateSize</span><span style="color:#f92672">();</span>
+ 
+<span style="color:#75715e">//当迭代器拥有SIZED特征时，返回剩余元素个数；否则返回-1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">default</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">getExactSizeIfKnown</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+   <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>characteristics<span style="color:#f92672">()</span> <span style="color:#f92672">&amp;</span> SIZED<span style="color:#f92672">)</span> <span style="color:#f92672">==</span> 0 <span style="color:#f92672">?</span> <span style="color:#f92672">-</span>1L <span style="color:#f92672">:</span> estimateSize<span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+ 
+ <span style="color:#75715e">//返回当前对象有哪些特征值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">characteristics</span><span style="color:#f92672">();</span>
+ 
+<span style="color:#75715e">//是否具有当前特征值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">default</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">hasCharacteristics</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> characteristics<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+   <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>characteristics<span style="color:#f92672">()</span> <span style="color:#f92672">&amp;</span> characteristics<span style="color:#f92672">)</span> <span style="color:#f92672">==</span> characteristics<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">//如果Spliterator的list是通过Comparator排序的，则返回Comparator
+</span><span style="color:#75715e">//如果Spliterator的list是自然排序的 ，则返回null
+</span><span style="color:#75715e">//其他情况下抛错
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">default</span> Comparator<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">super</span> T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getComparator</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalStateException<span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>注解：</p>
+<ol>
+<li>trySplit:一般使用二分法，修改自身index为mid，然后传下去。</li>
+<li>characteristics()：Spliterator接口中定义的一些集合的特征</li>
+<li>spliterator特征值附表：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ORDERED</td>
+<td>元素定义了遇见顺序，这使得拆分，下一个和遍历剩余有一个前缀顺序，没有保证基于散列的集合（如HashSet）的顺序</td>
+</tr>
+<tr>
+<td>DISTINCT</td>
+<td>每对遇到的元素x，y，!x.equals(y)</td>
+</tr>
+<tr>
+<td>SORTED</td>
+<td>在ORDERED基础上，遇见顺序遵循定义的排序顺序，此时getComparator()返回关联的Comparator，如果所有元素都是Comparable并按其自然顺序排序，则返回null。</td>
+</tr>
+<tr>
+<td>SIZED</td>
+<td>在遍历或拆分之前从estimateSize()返回的值表示有限大小</td>
+</tr>
+<tr>
+<td>NONNULL</td>
+<td>保证遇见的元素非空</td>
+</tr>
+<tr>
+<td>IMMUTABLE</td>
+<td>不能进行结构修改</td>
+</tr>
+<tr>
+<td>CONCURRENT</td>
+<td>多线程下安全Spliterator应该有一个关于遍历期间修改影响的记录策略</td>
+</tr>
+<tr>
+<td>SUBSIZED</td>
+<td>能够知道子结构的大小，因为一些树型结构不容易知道字子结构的大小</td>
+</tr>
+</tbody>
+</table>
+<p>Collections:</p>
+<p>|算法|阈值|低算法|高算法|
+|搜索|5000或支持随机存取|基于新的新的二分查找|
+|逆转|18或者支持随机存取|直接交换|基于迭代器的交换|
+|洗牌|5或支持随机存取|直接洗牌|基于迭代器洗牌|
+|填充|25或者支持随机存取|直接set|基于迭代器进行存储|
+|拷贝|10或者支持随机存取|直接set|基于迭代器的set|
+|切片-连接|100或者支持随机存取|直接set|三次反转算法|
+|替代全部算法|11或支持随机存取|直接set|基于迭代器的set|
+|子序列坐标（从前往后或从后往前）|35或者支持随机存取|基于普通的set|基于迭代器的set|</p>
+<h3 id="vector">Vector</h3>
+<p>方法是synchonized，比较安全。</p>
+<p>Vector原始容量是10
+需要多少扩多少，默认翻倍</p>
+<h3 id="stack">Stack</h3>
+<p>基于Vector派生，所有的操作都需要synchronized</p>
+<p>参考链接：</p>
+<p><a href="https://blog.csdn.net/qq_30711091/article/details/88847892">Java集合类</a>
+<a href="https://blog.csdn.net/sl1992/article/details/100149187">Spliterator 1</a>
+<a href="https://www.cnblogs.com/nevermorewang/p/9368431.html">Spliterator 2</a></p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/java/">#Java</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-12T16:29:30&#43;08:00">
+            12 Jul 2021
+        </time>
+    </footer>
+</article>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
         <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/network/">计算机网络面经与常见QA（2）</a></h2>
     </header>
     <section class="post-excerpt">
@@ -153,10 +769,10 @@
 <ul>
 <li>URG：紧急指针字段有效，尽快传输</li>
 <li>ACK：设定ack字段有效</li>
-<li>PSH：尽快将保温传给应用层</li>
+<li>PSH：尽快将报文传给应用层</li>
 <li>RST：要求重建TCP</li>
 <li>SYN：设定syn字段有效</li>
-<li>fin：表示传输结束，请求释放连接</li>
+<li>FIN：表示传输结束，请求释放连接</li>
 </ul>
 </li>
 <li>窗口字段（16bit）</li>
@@ -336,231 +952,6 @@
             
         
         <time class="post-date" datetime="2021-07-11T22:29:30&#43;08:00">
-            11 Jul 2021
-        </time>
-    </footer>
-</article>
-
-	
-	   
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/java/">Java面经基础（含OO）</a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <h3 id="oo的优点和三个特性">OO的优点和三个特性</h3>
-<p>优点：基于面向过程，易于复用，易于理解，可扩展，可维护</p>
-<ul>
-<li>封装
-<ul>
-<li>外部不关心也无法修改内部实现</li>
-</ul>
-</li>
-<li>继承
-<ul>
-<li>继承基类的方法并做出改变</li>
-</ul>
-</li>
-<li>多态
-<ul>
-<li>同一个方法，不同的实现</li>
-</ul>
-</li>
-</ul>
-<h3 id="java编译过程">Java编译过程</h3>
-<ol>
-<li>编译：创建完源文件之后，程序先要被JVM中的java编译器进行编译为.class文件。java编译一个类时，如果这个类所依赖的类还没有被编译，编译器会自动的先编译这个所依赖的类，然后引用。
-编译后的字节码文件格式主要分为两部分：常量池和方法字节码。常量池记录的是代码出现过的字面量（文本字符串、八种基本类型的值、被声明为final的常量等）以及符号引用（类和方法的全限定名、字段的名称和描述符、方法的名称和描述符）方法字节码中放的是各个方法的字节码（依赖操作数栈和局部变量表，由JVM解释执行）</li>
-<li>经过JVM的解释运行
-加载 &ndash;&gt; 验证 &ndash;&gt; 准备 &ndash;&gt; 解析 &ndash;&gt; 初始化（其中验证、准备、解析统称为类的连接）</li>
-</ol>
-<h3 id="jdk-jvm-jre">JDK JVM JRE</h3>
-<p>注意JRE包含bin和lib，bin是JVM虚拟机，lib是映射到不同操作系统所需要的库。</p>
-<h3 id="-和-equals">== 和 equals</h3>
-<p>== 比较的是栈里面的值，基础数据类型比较基础数据类型，对象比较地址</p>
-<p>equals默认用==进行比较
-String的equals重写将另一个对象强转String</p>
-<h3 id="final">final</h3>
-<p>final的作用</p>
-<ul>
-<li>修饰类：类不能被继承</li>
-<li>修饰方法：可以重载不能重写</li>
-<li>修饰变量：常变量，不能更改值</li>
-<li>修饰类变量：声明，非静态初始化块，构造器</li>
-<li>类变量：静态初始化块，声明</li>
-<li>作用在栈上，基础变量不能改，引用的值可变</li>
-</ul>
-<h3 id="为什么局部内部类和匿名内部类只能访问局部final类型的变量">为什么局部内部类和匿名内部类只能访问局部final类型的变量</h3>
-<p>编译生成class文件，内部类的class文件会独立出来。外部类方法结束局部变量销毁，但是内部类如果还在执行就会出问题。将局部变量复制作为内部类的成员变量，延长其生命周期。</p>
-<p>final是某种保持一致性的妥协</p>
-<h3 id="重载和重写">重载和重写</h3>
-<p>重载： 同一个类、方法名相同，参数名（类型、个数、顺序）不同，返回值修饰符可以不同；</p>
-<p>重写：父子类中，方法名参数名必须相同，返回值范围和抛出异常值范围小于等于父类，修饰符范围大于等于父类，无法重写父类private方法。</p>
-<h3 id="接口和抽象类">接口和抽象类</h3>
-<ul>
-<li>抽象类可以有普通成员函数，接口的方法必须全部抽象</li>
-<li>抽象类成员变量类型比较宽，看接口的成员变量必须是public static final</li>
-<li>抽象类单继承，可以通过接口实现多继承</li>
-</ul>
-<p>接口：对类的行为进行约束，约定了一定要有某个方法。like-a。</p>
-<p>抽象类设计的本质是代码复用。需要不同的类具有某种相同的行为，还需要这些类的这些方法实现方法一致。is-a。</p>
-<p>关注事物的本质用抽象类，关注某些操作用接口。</p>
-<p>定义抽象类的代价比较高，定义接口可以降低设计难度。</p>
-<p>抽象类被应用于模板方法中。</p>
-<h2 id="hashcode-和-equals">hashCode 和 equals</h2>
-<p>hashCode:获取哈希值，或者说将其map到int的范围内。</p>
-<p>对象加入HashSet的时候，HashSet会先计算对象的HashCode判断对象加入的位置，看该位置是否还有值，若无，java假设对象没有重复出现，如果发现有，调用equals检查是否相同。核心在减少equals的次数</p>
-<p>参考链接：
-<a href="https://blog.csdn.net/super_YC/article/details/71439786">java 程序编译和运行过程详解</a></p>
-
-          </section>
-      </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            miyuki
-        
-        on
-            
-                <a href="https://sonemiyuki.cn/tags/java/">#Java</a>,
-            
-        
-        <time class="post-date" datetime="2021-07-11T22:29:30&#43;08:00">
-            11 Jul 2021
-        </time>
-    </footer>
-</article>
-
-	
-	   
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/java/">Java面经集合</a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <h3 id="stringstringbuilderstringbuffer">String、StringBuilder、StringBuffer</h3>
-<p>String：final修饰，不可变，每次操作产生新对象，浪费时间空间</p>
-<p>StringBuffer和StringBuilder在原对象进行操作。StringBuffer的所有方法都是synchronize方法修饰的。</p>
-<p>性能 Builder &gt; Buffer &gt; String</p>
-<p>场景：改变字符串内容
-优先StringBuilder，多线程使用StringBuffer。</p>
-<h3 id="list-和-set">List 和 Set</h3>
-<p>List： 有序，可重复，允许多个null，可以用迭代器也可以用get方法访问元素</p>
-<p>Set：无序，不可重复，最多允许一个null，只能用迭代器遍历。</p>
-<p>HashSet底层是使用HashMap实现的。当使用add方法将对象添加到Set当中时，实际上是将该对象作为底层所维护的<strong>Map对象的key</strong>，而value则都是同一个Object对象（该对象我们用不上）；其他的都是通过定义的HashMap对象实现的。</p>
-<h3 id="arraylist-和-linkedlist">ArrayList 和 LinkedList</h3>
-<p>ArrayList：本质上基于数组，适合下标访问，具有1.5倍扩容机制，尾插法移动少，性能提高好。</p>
-<p>LinkedList：本质上基于链表时适合插入删除，不适合查询，必须用iterator遍历，否则时间复杂度过大。indexOf会遍历整个链表。</p>
-<h3 id="hashmap-和-hashtable">HashMap 和 HashTable</h3>
-<p>HashTable线程安全，所有方法synchronized修饰。HashMap允许null的key和value。</p>
-<p>底层实现：数组+链表
-数组：二次hash之后映射到一个数组上面那如果未冲突则直接存Node进去，如果冲突，equals判断，相同则取代钙元素，否则判断链表高度，链表高度达到8转为红黑树，低于6则转回链表。</p>
-<h3 id="hashmap扩容">HashMap扩容</h3>
-<p>capacity 即容量，默认16。loadFactor 加载因子，默认是0.75threshold 阈值。阈值=容量*加载因子。默认12。当元素数量超过阈值时便会触发扩容。</p>
-<p>当元素数量超过阈值时便会触发扩容。每次扩容的容量都是之前容量的2倍。</p>
-<p>HashMap的容量变化通常存在以下几种情况：
-空参数的构造函数：实例化的HashMap默认内部数组是null，即没有实例化。第一次调用put方法时，则会开始第一次初始化扩容，长度为16。有参构造函数：用于指定容量。会根据指定的正整数找到不小于指定容量的2的幂数，将这个数设置赋值给阈值（threshold）。第一次调用put方法时，会将阈值赋值给容量，然后让 阈值 = 容量 * 负载因子 。（因此并不是我们手动指定了容量就一定不会触发扩容，超过阈值后一样会扩容！！）如果不是第一次扩容，则容量变为原来的2倍，阈值也变为原来的2倍。（容量和阈值都变为原来的2倍时，负载因子还是不变）</p>
-<p>由于数组的容量是以2的幂次方扩容的，那么一个Entity在扩容时，新的位置要么在原位置，要么在原长度+原位置的位置。数组长度变为原来的2倍，表现在二进制上就是多了一个高位参与数组下标确定。此时，一个元素通过hash转换坐标的方法计算后，恰好出现一个现象：最高位是0则坐标不变，最高位是1则坐标变为“原长度+原坐标”。在扩容时，不需要重新计算元素的hash了，只需要判断最高位是1还是0就好了。</p>
-<p>参考链接：
-<a href="https://blog.csdn.net/prairie97/article/details/78481493">java中Map和Set的底层分析</a>
-<a href="https://zhuanlan.zhihu.com/p/114363420">HashMap扩容机制</a></p>
-
-          </section>
-      </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            miyuki
-        
-        on
-            
-                <a href="https://sonemiyuki.cn/tags/java/">#Java</a>,
-            
-        
-        <time class="post-date" datetime="2021-07-11T22:29:30&#43;08:00">
-            11 Jul 2021
-        </time>
-    </footer>
-</article>
-
-	
-	   
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/get-post/">Jmeter(1)</a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <h4 id="jmeter">Jmeter</h4>
-<p>Jmeter脚本生成</p>
-<ul>
-<li>借助第三方工具录制
-<ul>
-<li>badboy 被淘汰</li>
-<li>blazemeter 大陆无法注册账号</li>
-</ul>
-</li>
-<li>使用自带的http代理服务器方式生成
-<ul>
-<li>添加线程&ndash;线程组</li>
-<li>添加配置元件&ndash;cookie管理器</li>
-<li>添加非测试元件&ndash;http代理服务器</li>
-<li>配置http代理服务器并启动
-<ul>
-<li>端口：用户指定，和服务器无关</li>
-<li>目标控制器：</li>
-<li>Type：有时候需要选Java</li>
-</ul>
-</li>
-<li>在客户端进行设置，使客户端请求通过代理。
-<ul>
-<li>Internet选项-连接-局域网设置</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>抓包手写</li>
-</ul>
-<p>Jmeter代理服务器</p>
-<ul>
-<li>转发</li>
-<li>翻译</li>
-</ul>
-
-          </section>
-      </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            miyuki
-        
-        on
-            
-                <a href="https://sonemiyuki.cn/tags/jmeter/">#Jmeter</a>,
-            
-                <a href="https://sonemiyuki.cn/tags/http/">#http</a>,
-            
-                <a href="https://sonemiyuki.cn/tags/tester/">#tester</a>,
-            
-        
-        <time class="post-date" datetime="2021-07-11T11:29:30&#43;08:00">
             11 Jul 2021
         </time>
     </footer>

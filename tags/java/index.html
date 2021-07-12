@@ -96,6 +96,149 @@
 	   
 <article class="post post">
     <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/12/java/">Java集合类数据结构</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h3 id="collection">Collection</h3>
+<p><img src="https://sonemiyuki.cn/images/java/Collections.png" alt="Collections"></p>
+<p>Collection提供了一系列接口给集合实现。</p>
+<h3 id="iterator">Iterator</h3>
+<p>Iterator：用于遍历集合的对象，本身是同名设计模式的体现。</p>
+<h3 id="abstractlist">AbstractList</h3>
+<p>AbstractList的算法是基于内部Iterator遍历实现的，用一个cursor和size()函数控制迭代的数量</p>
+<h3 id="spliterator">Spliterator</h3>
+<p>Spliterator是Java 8中加入的一个新接口；这个名字代表“可拆分迭代器”（splitable iterator）。和Iterator一样，Spliterator也用于遍历数据源中的元素，但它是为了并行执行而设计的。Java 8已经为集合框架中包含的所有数据结构提供了一个默认的Spliterator实现。集合实现了Spliterator接口，接口提供了一个spliterator方法。</p>
+<p>Spliterator可以单独遍历元素（tryAdvance()）或批量顺序遍历元素（forEachRemaining()）。Spliterator还可以将它的一些元素（使用trySplit()）进行分区作为另一个Spliterator，以用于可能并行的操作。使用无法拆分的Spliterator或以高度不平衡或低效的方式进行操作不太可能从并行性中受益。遍历和拆分至用完元素;每个Spliterator仅对单个批量计算有用。</p>
+<p>这个就是用来多线程并行迭代的迭代器，这个迭代器的主要作用就是把集合分成了好几段，每个线程执行一段，因此是线程安全的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">//如果存在剩余元素，则对其执行给定操作，返回true；否则返回false。如果此Spliterator为ORDERED，则会对遇见顺序中的下一个元素执行操作。操作抛出的异常会转发给调用者。
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">tryAdvance</span><span style="color:#f92672">(</span>Consumer<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">super</span> T<span style="color:#f92672">&gt;</span> action<span style="color:#f92672">);</span>
+ 
+<span style="color:#75715e">//按顺序对每个剩余元素执行给定操作，直到所有元素都已处理或操作抛出异常为止。如果此Spliterator为ORDERED，则会按遇见顺序执行操作。操作抛出的异常会转发给调用者。默认方法调用tryAdvance方法
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">default</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">forEachRemaining</span><span style="color:#f92672">(</span>Consumer<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">super</span> T<span style="color:#f92672">&gt;</span> action<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+   <span style="color:#66d9ef">do</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span> <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>tryAdvance<span style="color:#f92672">(</span>action<span style="color:#f92672">));</span>
+<span style="color:#f92672">}</span>
+ 
+<span style="color:#75715e">//对任务分割，返回一个新的Spliterator迭代器
+</span><span style="color:#75715e"></span>Spliterator<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">trySplit</span><span style="color:#f92672">();</span>
+ 
+<span style="color:#75715e">//用于估算还剩下多少个元素需要遍历
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">long</span> <span style="color:#a6e22e">estimateSize</span><span style="color:#f92672">();</span>
+ 
+<span style="color:#75715e">//当迭代器拥有SIZED特征时，返回剩余元素个数；否则返回-1
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">default</span> <span style="color:#66d9ef">long</span> <span style="color:#a6e22e">getExactSizeIfKnown</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+   <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>characteristics<span style="color:#f92672">()</span> <span style="color:#f92672">&amp;</span> SIZED<span style="color:#f92672">)</span> <span style="color:#f92672">==</span> 0 <span style="color:#f92672">?</span> <span style="color:#f92672">-</span>1L <span style="color:#f92672">:</span> estimateSize<span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+ 
+ <span style="color:#75715e">//返回当前对象有哪些特征值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">characteristics</span><span style="color:#f92672">();</span>
+ 
+<span style="color:#75715e">//是否具有当前特征值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">default</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">hasCharacteristics</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> characteristics<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+   <span style="color:#66d9ef">return</span> <span style="color:#f92672">(</span>characteristics<span style="color:#f92672">()</span> <span style="color:#f92672">&amp;</span> characteristics<span style="color:#f92672">)</span> <span style="color:#f92672">==</span> characteristics<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#75715e">//如果Spliterator的list是通过Comparator排序的，则返回Comparator
+</span><span style="color:#75715e">//如果Spliterator的list是自然排序的 ，则返回null
+</span><span style="color:#75715e">//其他情况下抛错
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">default</span> Comparator<span style="color:#f92672">&lt;?</span> <span style="color:#66d9ef">super</span> T<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getComparator</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IllegalStateException<span style="color:#f92672">();</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>注解：</p>
+<ol>
+<li>trySplit:一般使用二分法，修改自身index为mid，然后传下去。</li>
+<li>characteristics()：Spliterator接口中定义的一些集合的特征</li>
+<li>spliterator特征值附表：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ORDERED</td>
+<td>元素定义了遇见顺序，这使得拆分，下一个和遍历剩余有一个前缀顺序，没有保证基于散列的集合（如HashSet）的顺序</td>
+</tr>
+<tr>
+<td>DISTINCT</td>
+<td>每对遇到的元素x，y，!x.equals(y)</td>
+</tr>
+<tr>
+<td>SORTED</td>
+<td>在ORDERED基础上，遇见顺序遵循定义的排序顺序，此时getComparator()返回关联的Comparator，如果所有元素都是Comparable并按其自然顺序排序，则返回null。</td>
+</tr>
+<tr>
+<td>SIZED</td>
+<td>在遍历或拆分之前从estimateSize()返回的值表示有限大小</td>
+</tr>
+<tr>
+<td>NONNULL</td>
+<td>保证遇见的元素非空</td>
+</tr>
+<tr>
+<td>IMMUTABLE</td>
+<td>不能进行结构修改</td>
+</tr>
+<tr>
+<td>CONCURRENT</td>
+<td>多线程下安全Spliterator应该有一个关于遍历期间修改影响的记录策略</td>
+</tr>
+<tr>
+<td>SUBSIZED</td>
+<td>能够知道子结构的大小，因为一些树型结构不容易知道字子结构的大小</td>
+</tr>
+</tbody>
+</table>
+<p>Collections:</p>
+<p>|算法|阈值|低算法|高算法|
+|搜索|5000或支持随机存取|基于新的新的二分查找|
+|逆转|18或者支持随机存取|直接交换|基于迭代器的交换|
+|洗牌|5或支持随机存取|直接洗牌|基于迭代器洗牌|
+|填充|25或者支持随机存取|直接set|基于迭代器进行存储|
+|拷贝|10或者支持随机存取|直接set|基于迭代器的set|
+|切片-连接|100或者支持随机存取|直接set|三次反转算法|
+|替代全部算法|11或支持随机存取|直接set|基于迭代器的set|
+|子序列坐标（从前往后或从后往前）|35或者支持随机存取|基于普通的set|基于迭代器的set|</p>
+<h3 id="vector">Vector</h3>
+<p>方法是synchonized，比较安全。</p>
+<p>Vector原始容量是10
+需要多少扩多少，默认翻倍</p>
+<h3 id="stack">Stack</h3>
+<p>基于Vector派生，所有的操作都需要synchronized</p>
+<p>参考链接：</p>
+<p><a href="https://blog.csdn.net/qq_30711091/article/details/88847892">Java集合类</a>
+<a href="https://blog.csdn.net/sl1992/article/details/100149187">Spliterator 1</a>
+<a href="https://www.cnblogs.com/nevermorewang/p/9368431.html">Spliterator 2</a></p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/java/">#Java</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-12T16:29:30&#43;08:00">
+            12 Jul 2021
+        </time>
+    </footer>
+</article>
+
+	
+	   
+<article class="post post">
+    <header class="post-header">
         <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/java/">Java面经后端</a></h2>
     </header>
     <section class="post-excerpt">
@@ -195,8 +338,86 @@ String的equals重写将另一个对象强转String</p>
 <h2 id="hashcode-和-equals">hashCode 和 equals</h2>
 <p>hashCode:获取哈希值，或者说将其map到int的范围内。</p>
 <p>对象加入HashSet的时候，HashSet会先计算对象的HashCode判断对象加入的位置，看该位置是否还有值，若无，java假设对象没有重复出现，如果发现有，调用equals检查是否相同。核心在减少equals的次数</p>
+<h2 id="default-关键字">default 关键字</h2>
+<p>Java 8在增强集合的过程中引进了default关键字。让其支持lambda表达式的时候，就面临了这样的挑战。为了克服这个困难，Java 8中引入了一个新的概念，叫做default方法，也可以称为Defender方法，或者虚拟扩展方法（Virtual extension methods)。
+Default方法是指，在接口内部包含了一些默认的方法实现（也就是接口中可以包含方法体，这打破了Java之前版本对接口的语法限制），从而使得接口在进行扩展的时候，不会破坏与接口相关的实现类代码。
+Default方法实现了对接口的扩展。
+同名的default方法必须在扩展类中被重写。
+Iterator接口的default方法是这样的：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">default</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">remove</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> UnsupportedOperationException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;remove&#34;</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>如果不重写，默认Iterator无法使用Remove方法，反之，若重写，就代表支持。</p>
+<h3 id="jdk-8-function接口">JDK 8 Function接口</h3>
+<p>类似于数学上的函数，需要实现一个从泛型T到泛型R的函数映射，实现apply方法。</p>
+<p>compose 和 andThen</p>
+<p>compose括号里的before函数先走，然后是调用函数，然后是andThen括号里的after函数。</p>
+<p><img src="https://sonemiyuki.cn/images/java/FunctionInterface.png" alt="compose 和 andThen"></p>
+<h3 id="transient关键字">transient关键字</h3>
+<p>transient是短暂的意思。对于transient 修饰的成员变量，在类的实例对象的序列化处理过程中会被忽略。 因此，transient变量不会贯穿对象的序列化和反序列化，生命周期仅存于调用者的内存中而不会写到磁盘里进行持久化。</p>
+<h3 id="synchronized关键字">synchronized关键字</h3>
+<p>synchronized锁什么？锁对象。</p>
+<p>锁的对象包括：</p>
+<ul>
+<li>this</li>
+<li>临界资源对象</li>
+<li>Class 类对象。</li>
+</ul>
+<p>保证同一时刻最多只有1个线程执行 被Synchronized修饰的方法 / 代码</p>
+<ul>
+<li>修饰 实例方法 / 代码块时，（同步）保护的是同一个对象方法的调用 &amp; 当前实例对象</li>
+<li>修饰 静态方法 / 代码块时，（同步）保护的是 静态方法的调用 &amp; class 类对象</li>
+</ul>
+<p>原理</p>
+<ol>
+<li>依赖JVM实现JVM等级的同步</li>
+<li>底层通过一个monitor完成，wait，notify方法也依赖于monitor对象</li>
+</ol>
+<p>特点：原子性、可见性、有序性、可重入性、重量级</p>
+<p>机理：</p>
+<ol>
+<li>维护锁的持有线程和持有数量</li>
+<li>调用synchronized代码是检查对象是否被锁
+<ol>
+<li>是的话检查是否被当前线程锁定</li>
+<li>不是的话假如等待队列，计数加1</li>
+</ol>
+</li>
+<li>释放的时候计数减1</li>
+<li>计数为0释放锁</li>
+</ol>
+<p>当锁定对象为this 时，相当于同步方法。</p>
+<p>Java 中锁的种类大致分为</p>
+<ul>
+<li>偏向锁</li>
+<li>自旋锁</li>
+<li>轻量级锁</li>
+<li>重量级锁</li>
+</ul>
+<p>因为 synchronized 无论是同步的方法还是同步的代码块，都会先把主内存的数据拷贝到工作内存中，同步代码块结束，会把工作内存中的数据更新到主内存中，这样主内存中的数据一定是最新的。更重要的是禁用了乱序重组以及保证了值对存储器的写入，这样就可以保证可见性。</p>
+<p>缺点：</p>
+<ul>
+<li>等待线程无法控制</li>
+<li>线程存在插队现象</li>
+</ul>
+<p>同步方法：</p>
+<p>同步方法锁定的是当前对象。当多线程通过同一个对象引用多次调用当前同步方法时，需同步执行。
+也就是说当一个线程访问同步方法时，其他线程访问这个方法将会被阻塞(等待锁)。</p>
+<p>同步代码块：
+用细粒度的同步增加效率。</p>
+<ul>
+<li>注意把IO语句移出同步块</li>
+</ul>
+<p>synchronized(非this对象 object)，这个对象如果是实例变量的话，指的是对象的引用，只要对象的引用不变，即使改变了对象的属性，运行结果依然是同步的。</p>
+<p>锁的是堆内存中的对象，而不是引用。</p>
+<p>synchronized 还可以应用在静态方法上，如果这么写，则代表的是对当前 .java 文件对应的 Class 类加锁。</p>
+<p>发生异常自动释放锁</p>
 <p>参考链接：
-<a href="https://blog.csdn.net/super_YC/article/details/71439786">java 程序编译和运行过程详解</a></p>
+<a href="https://blog.csdn.net/super_YC/article/details/71439786">java 程序编译和运行过程详解</a>
+<a href="https://blog.csdn.net/qq_41595139/article/details/108367464">Default关键字</a>
+<a href="https://blog.csdn.net/wang_zqiang/article/details/86595735">Function接口简介</a>
+<a href="https://blog.csdn.net/a1102325298/article/details/82595923">synchronized关键字</a>
+<a href="https://www.jianshu.com/p/2ed498b43628">synchronized关键字2</a></p>
 
           </section>
       </p>
@@ -254,7 +475,10 @@ String的equals重写将另一个对象强转String</p>
 <p>由于数组的容量是以2的幂次方扩容的，那么一个Entity在扩容时，新的位置要么在原位置，要么在原长度+原位置的位置。数组长度变为原来的2倍，表现在二进制上就是多了一个高位参与数组下标确定。此时，一个元素通过hash转换坐标的方法计算后，恰好出现一个现象：最高位是0则坐标不变，最高位是1则坐标变为“原长度+原坐标”。在扩容时，不需要重新计算元素的hash了，只需要判断最高位是1还是0就好了。</p>
 <p>参考链接：
 <a href="https://blog.csdn.net/prairie97/article/details/78481493">java中Map和Set的底层分析</a>
-<a href="https://zhuanlan.zhihu.com/p/114363420">HashMap扩容机制</a></p>
+<a href="https://zhuanlan.zhihu.com/p/114363420">HashMap扩容机制</a>
+<a href="https://blog.csdn.net/qq_30711091/article/details/88847892">Java集合类</a>
+<a href="https://blog.csdn.net/sl1992/article/details/100149187">Spliterator 1</a>
+<a href="https://www.cnblogs.com/nevermorewang/p/9368431.html">Spliterator 2</a></p>
 
           </section>
       </p>
