@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on 世界的中心</title>
+    <link>https://sonemiyuki.cn/tags/mysql/</link>
+    <description>Recent content in MySQL on 世界的中心</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>All rights reserved - 2021-</copyright>
+    <lastBuildDate>Sat, 10 Jul 2021 16:54:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mysql面经</title>
+      <link>https://sonemiyuki.cn/post/2021/07/10/database/</link>
+      <pubDate>Sat, 10 Jul 2021 16:54:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/10/database/</guid>
+      <description>为什么有索引系统 索引：帮助MySQL高效获取数据的数据结构。
+B+ Tree 弥补红黑树的缺陷，映射链表，便于区间查询。
+MySQL 储存引擎    引擎 MyISAM MEMORY InnoDB     存储限制 256T RAM 64T   事务 N N Y   全文索引 Y N N   B-Tree索引 Y Y Y   Hash索引 N Y N   集群索引 N N Y   数据索引 N Y Y   数据压缩 Y N N   空间使用率 低 N/A 高   外键 N N Y    MyISAM：</description>
+    </item>
+    
+  </channel>
+</rss>

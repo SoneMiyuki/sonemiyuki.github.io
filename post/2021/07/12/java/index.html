@@ -253,6 +253,45 @@
 需要多少扩多少，默认翻倍</p>
 <h3 id="stack">Stack</h3>
 <p>基于Vector派生，所有的操作都需要synchronized</p>
+<h3 id="arraylist">ArrayList</h3>
+<p>默认容量10
+底层data基于数组</p>
+<p>获取迭代器时会将 expectedModCount 赋值为 modCount， 若在使用迭代器迭代期间修改列表则会导致两者不相等，调用next()时会进行checkForComodification检查抛异常。说明迭代时不可以进行修改操作。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">//保证空间
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ensureCapacity</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> minCapacity<span style="color:#f92672">)</span>
+<span style="color:#75715e">//grow()进行扩容
+</span><span style="color:#75715e">//grow使其容量增长
+</span><span style="color:#75715e">//newCapacity(minCapacity)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">newCapacity</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> minCapacity<span style="color:#f92672">)</span>
+<span style="color:#75715e">//初始化的时候扩到max(10, 最小容量)
+</span><span style="color:#75715e">//新容量&lt;最小容量的时候直接扩到最小容量
+</span><span style="color:#75715e">//未超过maxarraysize就1.5倍扩张
+</span><span style="color:#75715e">//MAX_ARRAY_SIZE = MAX_INT - 8
+</span><span style="color:#75715e">//超过maxarraysize就扩容成maxin
+</span></code></pre></div><p>维护一个信号量，所有潜在的引起并发问题的crud都要走modcount，修改前获取modcount，然后对其进行操作，操作之后比较modcount，然后对modcount++表示当前操作进行处理</p>
+<h3 id="abstract-sequencial-list">Abstract Sequencial List</h3>
+<p>将一些crud操作改造为走迭代器的模式</p>
+<h3 id="linkedlist">LinkedList</h3>
+<p>Node数据结构：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span><span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+   E item<span style="color:#f92672">;</span>
+   Node<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> next<span style="color:#f92672">;</span>
+   Node<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> prev<span style="color:#f92672">;</span>
+
+   Node<span style="color:#f92672">(</span>Node<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> prev<span style="color:#f92672">,</span> E element<span style="color:#f92672">,</span> Node<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> next<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">item</span> <span style="color:#f92672">=</span> element<span style="color:#f92672">;</span>
+      <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> next<span style="color:#f92672">;</span>
+      <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> prev<span style="color:#f92672">;</span>
+   <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="hashmap">HashMap</h3>
+<p>默认容量16
+最大容量2^30
+改树阈值8
+改链阈值6</p>
+<p>本质上是基于Java链表的一个实现。</p>
+<p>基于2的幂次扩容</p>
+<h3 id="hashmap重要">HashMap重要</h3>
 <p>参考链接：</p>
 <p><a href="https://blog.csdn.net/qq_30711091/article/details/88847892">Java集合类</a>
 <a href="https://blog.csdn.net/sl1992/article/details/100149187">Spliterator 1</a>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DataStructure on 世界的中心</title>
+    <link>https://sonemiyuki.cn/tags/datastructure/</link>
+    <description>Recent content in DataStructure on 世界的中心</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <copyright>All rights reserved - 2021-</copyright>
+    <lastBuildDate>Tue, 13 Jul 2021 14:29:30 +0800</lastBuildDate><atom:link href="https://sonemiyuki.cn/tags/datastructure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据结构常识</title>
+      <link>https://sonemiyuki.cn/post/2021/07/13/java/</link>
+      <pubDate>Tue, 13 Jul 2021 14:29:30 +0800</pubDate>
+      
+      <guid>https://sonemiyuki.cn/post/2021/07/13/java/</guid>
+      <description>BST 二叉搜索树 左小右大，递归定义。 新插入的节点永远是叶子。
+平衡二叉树 增加操作
+ 旋转  左左 右右   双旋  左右 右左    删除操作
+删根：补充比较高的树的节点，左补大，右补小
+删树：递归下去查找
+删除节点之后进行适当旋转
+平衡二叉搜索树（Self-balancing binary search tree）又被称为AVL树（有别于AVL算法），且具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。平衡二叉树上所有结点的平衡因子只可能是 -1，0 或 1。如果某一结点的平衡因子绝对值大于1则说明此树不是平衡二叉树。为了方便计算每一结点的平衡因子我们可以为每个节点赋予height这一属性，表示此节点的高度。
+ALV树适用于大量查询，少量插入和删除的场景中。
+红黑树（R-B Tree） 大量查询，大量插入和删除，现在使用ALV树就不太合适了，因为ALV树大量的插入和删除。适当牺牲平衡性换取增删的效率。
+红黑树中，空节点也是树的一部分。
+1）每个结点或红或黑 2）根结点是黑色 3）空叶子结点是黑色 4）如果一个结点是红色，那么它的子节点是黑色 5）从任意一个结点出发到他的后代的空的叶子结点经过的黑结点个数相同
+任意结点到空的叶子结点的所有路径中，没有一条路径会大于其他路径的两倍
+Java集合中的TreeSet和TreeMap，C++ STL中的set、map，以及Linux虚拟内存的管理，都是通过红黑树去实现的。
+旋转操作
+ 左旋 右旋  增加操作
+先用平衡树的方式插入结点，将结点染红，通过旋转和重新着色使得其重新成为红黑树。
+我们有必要重复一下五条性质
+1）每个结点或红或黑 2）根结点是黑色 3）空叶子结点是黑色 4）如果一个结点是红色，那么它的子节点是黑色 5）从任意一个结点出发到他的后代的空的叶子结点经过的黑结点个数相同
+新插入一个红结点，只会和性质4冲突。
+新增的结点（红色）插入之后可能面临的几种情况，以及他们的处理措施
+删除节点
+  删除结点为红色
+ 直接删除    删除结点为黑色，其兄弟结点没有儿子
+ 兄弟结点变红，父亲结点变黑，然后将父亲结点当作当前结点按照这几种情形处理，直到当前结点为根结点    删除结点为黑色，其兄弟结点有一个孩子不空，并且该孩子和兄弟结点在同一边（同为左子树或者同为右子树）：</description>
+    </item>
+    
+  </channel>
+</rss>

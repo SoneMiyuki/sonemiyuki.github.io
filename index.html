@@ -83,13 +83,208 @@
     <div class="extra-pagination inner">
         <nav class="pagination" role="navigation">
 	
-	<span class="page-number">Page 1 of 3</span>
+	<span class="page-number">Page 1 of 4</span>
 	
 	    <a class="older-posts" href="https://sonemiyuki.cn/page/2/">Older Posts &rarr;</a>
 	
 </nav>
 
     </div>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/13/catalogue/">准备目录</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <ul>
+<li>计算机网络</li>
+<li>操作系统</li>
+<li>Mysql数据库</li>
+<li>Linux常用命令</li>
+<li>Java后端框架</li>
+<li>Java基础</li>
+<li>Java集合类</li>
+<li>Jmeter</li>
+<li>数据结构</li>
+</ul>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/catalogue/">#catalogue</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-13T16:58:30&#43;08:00">
+            13 Jul 2021
+        </time>
+    </footer>
+</article>
+
+    
+        
+<article class="post post">
+    <header class="post-header">
+        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/13/java/">数据结构常识</a></h2>
+    </header>
+    <section class="post-excerpt">
+      <p>
+          <section class="post-content">
+            <h3 id="bst-二叉搜索树">BST 二叉搜索树</h3>
+<p>左小右大，递归定义。
+新插入的节点永远是叶子。</p>
+<h3 id="平衡二叉树">平衡二叉树</h3>
+<p>增加操作</p>
+<ul>
+<li>旋转
+<ul>
+<li>左左</li>
+<li>右右</li>
+</ul>
+</li>
+<li>双旋
+<ul>
+<li>左右</li>
+<li>右左</li>
+</ul>
+</li>
+</ul>
+<p>删除操作</p>
+<p>删根：补充比较高的树的节点，左补大，右补小</p>
+<p>删树：递归下去查找</p>
+<p>删除节点之后进行适当旋转</p>
+<p>平衡二叉搜索树（Self-balancing binary search tree）又被称为AVL树（有别于AVL算法），且具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。平衡二叉树上所有结点的平衡因子只可能是 -1，0 或 1。如果某一结点的平衡因子绝对值大于1则说明此树不是平衡二叉树。为了方便计算每一结点的平衡因子我们可以为每个节点赋予height这一属性，表示此节点的高度。</p>
+<p>ALV树适用于大量查询，少量插入和删除的场景中。</p>
+<h3 id="红黑树r-b-tree">红黑树（R-B Tree）</h3>
+<p>大量查询，大量插入和删除，现在使用ALV树就不太合适了，因为ALV树大量的插入和删除。适当牺牲平衡性换取增删的效率。</p>
+<p>红黑树中，空节点也是树的一部分。</p>
+<p>1）每个结点或红或黑
+2）根结点是黑色
+3）空叶子结点是黑色
+4）如果一个结点是红色，那么它的子节点是黑色
+5）从任意一个结点出发到他的后代的空的叶子结点经过的黑结点个数相同</p>
+<p>任意结点到空的叶子结点的所有路径中，没有一条路径会大于其他路径的两倍</p>
+<p>Java集合中的TreeSet和TreeMap，C++ STL中的set、map，以及Linux虚拟内存的管理，都是通过红黑树去实现的。</p>
+<p>旋转操作</p>
+<ul>
+<li>左旋</li>
+<li>右旋</li>
+</ul>
+<p>增加操作</p>
+<p>先用平衡树的方式插入结点，将结点染红，通过旋转和重新着色使得其重新成为红黑树。</p>
+<p>我们有必要重复一下五条性质</p>
+<p>1）每个结点或红或黑
+2）根结点是黑色
+3）空叶子结点是黑色
+4）如果一个结点是红色，那么它的子节点是黑色
+5）从任意一个结点出发到他的后代的空的叶子结点经过的黑结点个数相同</p>
+<p>新插入一个红结点，只会和性质4冲突。</p>
+<p>新增的结点（红色）插入之后可能面临的几种情况，以及他们的处理措施</p>
+<p>删除节点</p>
+<ol>
+<li>
+<p>删除结点为红色</p>
+<ol>
+<li>直接删除</li>
+</ol>
+</li>
+<li>
+<p>删除结点为黑色，其兄弟结点没有儿子</p>
+<ol>
+<li>兄弟结点变红，父亲结点变黑，然后将父亲结点当作当前结点按照这几种情形处理，直到当前结点为根结点</li>
+</ol>
+</li>
+<li>
+<p>删除结点为黑色，其兄弟结点有一个孩子不空，并且该孩子和兄弟结点在同一边（同为左子树或者同为右子树）：</p>
+<ol>
+<li>不管是括号中那种情况，先交换兄弟结点和父亲结点的颜色，并且把父亲结点和兄弟结点的子结点涂成黑色</li>
+<li>其他情况
+<ol>
+<li>如果兄弟结点和兄弟结点的儿子都在右子树的话：对父亲结点进行左旋</li>
+<li>如果兄弟结点和兄弟结点的儿子都在左子树的话：对父亲结点进行右旋</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>删除结点为黑色，其兄弟结点有一个孩子不空，并且该孩子和兄弟结点不在同一边（右左或者左右的情况）</p>
+<ol>
+<li>先将兄弟结点和兄弟结点的儿子结点颜色互换</li>
+<li>其他情况
+<ol>
+<li>如果兄弟结点是左子树，兄弟结点的儿子结点是右子树：对兄弟结点进行左旋</li>
+<li>如果兄弟结点是右子树，兄弟结点的儿子结点是左子树：对兄弟结点进行右旋</li>
+</ol>
+</li>
+<li>将后续变换按照第3条处理</li>
+</ol>
+</li>
+<li>
+<p>删除结点为黑色，其兄弟结点有两个孩子，兄弟结点为黑色而且两个孩子结点也为黑色：</p>
+<ol>
+<li>将父亲结点和兄弟结点颜色互换</li>
+</ol>
+</li>
+<li>
+<p>删除结点为黑色，其兄弟结点有两个孩子，而且兄弟结点为红色：</p>
+<ol>
+<li>将兄弟结点和父亲结点的颜色互换</li>
+<li>其他情况
+<ol>
+<li>被删除的元素为左子树：对父亲结点左旋</li>
+<li>被删除的元素为右子树：对父亲结点右旋</li>
+<li>将后续变换按照第5条进行处理</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>剩下一个儿子：</p>
+<ul>
+<li>将儿子结点涂成黑色放到被删除结点的位置</li>
+</ul>
+<p>剩下两个儿子：</p>
+<p>找到删除结点的右子树中最左的结点，两两值交换，然后删除结点的情况就变成了上面两种情况中的一种了</p>
+<p>1.删除结点只有一个儿子的情况</p>
+<p>2.删除结点没有儿子的情况</p>
+<p>参考链接：
+<a href="%E7%BA%A2%E9%BB%91%E6%A0%91">https://www.cnblogs.com/yinbiao/p/10732600.html</a>
+<a href="%E5%B9%B3%E8%A1%A1%E6%A0%91">https://www.cnblogs.com/zhangbaochong/p/5164994.html</a></p>
+
+          </section>
+      </p>
+      
+    </section>
+    <footer class="post-meta">
+        
+            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
+        
+        
+            miyuki
+        
+        on
+            
+                <a href="https://sonemiyuki.cn/tags/datastructure/">#DataStructure</a>,
+            
+        
+        <time class="post-date" datetime="2021-07-13T14:29:30&#43;08:00">
+            13 Jul 2021
+        </time>
+    </footer>
+</article>
 
     
         
@@ -731,6 +926,45 @@ FSCAN
 需要多少扩多少，默认翻倍</p>
 <h3 id="stack">Stack</h3>
 <p>基于Vector派生，所有的操作都需要synchronized</p>
+<h3 id="arraylist">ArrayList</h3>
+<p>默认容量10
+底层data基于数组</p>
+<p>获取迭代器时会将 expectedModCount 赋值为 modCount， 若在使用迭代器迭代期间修改列表则会导致两者不相等，调用next()时会进行checkForComodification检查抛异常。说明迭代时不可以进行修改操作。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#75715e">//保证空间
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ensureCapacity</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> minCapacity<span style="color:#f92672">)</span>
+<span style="color:#75715e">//grow()进行扩容
+</span><span style="color:#75715e">//grow使其容量增长
+</span><span style="color:#75715e">//newCapacity(minCapacity)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">newCapacity</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> minCapacity<span style="color:#f92672">)</span>
+<span style="color:#75715e">//初始化的时候扩到max(10, 最小容量)
+</span><span style="color:#75715e">//新容量&lt;最小容量的时候直接扩到最小容量
+</span><span style="color:#75715e">//未超过maxarraysize就1.5倍扩张
+</span><span style="color:#75715e">//MAX_ARRAY_SIZE = MAX_INT - 8
+</span><span style="color:#75715e">//超过maxarraysize就扩容成maxin
+</span></code></pre></div><p>维护一个信号量，所有潜在的引起并发问题的crud都要走modcount，修改前获取modcount，然后对其进行操作，操作之后比较modcount，然后对modcount++表示当前操作进行处理</p>
+<h3 id="abstract-sequencial-list">Abstract Sequencial List</h3>
+<p>将一些crud操作改造为走迭代器的模式</p>
+<h3 id="linkedlist">LinkedList</h3>
+<p>Node数据结构：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Java" data-lang="Java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span><span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> <span style="color:#f92672">{</span>
+   E item<span style="color:#f92672">;</span>
+   Node<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> next<span style="color:#f92672">;</span>
+   Node<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> prev<span style="color:#f92672">;</span>
+
+   Node<span style="color:#f92672">(</span>Node<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> prev<span style="color:#f92672">,</span> E element<span style="color:#f92672">,</span> Node<span style="color:#f92672">&lt;</span>E<span style="color:#f92672">&gt;</span> next<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">item</span> <span style="color:#f92672">=</span> element<span style="color:#f92672">;</span>
+      <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> next<span style="color:#f92672">;</span>
+      <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> prev<span style="color:#f92672">;</span>
+   <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="hashmap">HashMap</h3>
+<p>默认容量16
+最大容量2^30
+改树阈值8
+改链阈值6</p>
+<p>本质上是基于Java链表的一个实现。</p>
+<p>基于2的幂次扩容</p>
+<h3 id="hashmap重要">HashMap重要</h3>
 <p>参考链接：</p>
 <p><a href="https://blog.csdn.net/qq_30711091/article/details/88847892">Java集合类</a>
 <a href="https://blog.csdn.net/sl1992/article/details/100149187">Spliterator 1</a>
@@ -759,257 +993,10 @@ FSCAN
 </article>
 
     
-        
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/network/">计算机网络面经与常见QA（2）</a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            <ol start="11">
-<li><strong>各层的报文格式</strong></li>
-</ol>
-<ul>
-<li>以太网帧
-<ul>
-<li>目标MAC地址（6B）</li>
-<li>源MAC地址（6B）</li>
-<li>类型（2B）</li>
-<li>数据（46-1500B）</li>
-<li>FCS（4B）</li>
-</ul>
-</li>
-<li>IP数据报
-<ul>
-<li>版本（4bit）</li>
-<li>header长度（4bit），以32bit为单位</li>
-<li>服务类型（8bit）</li>
-<li>总长度（16bit）</li>
-<li>上层协议标识（16bit）标记上层协议</li>
-<li>标志：（3bit）用来表示是否有分片，是否允许分片等</li>
-<li>片偏移量（13bit）以8bit为单位的片偏移量</li>
-<li>生存时间（8bit）跳数限制，若TTL为0，则丢弃这个数据包</li>
-<li>协议（8bit）</li>
-<li>校验和（16bit）检验首部的校验和</li>
-<li>源地址（32bit）</li>
-<li>目的地址（32bit）</li>
-</ul>
-</li>
-<li>UDP数据报
-<ul>
-<li>源端口（16bit）</li>
-<li>目的端口（16bit）</li>
-<li>UDP长度（16bit）</li>
-<li>UDP校验和（16bit）</li>
-<li>伪首部：前缀源IP（4B），目的IP（4B），0（1B），17（1B），UPD长度（2B），以16个bit为单位，按位加法，然后取反。</li>
-</ul>
-</li>
-<li>TCP数据报
-<ul>
-<li>源端口（16bit）</li>
-<li>目的端口（16bit）</li>
-<li>数据序号seq（16bit）</li>
-<li>确认序号ack（16bit）</li>
-<li>偏移量（4bit）</li>
-<li>保留（6bit）</li>
-<li>六个标志位（6bit）
-<ul>
-<li>URG：紧急指针字段有效，尽快传输</li>
-<li>ACK：设定ack字段有效</li>
-<li>PSH：尽快将报文传给应用层</li>
-<li>RST：要求重建TCP</li>
-<li>SYN：设定syn字段有效</li>
-<li>FIN：表示传输结束，请求释放连接</li>
-</ul>
-</li>
-<li>窗口字段（16bit）</li>
-<li>校验和（16bit）</li>
-<li>紧急指针（16bit）</li>
-</ul>
-</li>
-</ul>
-<ol start="12">
-<li>
-<p><strong>建立TCP/UDP连接的调用</strong>
-<img src="https://sonemiyuki.cn/images/socketprocess.png" alt="TCP/UDP过程"></p>
-</li>
-<li>
-<p><strong>路由协议</strong></p>
-</li>
-</ol>
-<ul>
-<li><strong>RIP(Routing Information Protocol)路由信息协议</strong>
-<ul>
-<li>距离向量型的一种路由协议</li>
-<li>30s一次,对全网广播,等待5次,将已知路由进行广播,然后下一跳继续广播,进行逐步传播</li>
-</ul>
-</li>
-<li><strong>OSPF(Open Shortest Path First)开放最短路径优先</strong>
-<ul>
-<li>基于IP</li>
-<li>适用泛洪法发送请求</li>
-<li>发送信息是路由器临近的所有路由器的链路状态</li>
-<li>链路状态变化才发送信息</li>
-<li>Dijkstra</li>
-<li>收敛快</li>
-<li>划分自治系统</li>
-<li>问候、数据库描述、链路状态请求、链路状态更新、链路状态确认</li>
-</ul>
-</li>
-<li><strong>BGP(Border Gateway Protrol)边界网关协议</strong>
-<ul>
-<li>寻求一条能到达目的地并且比较好的路由</li>
-<li>BGP发言人</li>
-</ul>
-</li>
-</ul>
-<ol start="14">
-<li><strong>等待2MSL的原因</strong></li>
-</ol>
-<ul>
-<li>保证客户端发送的最后一个ACK报文能够到达服务器。</li>
-<li>新的连接中不会出现旧连接的请求报文。</li>
-</ul>
-<ol start="15">
-<li><strong>TCP的可靠性</strong></li>
-</ol>
-<ul>
-<li>校验和</li>
-<li>序列号</li>
-<li>确认应答</li>
-<li>超时重传
-<ul>
-<li>超时重传基于两个可能的原因
-<ul>
-<li>发送过去的包全体丢包,接到这个包之后接收方没有收到</li>
-<li>接受的ACK报文丢包,接收方发现数据存在,仍然发送ACK应答</li>
-</ul>
-</li>
-<li>动态计算最大超时时间</li>
-</ul>
-</li>
-<li>连接管理
-<ul>
-<li>三次握手,四次挥手确保可靠的连接</li>
-</ul>
-</li>
-<li>流量管理
-<ul>
-<li>滑动窗口大小的内容实际上是接收端数据缓冲区的剩余大小。接收端会在确认应答发送ACK报文时，将自己的即时窗口大小填入，并跟随ACK报文一起发送过去。而发送方根据ACK报文里的窗口大小的值的改变进而改变自己的发送速度。如果接收到窗口大小的值为0，那么发送方将停止发送数据。并定期的向接收端发送<strong>窗口探测</strong>数据段，让接收端把窗口大小告诉发送端。</li>
-</ul>
-</li>
-<li>拥塞控制
-<ul>
-<li>慢启动:少量数据探路,拥塞窗口指数增长</li>
-<li>增长过阈值之后线性增长</li>
-<li>拥塞之后慢启动的阈值变为原来的一半,拥塞窗口重置为 1</li>
-</ul>
-</li>
-</ul>
-<ol start="16">
-<li><strong>糊涂窗口综合征</strong></li>
-</ol>
-<ul>
-<li>
-<p>当TCP中发送端发送数据很慢或者接收端接收缓冲数据很慢,就会使得应用进程的有效载荷很小。</p>
-</li>
-<li>
-<p>发送端：利用算法强迫TCP收集一定数据为更大的数据块再发送，Nagle算法决定TCP的等待时延</p>
-</li>
-<li>
-<p>接收端：</p>
-<ul>
-<li>Clark解决方法 Clark解决方法是只要有数据到达就发送确认，但宣布的窗口大小为零，直到或者缓存空间已能放入具有最大长度的报文段，或者缓存空间的一半已经空了。</li>
-<li>延迟确认 第二个解决方法是延迟一段时间后再发送确认。这表示当一个报文段到达时并不立即发送确认。接收端在确认收到的报文段之前一直等待，直到入缓存有足够的空间为止。延迟的确认防止了发送端的TCP滑动其窗口。当发送端的TCP发送完其数据后，它就停下来了。这样就防止了这种症状。</li>
-</ul>
-</li>
-<li>
-<p><a href="https://www.cnblogs.com/mawanglin2008/articles/3607767.html">参考链接1-FTP的主动模式和被动模式</a></p>
-</li>
-<li>
-<p><a href="https://www.nowcoder.com/discuss/1937">参考链接2-面经</a></p>
-</li>
-<li>
-<p><a href="https://blog.csdn.net/chpdirector84/article/details/6033511">参考链接3-RARP</a></p>
-</li>
-<li>
-<p><a href="https://blog.csdn.net/qq_30852577/article/details/79009060">参考链接4-路由协议</a></p>
-</li>
-<li>
-<p><a href="https://blog.csdn.net/qzcsu/article/details/72861891">参考链接5-TCP面经</a></p>
-</li>
-<li>
-<p><a href="https://blog.csdn.net/liuchenxia8/article/details/80428157">参考链接6-TCP/IP</a></p>
-</li>
-<li>
-<p><a href="https://www.cnblogs.com/ggjucheng/archive/2012/02/03/2337046.html">参考链接7-糊涂窗口综合征</a></p>
-</li>
-</ul>
-<p>参考书目：
-《计算机网络（第7版）》谢希仁</p>
-
-          </section>
-      </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            miyuki
-        
-        on
-            
-                <a href="https://sonemiyuki.cn/tags/http/">#http</a>,
-            
-                <a href="https://sonemiyuki.cn/tags/%E7%BD%91%E7%BB%9C/">#网络</a>,
-            
-        
-        <time class="post-date" datetime="2021-07-11T23:41:30&#43;08:00">
-            11 Jul 2021
-        </time>
-    </footer>
-</article>
-
-    
-        
-<article class="post post">
-    <header class="post-header">
-        <h2 class="post-title"><a href="https://sonemiyuki.cn/post/2021/07/11/java/">Java面经后端</a></h2>
-    </header>
-    <section class="post-excerpt">
-      <p>
-          <section class="post-content">
-            
-          </section>
-      </p>
-      
-    </section>
-    <footer class="post-meta">
-        
-            <img class="author-thumb" src="https://sonemiyuki.cn/images/user.png" alt="Author image" nopin="nopin" />
-        
-        
-            miyuki
-        
-        on
-            
-                <a href="https://sonemiyuki.cn/tags/java/">#Java</a>,
-            
-        
-        <time class="post-date" datetime="2021-07-11T22:29:30&#43;08:00">
-            11 Jul 2021
-        </time>
-    </footer>
-</article>
-
-    
 
     <nav class="pagination" role="navigation">
 	
-	<span class="page-number">Page 1 of 3</span>
+	<span class="page-number">Page 1 of 4</span>
 	
 	    <a class="older-posts" href="https://sonemiyuki.cn/page/2/">Older Posts &rarr;</a>
 	

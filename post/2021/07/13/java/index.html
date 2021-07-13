@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  	<meta property="og:title" content=" 数据结构常识 &middot;  世界的中心" />
+  	<meta property="og:site_name" content="世界的中心" />
+  	<meta property="og:url" content="https://sonemiyuki.cn/post/2021/07/13/java/" />
+    
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2021-07-13T14:29:30&#43;08:00" />
+
+    
+    <meta property="og:article:tag" content="DataStructure" />
+    
+    
+
+  <title>
+     数据结构常识 &middot;  世界的中心
+  </title>
+
+    <meta name="description" content="教学楼的天台，是世界的中心。" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://sonemiyuki.cn/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="https://sonemiyuki.cn/images/apple-touch-icon.png" />
+    
+    <link rel="stylesheet" type="text/css" href="https://sonemiyuki.cn/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="https://sonemiyuki.cn/index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.83.0" />
+
+    <link rel="canonical" href="https://sonemiyuki.cn/post/2021/07/13/java/" />
+
+     
+</head>
+<body class="nav-closed">
+<div id="particles-js"></div>
+  
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header " style="background-image: url(https://sonemiyuki.cn/images/user.jpg)">
+
+    <nav class="main-nav overlay clearfix">
+        
+            <a class="blog-logo" href="https://sonemiyuki.cn/"><img src="https://sonemiyuki.cn/images/user.png" alt="Blog Logo" /></a>
+        
+        
+    </nav>
+<div class="vertical">
+        <div class="main-header-content inner">
+            <h1 class="page-title">
+              <a class="btn-bootstrap-2" href="#content">世界的中心</a>
+          </h1>
+          <h2 class="page-description">教学楼的天台，是世界的中心。</h2>
+        </div>
+</div>
+    <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
+</header>
+
+  <main id="content" class="content" role="main">
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">数据结构常识</h1>
+        <section class="post-meta">
+        
+	<time class="post-date" datetime="2021-07-13">
+            2021-07-13
+          </time>
+        
+         
+          <span class="post-tag small"><a href="https://sonemiyuki.cn/tags/datastructure/">#DataStructure</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <h3 id="bst-二叉搜索树">BST 二叉搜索树</h3>
+<p>左小右大，递归定义。
+新插入的节点永远是叶子。</p>
+<h3 id="平衡二叉树">平衡二叉树</h3>
+<p>增加操作</p>
+<ul>
+<li>旋转
+<ul>
+<li>左左</li>
+<li>右右</li>
+</ul>
+</li>
+<li>双旋
+<ul>
+<li>左右</li>
+<li>右左</li>
+</ul>
+</li>
+</ul>
+<p>删除操作</p>
+<p>删根：补充比较高的树的节点，左补大，右补小</p>
+<p>删树：递归下去查找</p>
+<p>删除节点之后进行适当旋转</p>
+<p>平衡二叉搜索树（Self-balancing binary search tree）又被称为AVL树（有别于AVL算法），且具有以下性质：它是一棵空树或它的左右两个子树的高度差的绝对值不超过1，并且左右两个子树都是一棵平衡二叉树。平衡二叉树上所有结点的平衡因子只可能是 -1，0 或 1。如果某一结点的平衡因子绝对值大于1则说明此树不是平衡二叉树。为了方便计算每一结点的平衡因子我们可以为每个节点赋予height这一属性，表示此节点的高度。</p>
+<p>ALV树适用于大量查询，少量插入和删除的场景中。</p>
+<h3 id="红黑树r-b-tree">红黑树（R-B Tree）</h3>
+<p>大量查询，大量插入和删除，现在使用ALV树就不太合适了，因为ALV树大量的插入和删除。适当牺牲平衡性换取增删的效率。</p>
+<p>红黑树中，空节点也是树的一部分。</p>
+<p>1）每个结点或红或黑
+2）根结点是黑色
+3）空叶子结点是黑色
+4）如果一个结点是红色，那么它的子节点是黑色
+5）从任意一个结点出发到他的后代的空的叶子结点经过的黑结点个数相同</p>
+<p>任意结点到空的叶子结点的所有路径中，没有一条路径会大于其他路径的两倍</p>
+<p>Java集合中的TreeSet和TreeMap，C++ STL中的set、map，以及Linux虚拟内存的管理，都是通过红黑树去实现的。</p>
+<p>旋转操作</p>
+<ul>
+<li>左旋</li>
+<li>右旋</li>
+</ul>
+<p>增加操作</p>
+<p>先用平衡树的方式插入结点，将结点染红，通过旋转和重新着色使得其重新成为红黑树。</p>
+<p>我们有必要重复一下五条性质</p>
+<p>1）每个结点或红或黑
+2）根结点是黑色
+3）空叶子结点是黑色
+4）如果一个结点是红色，那么它的子节点是黑色
+5）从任意一个结点出发到他的后代的空的叶子结点经过的黑结点个数相同</p>
+<p>新插入一个红结点，只会和性质4冲突。</p>
+<p>新增的结点（红色）插入之后可能面临的几种情况，以及他们的处理措施</p>
+<p>删除节点</p>
+<ol>
+<li>
+<p>删除结点为红色</p>
+<ol>
+<li>直接删除</li>
+</ol>
+</li>
+<li>
+<p>删除结点为黑色，其兄弟结点没有儿子</p>
+<ol>
+<li>兄弟结点变红，父亲结点变黑，然后将父亲结点当作当前结点按照这几种情形处理，直到当前结点为根结点</li>
+</ol>
+</li>
+<li>
+<p>删除结点为黑色，其兄弟结点有一个孩子不空，并且该孩子和兄弟结点在同一边（同为左子树或者同为右子树）：</p>
+<ol>
+<li>不管是括号中那种情况，先交换兄弟结点和父亲结点的颜色，并且把父亲结点和兄弟结点的子结点涂成黑色</li>
+<li>其他情况
+<ol>
+<li>如果兄弟结点和兄弟结点的儿子都在右子树的话：对父亲结点进行左旋</li>
+<li>如果兄弟结点和兄弟结点的儿子都在左子树的话：对父亲结点进行右旋</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>删除结点为黑色，其兄弟结点有一个孩子不空，并且该孩子和兄弟结点不在同一边（右左或者左右的情况）</p>
+<ol>
+<li>先将兄弟结点和兄弟结点的儿子结点颜色互换</li>
+<li>其他情况
+<ol>
+<li>如果兄弟结点是左子树，兄弟结点的儿子结点是右子树：对兄弟结点进行左旋</li>
+<li>如果兄弟结点是右子树，兄弟结点的儿子结点是左子树：对兄弟结点进行右旋</li>
+</ol>
+</li>
+<li>将后续变换按照第3条处理</li>
+</ol>
+</li>
+<li>
+<p>删除结点为黑色，其兄弟结点有两个孩子，兄弟结点为黑色而且两个孩子结点也为黑色：</p>
+<ol>
+<li>将父亲结点和兄弟结点颜色互换</li>
+</ol>
+</li>
+<li>
+<p>删除结点为黑色，其兄弟结点有两个孩子，而且兄弟结点为红色：</p>
+<ol>
+<li>将兄弟结点和父亲结点的颜色互换</li>
+<li>其他情况
+<ol>
+<li>被删除的元素为左子树：对父亲结点左旋</li>
+<li>被删除的元素为右子树：对父亲结点右旋</li>
+<li>将后续变换按照第5条进行处理</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>剩下一个儿子：</p>
+<ul>
+<li>将儿子结点涂成黑色放到被删除结点的位置</li>
+</ul>
+<p>剩下两个儿子：</p>
+<p>找到删除结点的右子树中最左的结点，两两值交换，然后删除结点的情况就变成了上面两种情况中的一种了</p>
+<p>1.删除结点只有一个儿子的情况</p>
+<p>2.删除结点没有儿子的情况</p>
+<p>参考链接：
+<a href="%E7%BA%A2%E9%BB%91%E6%A0%91">https://www.cnblogs.com/yinbiao/p/10732600.html</a>
+<a href="%E5%B9%B3%E8%A1%A1%E6%A0%91">https://www.cnblogs.com/zhangbaochong/p/5164994.html</a></p>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+
+        <a class="img" href="https://sonemiyuki.cn/" style="background-image: url(https://sonemiyuki.cn/images/user.png)"><span class="hidden">miyuki</span></a>
+    </figure>
+    
+
+    <section class="author">
+
+  <p>miyuki</p>
+  
+
+</section>
+
+
+    
+    <section class="share">
+      <h4>Share this post</h4>
+      <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84%e5%b8%b8%e8%af%86&amp;url=https%3a%2f%2fsonemiyuki.cn%2fpost%2f2021%2f07%2f13%2fjava%2f"
+          onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <span class="hidden">Twitter</span>
+      </a>
+      <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsonemiyuki.cn%2fpost%2f2021%2f07%2f13%2fjava%2f"
+          onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <span class="hidden">Facebook</span>
+      </a>
+      <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fsonemiyuki.cn%2fpost%2f2021%2f07%2f13%2fjava%2f"
+         onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <span class="hidden">Google+</span>
+      </a>
+    </section>
+    
+
+    
+    
+    
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">世界的中心</a> All rights reserved - 2021-</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="https://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/syui/hugo-theme-air">hugo-theme-air</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/index.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.min.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.js"></script>  
+
+</body>
+</html>
+

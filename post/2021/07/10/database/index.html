@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  	<meta property="og:title" content=" Mysql面经 &middot;  世界的中心" />
+  	<meta property="og:site_name" content="世界的中心" />
+  	<meta property="og:url" content="https://sonemiyuki.cn/post/2021/07/10/database/" />
+    
+    
+  	<meta property="og:type" content="article" />
+
+    <meta property="og:article:published_time" content="2021-07-10T16:54:30&#43;08:00" />
+
+    
+    <meta property="og:article:tag" content="MySQL" />
+    
+    
+
+  <title>
+     Mysql面经 &middot;  世界的中心
+  </title>
+
+    <meta name="description" content="教学楼的天台，是世界的中心。" />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="https://sonemiyuki.cn/images/favicon.ico">
+	  <link rel="apple-touch-icon" href="https://sonemiyuki.cn/images/apple-touch-icon.png" />
+    
+    <link rel="stylesheet" type="text/css" href="https://sonemiyuki.cn/css/screen.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400|Inconsolata" />
+
+
+    
+      
+          <link href="https://sonemiyuki.cn/index.xml" rel="alternate" type="application/rss+xml" title="世界的中心" />
+      
+      
+    
+    <meta name="generator" content="Hugo 0.83.0" />
+
+    <link rel="canonical" href="https://sonemiyuki.cn/post/2021/07/10/database/" />
+
+     
+</head>
+<body class="nav-closed">
+<div id="particles-js"></div>
+  
+
+
+ <div class="site-wrapper">
+
+
+
+<header class="main-header " style="background-image: url(https://sonemiyuki.cn/images/user.jpg)">
+
+    <nav class="main-nav overlay clearfix">
+        
+            <a class="blog-logo" href="https://sonemiyuki.cn/"><img src="https://sonemiyuki.cn/images/user.png" alt="Blog Logo" /></a>
+        
+        
+    </nav>
+<div class="vertical">
+        <div class="main-header-content inner">
+            <h1 class="page-title">
+              <a class="btn-bootstrap-2" href="#content">世界的中心</a>
+          </h1>
+          <h2 class="page-description">教学楼的天台，是世界的中心。</h2>
+        </div>
+</div>
+    <a class="scroll-down icon-arrow-left" href="#content"><span class="hidden">Scroll Down</span></a>
+</header>
+
+  <main id="content" class="content" role="main">
+
+
+  <article class="post post">
+
+    <header class="post-header">
+        <h1 class="post-title">Mysql面经</h1>
+        <section class="post-meta">
+        
+	<time class="post-date" datetime="2021-07-10">
+            2021-07-10
+          </time>
+        
+         
+          <span class="post-tag small"><a href="https://sonemiyuki.cn/tags/mysql/">#MySQL</a></span>
+         
+        </section>
+    </header>
+
+    <section class="post-content">
+      <h3 id="为什么有索引系统">为什么有索引系统</h3>
+<p>索引：帮助MySQL高效获取数据的数据结构。</p>
+<h3 id="b-tree">B+ Tree</h3>
+<p>弥补红黑树的缺陷，映射链表，便于区间查询。</p>
+<h3 id="mysql-储存引擎">MySQL 储存引擎</h3>
+<table>
+<thead>
+<tr>
+<th>引擎</th>
+<th>MyISAM</th>
+<th>MEMORY</th>
+<th>InnoDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存储限制</td>
+<td>256T</td>
+<td>RAM</td>
+<td>64T</td>
+</tr>
+<tr>
+<td>事务</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>全文索引</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>B-Tree索引</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>Hash索引</td>
+<td>N</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+<tr>
+<td>集群索引</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>数据索引</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>数据压缩</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>空间使用率</td>
+<td>低</td>
+<td>N/A</td>
+<td>高</td>
+</tr>
+<tr>
+<td>外键</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+</tbody>
+</table>
+<p>MyISAM：</p>
+<p>frm：表定义数据
+MYD：数据
+MYI：索引</p>
+<ul>
+<li>不支持事务，原子查询</li>
+<li>表级锁</li>
+<li>非聚簇索引，B+ Tree</li>
+<li>多次IO操作</li>
+</ul>
+<p>Memory：</p>
+<p>数据存储在内存中
+frm文件</p>
+<ul>
+<li>数据类型限制：不支持TEXT和BLOB，字符串必须定长</li>
+<li>表级锁</li>
+<li>可持久化性差</li>
+<li>Hash索引</li>
+</ul>
+<p>InnoDB：</p>
+<ul>
+<li>默认的数据库引擎</li>
+<li>自动增长列，辅助索引</li>
+<li>MVCC 默认可重复读</li>
+<li>支持事务</li>
+<li>行级锁</li>
+<li>外键：降低速度，增加耦合度</li>
+<li>缓冲管理</li>
+<li>聚集索引
+<ul>
+<li>叶节点是链表，由索引指向</li>
+</ul>
+</li>
+</ul>
+<h3 id="联合索引最左匹配">联合索引最左匹配</h3>
+<p>联合索引优先匹配最左端的值</p>
+<p>注意</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> <span style="color:#66d9ef">and</span> b <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">7</span> <span style="color:#66d9ef">and</span> <span style="color:#66d9ef">c</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</code></pre></div><h3 id="mysql-事务">MySQL 事务</h3>
+<ul>
+<li>ACID</li>
+</ul>
+<p>隔离性：</p>
+<table>
+<thead>
+<tr>
+<th>等级</th>
+<th>read uncommitted</th>
+<th>read committed</th>
+<th>repeatable read</th>
+<th>serializable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>脏读</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>不可重复读</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr>
+<td>幻读</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+<p>脏读：读取了未提交的数据。</p>
+<p>不可重复读：读的过程中被改了，系统不可以读取到重复的数据，称作不可重复读。</p>
+<p>幻读：读的过程中被插入新的数据</p>
+<h3 id="mvcc">MVCC</h3>
+<p>多版本并发控制，针对读已提交和可重复读</p>
+<p>读读：不考虑线程安全
+读写：MVCC处理线程安全问题
+写写：需要串行化</p>
+<p>MVCC的好处：基于快照锁实现读写不加锁，提高并发效率。</p>
+<p>隐式字段：</p>
+<ul>
+<li>DB_TRX_ID: 6byte
+<ul>
+<li>最近修改的事务id</li>
+</ul>
+</li>
+<li>PD_ROLL_PTR: 7byte
+<ul>
+<li>回滚指针，指向记录的上一个版本</li>
+</ul>
+</li>
+<li>DB_ROW_ID: 6byte
+<ul>
+<li>隐藏的ID，如果数据表没有逐渐，InnoDB会以DB_ROW_ID产生聚簇索引</li>
+</ul>
+</li>
+</ul>
+<p>undolog</p>
+<p>读已提交：</p>
+<p>维护最大事务id
+维护未提交事务列表
+这样的组合被称为快照
+每次commit都会更新快照</p>
+<p>在undolog里面选择id符合要求的最近的已提交数据</p>
+<p>可重复读：</p>
+<p>第一次查询生成快照
+之后这个commit之前都用这个快照</p>
+<h3 id="不同粒度的锁基础">不同粒度的锁（基础）</h3>
+<p>表级锁:开销小、加锁快、不死锁、力度大、冲突概率大、并发多、少量的基于索引更新的应用
+行级锁：开销大、加锁慢、死锁、力度小、冲突概率低、并发小，大量索引更新，并发量大</p>
+<p>MyISAM memory 表级锁</p>
+<p>MyISAM：
+select 共享读锁、detele update insert独占写锁
+读锁：不阻塞读，阻塞写
+写锁：阻塞写，阻塞读
+SQL 一次加完所有的锁，所以不会死锁
+为什么不适合查询量大的情况？偏向于写</p>
+<p>innodb锁</p>
+<p>S锁 X锁
+IS锁 IX锁
+行锁 自增锁</p>
+<p>IS IX：维持行锁和表锁的关系</p>
+<h3 id="mysql主从架构">MySQL主从架构</h3>
+<p>写：全都走总数据库
+读：可以去从数据库</p>
+<p>一致性问题</p>
+<p>主：binlog，通过logdumpthread和slave通信
+从：通过iothread和master通信，维护relaylog并用sqlthread更新sql</p>
+<p>网络问题：半同步</p>
+<p>访问主数据库的线程异步返回</p>
+<p>参考链接
+<a href="https://blog.csdn.net/qq_33591903/article/details/81672260">脏读、不可重复读、幻读</a>
+<a href="https://www.bilibili.com/video/BV17h411m7Xh?p=5&amp;spm_id_from=pageDriver">MySQL面经</a></p>
+
+    </section>
+
+
+  <footer class="post-footer">
+
+
+    
+    <figure class="author-image">
+
+        <a class="img" href="https://sonemiyuki.cn/" style="background-image: url(https://sonemiyuki.cn/images/user.png)"><span class="hidden">miyuki</span></a>
+    </figure>
+    
+
+    <section class="author">
+
+  <p>miyuki</p>
+  
+
+</section>
+
+
+    
+    <section class="share">
+      <h4>Share this post</h4>
+      <a class="icon-twitter" style="font-size: 1.4em" href="https://twitter.com/share?text=Mysql%e9%9d%a2%e7%bb%8f&amp;url=https%3a%2f%2fsonemiyuki.cn%2fpost%2f2021%2f07%2f10%2fdatabase%2f"
+          onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+          <span class="hidden">Twitter</span>
+      </a>
+      <a class="icon-facebook" style="font-size: 1.4em" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fsonemiyuki.cn%2fpost%2f2021%2f07%2f10%2fdatabase%2f"
+          onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+          <span class="hidden">Facebook</span>
+      </a>
+      <a class="icon-google-plus" style="font-size: 1.4em" href="https://plus.google.com/share?url=https%3a%2f%2fsonemiyuki.cn%2fpost%2f2021%2f07%2f10%2fdatabase%2f"
+         onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+          <span class="hidden">Google+</span>
+      </a>
+    </section>
+    
+
+    
+    
+    
+
+  </footer>
+</article>
+
+</main>
+    <footer class="site-footer clearfix">
+        <section class="copyright"><a href="">世界的中心</a> All rights reserved - 2021-</section>
+        
+        <section class="poweredby">Proudly generated by <a class="icon-hugo" href="https://gohugo.io">HUGO</a>, with <a class="icon-theme" href="https://github.com/syui/hugo-theme-air">hugo-theme-air</a> theme</section>
+        
+    </footer>
+    </div>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://sonemiyuki.cn/js/index.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.min.js"></script>
+    <script src="https://sonemiyuki.cn/js/particles.js"></script>  
+
+</body>
+</html>
+
